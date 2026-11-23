@@ -1,0 +1,315 @@
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--vscode-editor-foreground);
+  background: var(--vscode-editor-background);
+  font: var(--vscode-font-size, 13px) var(--vscode-font-family);
+}
+html,
+body,
+#merge-app,
+.merge-diff {
+  height: 100%;
+}
+.merge-diff {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.merge-status {
+  color: var(--vscode-descriptionForeground);
+  padding: 8px 12px;
+  margin: 0;
+}
+.merge-panes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr) 28px minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  position: relative;
+  > section {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+    > header {
+      padding: 8px 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      background: var(--vscode-editorGroupHeader-tabsBackground);
+      border-bottom: 1px solid var(--vscode-panel-border);
+    }
+  }
+}
+.merge-editor {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+.monaco-editor .merge-change-gutter {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  color: var(--vscode-editor-foreground);
+  font-size: 14px;
+  opacity: 0.7;
+}
+.merge-alignment-gap {
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0 3px,
+    var(--vscode-diffEditor-diagonalFill, #80808040) 3px 4px
+  );
+}
+.merge-native .merge-sash::before {
+  content: '';
+  position: absolute;
+  inset: 0 -4px;
+}
+.merge-panes > section > .merge-revision-header {
+  overflow: visible;
+  cursor: default;
+  .merge-revision-summary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    overflow: hidden;
+  }
+  &:focus-visible {
+    outline: 1px solid var(--vscode-focusBorder);
+    outline-offset: -1px;
+  }
+  .merge-revision-label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .merge-revision-person {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: auto;
+  }
+  time {
+    flex-shrink: 0;
+    color: var(--vscode-descriptionForeground);
+  }
+}
+.merge-commit-hover {
+  position: fixed;
+  z-index: 100;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(516px, calc(100vw - 16px));
+  min-width: min(320px, calc(100vw - 16px));
+  max-height: calc(100vh - 16px);
+  overflow: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  user-select: text;
+  cursor: default;
+  font: var(--vscode-font-weight, normal) var(--vscode-font-size, 13px)/1.5
+    var(--vscode-font-family);
+  color: var(--vscode-editorHoverWidget-foreground, var(--vscode-editor-foreground));
+  background: var(--vscode-editorHoverWidget-background, var(--vscode-editor-background));
+  border: 1px solid var(--vscode-editorHoverWidget-border, var(--vscode-panel-border));
+  border-radius: var(--vscode-cornerRadius-medium, 3px);
+  box-shadow: 0 2px 8px var(--vscode-widget-shadow);
+  .merge-commit-content {
+    padding: 4px 8px;
+  }
+  .merge-commit-person {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+    > .codicon {
+      font-size: 14px;
+    }
+  }
+  a,
+  .merge-commit-footer {
+    color: var(--vscode-textLink-foreground);
+  }
+  a {
+    text-decoration: none;
+    &:hover {
+      color: var(--vscode-textLink-activeForeground);
+      text-decoration: underline;
+    }
+  }
+  .merge-commit-comma {
+    margin-left: -4px;
+  }
+  .merge-commit-date,
+  .merge-commit-committer {
+    color: var(--vscode-descriptionForeground);
+  }
+  .merge-commit-committer {
+    margin-bottom: 8px;
+  }
+  .merge-commit-body p {
+    font-weight: normal;
+    white-space: pre-wrap;
+    margin: 0 0 8px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .merge-commit-stats,
+  .merge-commit-footer {
+    padding: 6px 8px;
+    border-top: 1px solid var(--vscode-editorHoverWidget-border, var(--vscode-panel-border));
+  }
+  .merge-commit-insertions {
+    color: var(
+      --vscode-scmGraph-historyItemHoverAdditionsForeground,
+      var(--vscode-gitDecoration-addedResourceForeground)
+    );
+  }
+  .merge-commit-deletions {
+    color: var(
+      --vscode-scmGraph-historyItemHoverDeletionsForeground,
+      var(--vscode-gitDecoration-deletedResourceForeground)
+    );
+  }
+  .merge-commit-footer,
+  .merge-commit-hash {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .merge-commit-hash code {
+    font-family: var(--vscode-editor-font-family, monospace);
+  }
+  .merge-commit-copy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    width: 20px;
+    height: 20px;
+    border: 0;
+    border-radius: 3px;
+    color: inherit;
+    background: transparent;
+    cursor: pointer;
+    &:hover {
+      background: var(--vscode-toolbar-hoverBackground);
+    }
+    &:focus-visible {
+      outline: 1px solid var(--vscode-focusBorder);
+    }
+    > .codicon {
+      font-size: 14px;
+    }
+  }
+}
+
+.merge-sash {
+  position: relative;
+  z-index: 5;
+  background: transparent;
+  cursor: col-resize;
+  touch-action: none;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(50% - 2px);
+    width: 4px;
+  }
+  &:hover,
+  &:focus-visible,
+  &.dragging {
+    outline: none;
+    &::after {
+      background: var(--vscode-sash-hoverBorder, var(--vscode-focusBorder));
+    }
+  }
+}
+.merge-panes-resizing {
+  cursor: col-resize;
+  user-select: none;
+  > section {
+    pointer-events: none;
+  }
+}
+
+.merge-panes {
+  --merge-inserted-fill: var(--vscode-diffEditor-insertedLineBackground, #9ccc2c20);
+  --merge-deleted-fill: var(--vscode-diffEditor-removedLineBackground, #ff000020);
+  --merge-modified-fill: color-mix(
+    in srgb,
+    var(--vscode-editorGutter-modifiedBackground, #569cd6) 20%,
+    transparent
+  );
+  --merge-inserted-border: var(--vscode-editorGutter-addedBackground, #73c991);
+  --merge-deleted-border: var(--vscode-editorGutter-deletedBackground, #f14c4c);
+  --merge-modified-border: var(--vscode-editorGutter-modifiedBackground, #569cd6);
+}
+.merge-inserted-line {
+  background: var(--merge-inserted-fill);
+}
+.merge-deleted-line {
+  background: var(--merge-deleted-fill);
+}
+.merge-modified-line {
+  background: var(--merge-modified-fill);
+}
+.merge-conflict-line {
+  background: var(--merge-deleted-fill);
+}
+.merge-connectors {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+.merge-connector {
+  stroke: none;
+}
+.merge-connector-border {
+  fill: none;
+  stroke-width: 1;
+  opacity: 0.6;
+}
+.merge-change-edge {
+  fill: none;
+  stroke-width: 1;
+  opacity: 0.6;
+}
+.merge-inserted-connector {
+  fill: var(--merge-inserted-fill);
+}
+.merge-deleted-connector {
+  fill: var(--merge-deleted-fill);
+}
+.merge-modified-connector {
+  fill: var(--merge-modified-fill);
+}
+.merge-conflict-connector {
+  fill: var(--merge-deleted-fill);
+}
+.merge-inserted-edge {
+  stroke: var(--merge-inserted-border);
+}
+.merge-deleted-edge {
+  stroke: var(--merge-deleted-border);
+}
+.merge-modified-edge {
+  stroke: var(--merge-modified-border);
+}
+.merge-conflict-edge {
+  stroke: var(--merge-deleted-border);
+}

@@ -1,0 +1,362 @@
+/* Compact Rebased action popups, with VS Code theme colors. */
+#filter-popup.rebased-filter-menu {
+  width: max-content;
+  min-width: 110px;
+  max-width: min(332px, calc(100vw - 16px));
+  padding: 4px;
+  overflow: visible;
+}
+#filter-popup.filter-kind-user {
+  min-width: 200px;
+}
+#filter-popup.filter-kind-branch {
+  width: 332px;
+  min-width: 200px;
+}
+.filter-menu-body {
+  max-height: min(320px, calc(100vh - 40px));
+  overflow: auto;
+}
+.filter-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 22px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.filter-menu-item:focus,
+.filter-menu-item.is-search-selected {
+  background: var(--vscode-list-activeSelectionBackground);
+  color: var(--vscode-list-activeSelectionForeground);
+}
+.filter-menu-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.filter-recent-remove {
+  position: relative;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border-radius: 3px;
+  color: var(--vscode-descriptionForeground);
+  opacity: 0;
+}
+.filter-recent-remove::before,
+.filter-recent-remove::after,
+.search-clear::before,
+.search-clear::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 1px;
+  background: currentColor;
+  transform: translate(-50%, -50%) rotate(45deg);
+  pointer-events: none;
+}
+.filter-recent-remove::after,
+.search-clear::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.filter-menu-item:hover > .filter-recent-remove,
+.filter-menu-item:focus-within > .filter-recent-remove {
+  opacity: 1;
+}
+.filter-recent-remove:hover,
+.filter-recent-remove:focus-visible {
+  background: var(--vscode-toolbar-hoverBackground);
+}
+.filter-recent-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  border-radius: 3px;
+}
+.filter-recent-clear:hover,
+.filter-recent-clear:focus-visible {
+  background: var(--vscode-toolbar-hoverBackground);
+}
+.filter-recent-heading {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.filter-submenu-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 0 28px;
+  height: 22px;
+  margin: -2px -8px -2px 0;
+  padding-right: 8px;
+}
+.filter-menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  margin-right: 4px;
+  line-height: 1;
+}
+.filter-menu-icon > .rebased-icon {
+  display: block;
+}
+.filter-menu-icon:not(.is-favorite) .rebased-star {
+  opacity: 0;
+}
+.filter-menu-item:focus .filter-menu-icon:not(.is-favorite) .rebased-star {
+  opacity: 0.35;
+}
+.filter-menu-icon[role='button'] {
+  cursor: pointer;
+}
+.filter-menu-heading {
+  margin-top: 4px;
+  border-top: 1px solid var(--vscode-menu-separatorBackground, var(--vscode-panel-border));
+  padding: 6px 8px 2px;
+  color: var(--vscode-descriptionForeground);
+  font-weight: 600;
+}
+.filter-menu-separator {
+  height: 1px;
+  background: var(--vscode-menu-separatorBackground, var(--vscode-panel-border));
+  margin: 5px 0;
+}
+.filter-submenu {
+  position: fixed;
+  z-index: 65;
+  width: max-content;
+  min-width: 170px;
+  max-width: min(600px, calc(100vw - 16px));
+  max-height: calc(100vh - 16px);
+  overflow: auto;
+  border: 1px solid var(--vscode-menu-border, var(--vscode-panel-border));
+  border-radius: 5px;
+  background: var(--vscode-menu-background, var(--vscode-editor-background));
+  padding: 4px;
+  box-shadow: 0 4px 16px var(--vscode-widget-shadow);
+}
+.filter-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  margin: 0 8px 8px;
+  border-bottom: 1px solid var(--vscode-menu-separatorBackground, var(--vscode-panel-border));
+}
+.filter-search-bar > .rebased-icon {
+  flex: 0 0 16px;
+}
+#filter-popup .filter-speed-search {
+  flex: 1;
+  min-width: 0;
+  width: 0;
+  height: 26px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+.filter-search-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 22px;
+  padding: 0;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--vscode-descriptionForeground);
+}
+.filter-menu-label strong {
+  font-weight: 600;
+}
+.is-searching .filter-menu-body {
+  max-height: min(280px, calc(100vh - 84px));
+}
+.filter-menu-heading:first-child {
+  margin-top: 0;
+  border-top: 0;
+}
+.filter-empty {
+  padding: 6px 8px;
+  color: var(--vscode-descriptionForeground);
+}
+#filter-popup.filter-editor {
+  width: min(480px, calc(100vw - 16px));
+  min-width: 200px;
+  min-height: 90px;
+  padding: 2px;
+  resize: both;
+  overflow: auto;
+}
+.filter-editor textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 58px;
+  height: calc(100% - 30px);
+  margin: 0;
+  padding: 4px;
+  resize: none;
+  border: 1px solid var(--vscode-input-border, var(--vscode-panel-border));
+  background: var(--vscode-input-background);
+  color: var(--vscode-input-foreground);
+  font: inherit;
+  outline: none;
+}
+.filter-editor textarea:focus {
+  border-color: var(--vscode-focusBorder);
+}
+.filter-editor-hint {
+  color: var(--vscode-descriptionForeground);
+  padding: 5px 8px;
+  font-size: 12px;
+}
+.filter-completion {
+  max-height: 220px;
+  overflow: auto;
+  border-top: 1px solid var(--vscode-panel-border);
+}
+.filter-completion-item {
+  display: block;
+  width: 100%;
+  min-height: 22px;
+  padding: 2px 8px;
+}
+.filter-completion-item[aria-selected='true'] {
+  background: var(--vscode-list-activeSelectionBackground);
+  color: var(--vscode-list-activeSelectionForeground);
+}
+#filter-popup.filter-dialog-host {
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+.filter-dialog {
+  outline: none;
+  color-scheme: dark;
+  min-width: 300px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 32px);
+  padding: 12px;
+  border: 1px solid var(--vscode-menu-border, var(--vscode-panel-border));
+  border-radius: 6px;
+  background: var(--vscode-editor-background);
+  color: var(--vscode-foreground);
+  font: inherit;
+  box-shadow: 0 4px 18px var(--vscode-widget-shadow);
+}
+.vscode-light .filter-dialog,
+.vscode-high-contrast-light .filter-dialog {
+  color-scheme: light;
+}
+.filter-dialog::backdrop {
+  background: #0003;
+}
+.filter-dialog h3 {
+  font-size: inherit;
+  margin: 0 0 16px;
+  font-weight: 600;
+}
+.filter-date-fields {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.filter-date-fields label {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.filter-date-fields input[type='date'] {
+  height: 24px;
+  width: 138px;
+  color-scheme: inherit;
+}
+.vscode-light .filter-date-fields input[type='date'],
+.vscode-high-contrast-light .filter-date-fields input[type='date'] {
+  color-scheme: light;
+}
+.filter-date-fields input:disabled {
+  opacity: 0.5;
+}
+.filter-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+}
+.filter-dialog-actions button {
+  min-width: 72px;
+  height: 26px;
+  text-align: center;
+  border-radius: 3px;
+}
+.filter-cancel {
+  border: 1px solid var(--vscode-button-border, var(--vscode-panel-border));
+  background: var(--vscode-button-secondaryBackground);
+}
+.filter-path-tree {
+  width: 400px;
+  max-width: calc(100vw - 60px);
+  height: min(440px, 60vh);
+  overflow: auto;
+  border: 1px solid var(--vscode-panel-border);
+  padding: 4px;
+}
+.filter-path-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding-right: 4px;
+  white-space: nowrap;
+  width: max-content;
+  min-width: 100%;
+}
+.filter-path-row:focus {
+  outline: none;
+  background: var(--vscode-list-activeSelectionBackground);
+  color: var(--vscode-list-activeSelectionForeground);
+}
+.filter-path-expander {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 20px;
+  padding: 0;
+}
+.filter-path-children {
+  margin-left: var(--file-tree-indent, 8px);
+}
+.filter-path-row input {
+  flex-shrink: 0;
+}
+.filter-dialog .popup-error:empty {
+  display: none;
+}

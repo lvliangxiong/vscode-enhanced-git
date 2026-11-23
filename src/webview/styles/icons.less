@@ -1,0 +1,290 @@
+@import '_metrics';
+.file-diff-icon {
+  display: inline-block;
+  .square(@icon-size);
+  flex: 0 0 @icon-size;
+  color: inherit;
+  fill: currentColor;
+  stroke: none;
+  vertical-align: middle;
+}
+/* Original JetBrains / Rebased SVGs; see THIRD_PARTY_NOTICES.md. */
+.rebased-icon {
+  display: inline-block;
+  .square(@icon-size);
+  flex: 0 0 16px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  vertical-align: middle;
+}
+.rebased-show {
+  background-image: url('icons/show.svg');
+}
+.vscode-dark .rebased-show,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-show {
+  background-image: url('icons/show_dark.svg');
+}
+.rebased-refresh {
+  background-image: url('icons/refresh.svg');
+}
+.vscode-dark .rebased-refresh,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-refresh {
+  background-image: url('icons/refresh_dark.svg');
+}
+.rebased-expand {
+  background-image: url('icons/expand.svg');
+}
+.vscode-dark .rebased-expand,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-expand {
+  background-image: url('icons/expand_dark.svg');
+}
+.rebased-collapse {
+  background-image: url('icons/collapse.svg');
+}
+.vscode-dark .rebased-collapse,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-collapse {
+  background-image: url('icons/collapse_dark.svg');
+}
+.rebased-right {
+  background-image: url('icons/right.svg');
+}
+.rebased-left {
+  background-image: url('icons/left.svg');
+}
+.vscode-dark .rebased-left,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-left {
+  background-image: url('icons/left_dark.svg');
+}
+.vscode-dark .rebased-right,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-right {
+  background-image: url('icons/right_dark.svg');
+}
+.rebased-down {
+  background-image: url('icons/down.svg');
+}
+.vscode-dark .rebased-down,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-down {
+  background-image: url('icons/down_dark.svg');
+}
+.rebased-search {
+  background-image: url('icons/search.svg');
+}
+.vscode-dark .rebased-search,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-search {
+  background-image: url('icons/search_dark.svg');
+}
+.rebased-branch {
+  background-image: url('icons/branch.svg');
+}
+.vscode-dark .rebased-branch,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-branch {
+  background-image: url('icons/branch_dark.svg');
+}
+.rebased-folder {
+  background-image: url('icons/folder.svg');
+}
+.vscode-dark .rebased-folder,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-folder {
+  background-image: url('icons/folder_dark.svg');
+}
+.rebased-star {
+  background-image: url('icons/star.svg');
+}
+.vscode-dark .rebased-star,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-star {
+  background-image: url('icons/star_dark.svg');
+}
+.rebased-tag {
+  background-image: url('icons/tag.svg');
+}
+.vscode-dark .rebased-tag,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-tag {
+  background-image: url('icons/tag_dark.svg');
+}
+.search-icon {
+  border: 0;
+  border-radius: 0;
+  margin: 0 3px 0 8px;
+  position: static;
+}
+.search-icon::after {
+  content: none;
+}
+.chevron,
+.folder-chevron {
+  .square(@icon-size);
+  flex: 0 0 16px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  transform: none;
+}
+.file-folder[open] > summary > .folder-chevron,
+.branch-group[open] > summary > .folder-chevron {
+  transform: rotate(90deg);
+  margin-top: 0;
+}
+.rebased-graph {
+  background-image: url('icons/graph.svg');
+}
+.vscode-dark .rebased-graph,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-graph {
+  background-image: url('icons/graph_dark.svg');
+}
+.rebased-new-tab {
+  background-image: url('icons/new-tab.svg');
+}
+.vscode-dark .rebased-new-tab,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-new-tab {
+  background-image: url('icons/new-tab_dark.svg');
+}
+.rebased-resume {
+  background-image: url('icons/resume.svg');
+}
+.vscode-dark .rebased-resume,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-resume {
+  background-image: url('icons/resume_dark.svg');
+}
+.rebased-cherry {
+  background-image: url('icons/cherry.svg');
+}
+.vscode-dark .rebased-cherry,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-cherry {
+  background-image: url('icons/cherry_dark.svg');
+}
+
+.rebased-diff {
+  background-image: url('icons/diff.svg');
+}
+.vscode-dark .rebased-diff,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-diff {
+  background-image: url('icons/diff_dark.svg');
+}
+
+.rebased-checkOut {
+  background-image: url('icons/checkOut.svg');
+}
+.vscode-dark .rebased-checkOut,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-checkOut {
+  background-image: url('icons/checkOut_dark.svg');
+}
+
+.rebased-gc {
+  background-image: url('icons/gc.svg');
+}
+.vscode-dark .rebased-gc,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-gc {
+  background-image: url('icons/gc_dark.svg');
+}
+
+.rebased-copy {
+  background-image: url('icons/copy.svg');
+}
+.vscode-dark .rebased-copy,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-copy {
+  background-image: url('icons/copy_dark.svg');
+}
+
+.rebased-patch {
+  background-image: url('icons/patch.svg');
+}
+.vscode-dark .rebased-patch,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-patch {
+  background-image: url('icons/patch_dark.svg');
+}
+
+.rebased-locate {
+  background-image: url('icons/locate.svg');
+}
+.vscode-dark .rebased-locate,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-locate {
+  background-image: url('icons/locate_dark.svg');
+}
+
+.rebased-add {
+  background-image: url('icons/add.svg');
+}
+.vscode-dark .rebased-add,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-add {
+  background-image: url('icons/add_dark.svg');
+}
+
+.rebased-fetch {
+  background-image: url('icons/fetch.svg');
+}
+.vscode-dark .rebased-fetch,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-fetch {
+  background-image: url('icons/fetch_dark.svg');
+}
+
+.rebased-history {
+  background-image: url('icons/history.svg');
+}
+.vscode-dark .rebased-history,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-history {
+  background-image: url('icons/history_dark.svg');
+}
+
+.rebased-up {
+  background-image: url('icons/up.svg');
+}
+.vscode-dark .rebased-up,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-up {
+  background-image: url('icons/up_dark.svg');
+}
+
+.rebased-diff-layout {
+  background-image: url('icons/diff-layout.svg');
+}
+.vscode-dark .rebased-diff-layout,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-diff-layout {
+  background-image: url('icons/diff-layout_dark.svg');
+}
+
+.rebased-open-file {
+  background-image: url('icons/open-file.svg');
+}
+.vscode-dark .rebased-open-file,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-open-file {
+  background-image: url('icons/open-file_dark.svg');
+}
+
+.rebased-affected {
+  background-image: url('icons/affected.svg');
+}
+.vscode-dark .rebased-affected,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-affected {
+  background-image: url('icons/affected_dark.svg');
+}
+
+.rebased-compare-local {
+  background-image: url('icons/compare-local.svg');
+}
+.vscode-dark .rebased-compare-local,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-compare-local {
+  background-image: url('icons/compare-local_dark.svg');
+}
+.rebased-stash {
+  background-image: url('icons/stash.svg');
+}
+.vscode-dark .rebased-stash,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-stash {
+  background-image: url('icons/stash_dark.svg');
+}
+
+.rebased-current-branch {
+  background-image: url('icons/current-branch.svg');
+}
+.vscode-dark .rebased-current-branch,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-current-branch {
+  background-image: url('icons/current-branch_dark.svg');
+}
+
+.rebased-current-branch-favorite {
+  background-image: url('icons/current-branch-favorite.svg');
+}
+.vscode-dark .rebased-current-branch-favorite,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .rebased-current-branch-favorite {
+  background-image: url('icons/current-branch-favorite_dark.svg');
+}

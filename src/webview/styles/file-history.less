@@ -1,0 +1,104 @@
+html,
+body,
+#file-history-app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+body {
+  color: var(--vscode-foreground);
+  background: var(--vscode-sideBar-background);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+}
+* {
+  box-sizing: border-box;
+}
+.file-history {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.history-list {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.history-commits {
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline-offset: -1px;
+}
+.history-list footer {
+  display: flex;
+  gap: 8px;
+  padding: 6px 10px;
+  align-items: center;
+  color: var(--vscode-descriptionForeground);
+  border-top: 1px solid var(--vscode-panel-border);
+}
+.history-list footer > span {
+  flex: 1;
+}
+.history-list footer button {
+  color: var(--vscode-textLink-foreground);
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.history-list footer button:disabled {
+  opacity: 0.5;
+}
+.history-commit-details {
+  // Reserve the same space for every commit; only the details content scrolls.
+  flex: 0 0 30%;
+  min-height: 0;
+  max-height: 30%;
+  overflow: auto;
+  padding: 12px;
+  border-top: 1px solid var(--vscode-panel-border);
+}
+.history-status {
+  padding: 4px 10px;
+  font-size: 11px;
+  color: var(--vscode-descriptionForeground);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+button:focus-visible,
+[tabindex]:focus-visible,
+summary:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder);
+  outline-offset: -1px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--vscode-scrollbarSlider-background);
+}
+
+@import 'commit-table';
+.history-commits {
+  overflow-x: auto;
+  .commit {
+    grid-template-columns: inherit;
+    min-width: 380px;
+  }
+  .column-resizer {
+    display: none;
+  }
+}
+
+@import 'commit-details';
+
+@import 'sidebar-welcome';

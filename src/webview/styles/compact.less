@@ -1,0 +1,674 @@
+@import '_metrics';
+/* Rebased compact metrics. See docs/architecture.md for upstream references.
+   CSS pixels are unscaled UI units; VS Code zoom applies to the whole webview. */
+:root {
+  /* A compact text tier relative to the workbench, without scaling icons/hit targets. */
+  --log-font-size: calc(var(--vscode-font-size, 13px) - 1px);
+  --log-line-height: 18px;
+  --log-row-height: @tree-row-height;
+  --log-commit-height: @commit-height;
+  --log-search-height: 24px;
+  --log-search-min-width: 202px; /* 150 text + 2x22 actions + 2 inner + 6 outer insets */
+  --log-toolbar-height: @toolbar-height;
+  --log-tree-indent: 18px;
+  --file-tree-indent: 8px;
+  --log-branch-rail-width: @branch-rail-width;
+}
+/* Rebased ExpandStripeButton: a full-height clickable stripe, not a hover popup. */
+#branch-pane {
+  flex-direction: row;
+}
+.branch-rail {
+  width: var(--log-branch-rail-width);
+  flex: 0 0 var(--log-branch-rail-width);
+  border-right: 1px solid var(--vscode-panel-border);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+.branch-rail::-webkit-scrollbar {
+  display: none;
+}
+.branch-rail-separator {
+  margin: 5px;
+  border-top: 1px solid var(--vscode-panel-border);
+}
+/* The toolbar previews the action: a grey star removes an existing favorite. */
+#branch-favorite.is-favorite .rebased-star {
+  filter: grayscale(1);
+}
+#branch-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+.branch-rail > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .square(@action-size);
+  margin: 3px auto;
+  padding: 3px;
+  border-radius: 3px;
+}
+.branches-collapsed .branch-rail > :not(#branches-toggle) {
+  display: none;
+}
+.branch-stripe-label {
+  display: none;
+}
+.branches-collapsed #branches-toggle,
+.details-stripe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: calc((var(--log-toolbar-height) - 16px) / 2) 0 0;
+  gap: 12px;
+  border-radius: 0;
+  background: var(--vscode-sideBar-background);
+}
+.branches-collapsed .branch-stripe-label,
+.details-stripe > span:not(.rebased-icon) {
+  display: block;
+  flex: 0 0 auto;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 18px;
+}
+.branches-collapsed #branches-toggle:hover,
+.details-stripe:hover {
+  background: var(--vscode-toolbar-hoverBackground, var(--vscode-list-hoverBackground));
+}
+.branch-rail > button:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder);
+  outline-offset: -1px;
+}
+.branch-toolbar,
+.filters,
+.detail-toolbar {
+  height: var(--log-toolbar-height);
+  min-height: var(--log-toolbar-height);
+  flex: 0 0 var(--log-toolbar-height);
+  padding: 2px 4px;
+  gap: 2px;
+}
+.search-box {
+  height: var(--log-search-height);
+  min-height: var(--log-search-height);
+}
+.search-box input {
+  height: 22px;
+  padding: 0 4px;
+  font-size: inherit;
+  line-height: var(--log-line-height);
+}
+.search-box button {
+  height: 20px;
+  flex-basis: @action-size;
+  padding: 0 3px;
+}
+.search-box .search-clear {
+  position: relative;
+  padding: 0;
+}
+.search-icon {
+  margin: 0 2px 0 6px;
+}
+.commit-search {
+  min-width: var(--log-search-min-width);
+  max-width: 260px;
+}
+#filter-strip,
+#filter-strip.is-floating {
+  height: var(--log-search-height);
+}
+.filter-trigger,
+.filter-clear {
+  height: 22px;
+}
+.filter-trigger {
+  padding: 0 4px;
+  gap: 2px;
+}
+.toolbar-icon {
+  .square(@action-size);
+  flex-basis: @action-size;
+  padding: 3px;
+}
+/* Rebased BadgeDotProvider: center (82.5%,17.5%), radius 17.5%, gap 7.5%.
+   Cut the icon out under the badge so hover/focus backgrounds stay intact. */
+.toolbar-icon.has-modified-options {
+  position: relative;
+  --option-badge-color: #55a76a;
+}
+.vscode-dark .toolbar-icon.has-modified-options,
+.vscode-high-contrast:not(.vscode-high-contrast-light) .toolbar-icon.has-modified-options {
+  --option-badge-color: #5fad65;
+}
+.toolbar-icon.has-modified-options > .rebased-icon {
+  mask-image: radial-gradient(circle at 82.5% 17.5%, transparent 3.9px, #000 4px);
+}
+.toolbar-icon.has-modified-options::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 82.5% 17.5%,
+    var(--option-badge-color) 2.7px,
+    transparent 2.8px
+  );
+}
+.log-actions {
+  gap: 2px;
+}
+.toolbar-separator {
+  height: 20px;
+  margin: 0 4px;
+}
+.rebased-icon,
+.branch-icon {
+  width: 16px;
+  height: 16px;
+  flex-basis: 16px;
+  background-size: 16px 16px;
+}
+#branches {
+  padding: 0 4px;
+}
+.branch-group > summary {
+  overflow: hidden;
+}
+#all {
+  padding-left: 26px;
+}
+.branch-group > summary {
+  height: 22px;
+  gap: 4px;
+  padding: 0 4px;
+}
+.branch-group .branch-group {
+  margin-left: var(--log-tree-indent);
+}
+.file-folder .file-folder {
+  margin-left: var(--file-tree-indent);
+}
+.branch-group > .branch {
+  height: 22px;
+  gap: 4px;
+  padding: 0 4px 0 22px;
+  border-radius: 3px;
+}
+.branch-count,
+.folder-count,
+.file-directory {
+  font-size: inherit;
+}
+.commit,
+.subject {
+  height: var(--log-commit-height);
+}
+.commit {
+  padding: 0 4px;
+  column-gap: 8px;
+}
+/* Text columns need an outer inset when reordered ahead of the graph.
+   The graph already has its own lane inset inside the graph cell. */
+.commit > .log-column:first-child:not(.subject) {
+  padding-left: 4px;
+}
+.refs {
+  padding: 0 3px;
+  font-size: inherit;
+  line-height: 18px;
+}
+.file,
+.file-folder > summary,
+.merge-empty-row {
+  height: 22px;
+  line-height: 18px;
+  gap: 4px;
+}
+.file {
+  padding: 0 4px;
+  gap: 6px;
+}
+.file-folder > summary,
+.merge-empty-row {
+  padding: 0 4px;
+}
+.merge-file-group > summary > .file-group-icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex: 0 0 1.15em;
+  background-size: 100% 100%;
+}
+#files {
+  padding: 0;
+}
+#message {
+  padding: 8px;
+  font-size: inherit;
+}
+#message .commit-title {
+  line-height: 18px;
+  margin: 0 0 8px;
+}
+#message p {
+  margin: 8px 0;
+}
+.view-menu-item {
+  min-height: 22px;
+  padding: 2px 8px;
+}
+.view-menu-heading {
+  padding: 4px 8px 2px;
+  font-size: inherit;
+}
+#more,
+footer {
+  font-size: 12px;
+}
+
+/* Search shrinks first. Only a trailing group of whole controls is folded. */
+.filter-viewport {
+  flex: 0 0 auto;
+  min-width: 0;
+  height: 24px;
+  overflow: hidden;
+}
+#filter-strip {
+  max-width: none;
+}
+.filters-collapsed .commit-search {
+  flex: 0 0 var(--log-search-min-width);
+  width: var(--log-search-min-width);
+  min-width: var(--log-search-min-width);
+  margin-right: 0;
+}
+/* Keep the overflow chevron attached to the fixed right-hand actions. */
+.filters-collapsed .filter-overflow {
+  margin-left: auto;
+}
+.filters-collapsed .log-actions {
+  margin-left: 0;
+}
+
+.log-column {
+  position: relative;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  overflow: visible;
+}
+.column-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.log-column .column-text {
+  cursor: grab;
+}
+body.reordering-columns,
+body.reordering-columns * {
+  cursor: grabbing !important;
+  user-select: none !important;
+}
+.column-resizer {
+  position: absolute;
+  left: -5px;
+  top: 0;
+  bottom: 0;
+  width: 7px;
+  cursor: col-resize;
+  z-index: 2;
+}
+.column-resizer:hover,
+.column-resizer:focus {
+  background: var(--vscode-sash-hoverBorder, var(--vscode-focusBorder));
+}
+.refs.expanded-refs {
+  max-width: none;
+  flex-shrink: 0;
+}
+.columns-menu {
+  position: fixed;
+  z-index: 60;
+  min-width: 180px;
+  padding: 4px;
+  border: 1px solid var(--vscode-menu-border, var(--vscode-panel-border));
+  background: var(--vscode-menu-background, var(--vscode-editor-background));
+  box-shadow: 0 3px 12px var(--vscode-widget-shadow);
+}
+.view-menu-item > .rebased-right {
+  margin-left: auto;
+}
+
+.preview-location-menu {
+  position: fixed;
+  z-index: 60;
+  min-width: 150px;
+  padding: 4px;
+  border: 1px solid var(--vscode-menu-border, var(--vscode-panel-border));
+  background: var(--vscode-menu-background);
+  box-shadow: 0 2px 8px var(--vscode-widget-shadow);
+}
+#layout > aside {
+  grid-column: 1;
+  grid-row: 1 / -1;
+}
+#split-left {
+  grid-column: 2;
+  grid-row: 1 / -1;
+}
+#history {
+  grid-column: 3;
+  grid-row: 1;
+}
+#split-right {
+  grid-column: 4;
+  grid-row: 1;
+}
+#detail {
+  grid-column: 5;
+  grid-row: 1;
+}
+#layout.preview-bottom {
+  grid-template-rows: minmax(0, 7fr) minmax(0, 3fr);
+}
+#layout > #preview {
+  height: auto;
+  min-width: 0;
+}
+#layout.preview-bottom > #preview {
+  grid-column: 3 / 6;
+  grid-row: 2;
+}
+#layout.preview-right > #preview {
+  grid-column: 6;
+  grid-row: 1;
+  border-left: 1px solid var(--vscode-panel-border);
+}
+#layout:not(.preview-bottom) {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.commit {
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+}
+.commit:hover {
+  background: var(--vscode-list-hoverBackground);
+}
+/* Rows are focusable divs: replace Chromium's default focus ring with the
+   list's themed background, including after programmatic arrow navigation. */
+.commit:focus {
+  outline: none;
+}
+.commit:focus-visible {
+  background: var(--vscode-list-focusBackground, var(--vscode-list-inactiveSelectionBackground));
+}
+
+.cherry-muted:not(.selected) {
+  color: var(--vscode-descriptionForeground);
+}
+.column-resizer {
+  touch-action: none;
+}
+.graph-jump {
+  cursor: pointer;
+  pointer-events: all;
+}
+.graph-jump:focus {
+  outline: none;
+}
+.graph-node,
+.graph-jump path {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Clip the graph and message together, leaving the column resize handle outside.
+   A wide graph keeps its lane spacing; text beyond the column is also clipped. */
+.subject-content {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+.history-updates {
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  color: var(--vscode-textLink-foreground);
+  padding: 0 4px;
+  font: inherit;
+  cursor: pointer;
+}
+.history-updates:hover {
+  color: var(--vscode-textLink-activeForeground);
+  text-decoration: underline;
+}
+#refresh.history-outdated {
+  position: relative;
+}
+#refresh.history-outdated::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--vscode-gitDecoration-addedResourceForeground, #73c991);
+}
+
+/* Virtual rows have fixed metrics. Spacers preserve the full scrollbar extent. */
+#commits {
+  overflow-anchor: none;
+  overflow-x: hidden;
+}
+.filters {
+  overflow-x: hidden;
+}
+.commit-spacer {
+  width: 1px;
+  pointer-events: none;
+}
+
+@import 'commit-table';
+
+@import 'commit-details';
+
+// Keep all actions reachable if the host itself is narrower than the usual minimum.
+.detail-toolbar {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Outline labels follow Rebased's reference groups, using the active VS Code surfaces. */
+.refs.reference-labels {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  background: transparent;
+  color: var(--vscode-descriptionForeground);
+}
+.reference-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+}
+.reference-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.reference-icon {
+  flex: none;
+  overflow: visible;
+}
+/* Rebased New UI VersionControl.GitLog palette, separate from VS Code surfaces. */
+:root {
+  --reference-head-color: #ffaf0f;
+  --reference-local-color: #369650;
+  --reference-remote-color: #834df0;
+  --reference-other-color: #6c707e;
+}
+.vscode-dark,
+.vscode-high-contrast:not(.vscode-high-contrast-light) {
+  --reference-head-color: #f5d273;
+  --reference-local-color: #5fad65;
+  --reference-remote-color: #b589ec;
+  --reference-other-color: #868a91;
+}
+.reference-head {
+  color: var(--reference-head-color);
+}
+.reference-local {
+  color: var(--reference-local-color);
+}
+.reference-remote {
+  color: var(--reference-remote-color);
+}
+.reference-tag,
+.reference-other,
+.reference-stash {
+  color: var(--reference-other-color);
+}
+/* Occlusion comes from SVG masks, so translucent selection colors never reveal rear tags. */
+.reference-icon-body {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.commit-hover.reference-popup {
+  min-width: 0;
+  width: max-content;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  overflow: visible;
+}
+.reference-popup::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 14px;
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+  background: var(--vscode-editorHoverWidget-background, var(--vscode-editor-background));
+  border-left: 1px solid var(--vscode-editorHoverWidget-border, var(--vscode-panel-border));
+  border-top: 1px solid var(--vscode-editorHoverWidget-border, var(--vscode-panel-border));
+}
+.reference-popup[data-placement='above']::before {
+  top: auto;
+  bottom: -5px;
+  transform: rotate(225deg);
+}
+.reference-popup-row {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr) 22px;
+  align-items: center;
+  gap: 6px;
+  min-height: 22px;
+  overflow-wrap: anywhere;
+}
+.reference-popup-row .hover-copy {
+  position: static;
+  box-sizing: border-box;
+  width: 22px;
+  height: 22px;
+  padding: 3px;
+}
+.reference-more {
+  color: var(--vscode-descriptionForeground);
+}
+
+/* Size visible tree rows to their contents while keeping each pane independently scrollable. */
+#branches,
+#files {
+  display: grid;
+  grid-template-columns: minmax(100%, max-content);
+  align-content: start;
+  overflow: auto;
+}
+#files {
+  grid-template-columns: minmax(max-content, 1fr);
+}
+#files > .file-folder {
+  width: max-content;
+  min-width: 100%;
+}
+#files .file-row {
+  min-width: max-content;
+}
+#files .file-row > .file {
+  flex: 1 0 auto;
+}
+#branches .branch,
+#branches .branch-group > summary,
+#files .file,
+#files .file-folder > summary {
+  overflow: visible;
+  text-overflow: clip;
+}
+#branches .branch-label,
+#files .file-name,
+#files .file-directory,
+#files .folder-name {
+  flex: 0 0 auto;
+  max-width: none;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+
+/* Reference widths are allocated by the label painter, independently from subject flex shrink. */
+.commit-table .subject-content > .subject-text {
+  min-width: 0;
+}
+.subject-content > .refs.reference-labels {
+  flex: 0 0 auto;
+  min-width: 0;
+  max-width: none;
+  padding: 0 4px;
+  gap: 6px;
+  overflow: visible;
+}
+.subject-content > .refs.reference-labels.expanded-refs {
+  gap: 12px;
+}
+.reference-labels .reference-group {
+  flex: 0 0 auto;
+}
+.reference-labels .reference-name {
+  overflow: visible;
+  text-overflow: clip;
+}

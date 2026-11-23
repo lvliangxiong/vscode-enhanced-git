@@ -1,0 +1,32 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--vscode-editor-background);
+}
+#host-app {
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) 4px minmax(0, 1fr);
+}
+.log-pane {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+}
+#sash {
+  background: var(--vscode-panel-border);
+  cursor: row-resize;
+  touch-action: none;
+}
+#sash:hover,
+#sash:focus {
+  background: var(--vscode-focusBorder);
+  outline: 0;
+}
+body.dragging .log-pane {
+  pointer-events: none;
+}

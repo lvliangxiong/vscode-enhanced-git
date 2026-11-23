@@ -1,0 +1,39 @@
+# Dependencies and generated output
+node_modules/
+out/
+dist/
+*.vsix
+*.tsbuildinfo
+coverage/
+*.log
+.DS_Store
+
+# Machine-specific development configuration and deployment
+.vscode/
+.idea/
+*.code-workspace
+.env
+.env.*
+!.env.example
+.npmrc
+.local/
+/scripts/deploy-remote.ts
+
+# Personal assistant instructions and generated context
+AGENTS.md
+AGENTS.override.md
+CLAUDE.md
+GEMINI.md
+.codex/
+.claude/
+.cursor/
+.continue/
+.windsurf/
+.opencode/
+.cursorrules
+.windsurfrules
+.aider*
+.github/copilot-instructions.md
+.github/instructions/
+.github/agents/
+.github/prompts/

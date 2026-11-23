@@ -1,0 +1,488 @@
+{
+  "name": "vsgit",
+  "displayName": "VS Git",
+  "description": "A JetBrains-inspired three-pane Git history for VS Code.",
+  "version": "0.1.282",
+  "publisher": "lvliangxiong",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "SCM Providers"
+  ],
+  "main": "./out/extension/extension.js",
+  "activationEvents": [
+    "onCommand:vsgit.open",
+    "onView:vsgit.changes",
+    "onView:vsgit.log",
+    "onView:vsgit.fileHistory",
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "vsgit.changes.reset",
+        "title": "Reset Comparison",
+        "category": "VS Git",
+        "icon": "$(clear-all)",
+        "enablement": "vsgit.changes.hasComparison"
+      },
+      {
+        "command": "vsgit.changes.refresh",
+        "title": "Refresh",
+        "category": "VS Git",
+        "icon": "$(refresh)",
+        "enablement": "vsgit.changes.hasComparison && !vsgit.changes.refreshing"
+      },
+      {
+        "command": "vsgit.open",
+        "title": "VS Git: Open Git Log",
+        "icon": "$(git-branch)"
+      },
+      {
+        "command": "vsgit.changes.toggleLayout",
+        "title": "View as Tree",
+        "category": "VS Git",
+        "icon": "$(list-tree)",
+        "toggled": {
+          "condition": "vsgit.changes.tree",
+          "title": "View as List",
+          "icon": "$(list-flat)"
+        }
+      },
+      {
+        "command": "vsgit.changes.toggleExpansion",
+        "title": "Expand All",
+        "category": "VS Git",
+        "icon": "$(expand-all)",
+        "enablement": "vsgit.changes.tree && vsgit.changes.hasFolders",
+        "toggled": {
+          "condition": "vsgit.changes.expanded",
+          "title": "Collapse All",
+          "icon": "$(collapse-all)"
+        }
+      },
+      {
+        "command": "vsgit.merge.previous",
+        "title": "Previous Difference",
+        "category": "VS Git",
+        "icon": "$(arrow-up)",
+        "enablement": "vsgit.merge.canNavigate"
+      },
+      {
+        "command": "vsgit.merge.next",
+        "title": "Next Difference",
+        "category": "VS Git",
+        "icon": "$(arrow-down)",
+        "enablement": "vsgit.merge.canNavigate"
+      },
+      {
+        "command": "vsgit.merge.compareParent1",
+        "title": "Compare with Parent 1",
+        "category": "VS Git",
+        "icon": "$(git-compare)"
+      },
+      {
+        "command": "vsgit.merge.compareParent2",
+        "title": "Compare with Parent 2",
+        "category": "VS Git",
+        "icon": "$(git-compare)"
+      },
+      {
+        "command": "vsgit.merge.openFile",
+        "title": "Open File",
+        "category": "VS Git",
+        "icon": "$(go-to-file)"
+      },
+      {
+        "command": "vsgit.fileHistory.openFile",
+        "title": "Open File",
+        "category": "VS Git",
+        "icon": "$(go-to-file)"
+      },
+      {
+        "command": "vsgit.fileHistory.refresh",
+        "title": "Refresh",
+        "category": "VS Git",
+        "icon": "$(refresh)",
+        "enablement": "vsgit.fileHistory.canRefresh"
+      },
+      {
+        "command": "vsgit.fileHistory.compareLocal",
+        "title": "Compare with Working Tree",
+        "category": "VS Git",
+        "icon": "$(compare-changes)",
+        "enablement": "vsgit.fileHistory.canCompareLocal"
+      },
+      {
+        "command": "vsgit.fileHistory.affected",
+        "title": "Show All Affected Files",
+        "category": "VS Git",
+        "icon": "$(files)",
+        "enablement": "vsgit.fileHistory.canAffected"
+      },
+      {
+        "command": "vsgit.fileHistory.viewOptions",
+        "title": "View Options",
+        "category": "VS Git",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "vsgit.fileHistory.locate",
+        "title": "Select in Git Log",
+        "category": "VS Git",
+        "icon": "$(target)",
+        "enablement": "vsgit.fileHistory.canLocate"
+      },
+      {
+        "command": "vsgit.showFileHistory",
+        "title": "Show File History",
+        "category": "VS Git",
+        "icon": "$(history)"
+      },
+      {
+        "command": "vsgit.showCommitFileDiffs",
+        "title": "Show Commit File Diffs",
+        "category": "VS Git",
+        "icon": "$(diff-multiple)"
+      },
+      {
+        "command": "vsgit.locateCommit",
+        "title": "Locate in Git Log",
+        "category": "VS Git",
+        "icon": "$(target)"
+      },
+      {
+        "command": "vsgit.toggleComparisonPanel",
+        "title": "Toggle Panel",
+        "category": "VS Git"
+      },
+      {
+        "command": "vsgit.switchRepositoriesBranch",
+        "title": "Switch Branch in All Repositories",
+        "category": "VS Git"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "vsgit.open",
+        "key": "alt+g"
+      },
+      {
+        "command": "vsgit.toggleComparisonPanel",
+        "key": "ctrl+j",
+        "mac": "cmd+j",
+        "when": "vsgit.comparisonVisible"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "vsgit.changes.reset",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.changes.refresh",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.open"
+        },
+        {
+          "command": "vsgit.changes.toggleLayout",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.changes.toggleExpansion",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.merge.previous",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.merge.next",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.merge.compareParent1",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.merge.compareParent2",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.merge.openFile",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.fileHistory.openFile",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.fileHistory.refresh",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.fileHistory.compareLocal",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.fileHistory.affected",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.fileHistory.viewOptions",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.fileHistory.locate",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.showCommitFileDiffs",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.locateCommit",
+          "when": "false"
+        },
+        {
+          "command": "vsgit.toggleComparisonPanel",
+          "when": "false"
+        }
+      ],
+      "scm/title": [
+        {
+          "command": "vsgit.open",
+          "group": "navigation"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "vsgit.changes.reset",
+          "when": "view == vsgit.changes",
+          "group": "navigation@3"
+        },
+        {
+          "command": "vsgit.changes.refresh",
+          "when": "view == vsgit.changes",
+          "group": "navigation@0"
+        },
+        {
+          "command": "vsgit.changes.toggleLayout",
+          "when": "view == vsgit.changes",
+          "group": "navigation@1"
+        },
+        {
+          "command": "vsgit.changes.toggleExpansion",
+          "when": "view == vsgit.changes",
+          "group": "navigation@2"
+        },
+        {
+          "command": "vsgit.fileHistory.refresh",
+          "when": "view == vsgit.fileHistory",
+          "group": "navigation@0"
+        },
+        {
+          "command": "vsgit.fileHistory.compareLocal",
+          "when": "view == vsgit.fileHistory",
+          "group": "navigation@2"
+        },
+        {
+          "command": "vsgit.fileHistory.affected",
+          "when": "view == vsgit.fileHistory",
+          "group": "navigation@3"
+        },
+        {
+          "command": "vsgit.fileHistory.viewOptions",
+          "when": "view == vsgit.fileHistory",
+          "group": "navigation@4"
+        },
+        {
+          "command": "vsgit.fileHistory.locate",
+          "when": "view == vsgit.fileHistory",
+          "group": "navigation@5"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "vsgit.merge.previous",
+          "when": "activeWebviewPanelId == vsgit.mergeDiff",
+          "group": "navigation@20"
+        },
+        {
+          "command": "vsgit.merge.next",
+          "when": "activeWebviewPanelId == vsgit.mergeDiff",
+          "group": "navigation@21"
+        },
+        {
+          "command": "vsgit.merge.compareParent1",
+          "when": "activeWebviewPanelId == vsgit.mergeDiff",
+          "group": "1_compare@1"
+        },
+        {
+          "command": "vsgit.merge.compareParent2",
+          "when": "activeWebviewPanelId == vsgit.mergeDiff",
+          "group": "1_compare@2"
+        },
+        {
+          "command": "vsgit.merge.openFile",
+          "when": "activeWebviewPanelId == vsgit.mergeDiff",
+          "group": "navigation@19"
+        },
+        {
+          "command": "vsgit.fileHistory.openFile",
+          "when": "resourceScheme == vsgit-history && isInDiffEditor",
+          "group": "navigation@19"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "vsgit.showFileHistory",
+          "when": "(resourceScheme == file || resourceScheme == vscode-remote) && !explorerResourceIsFolder",
+          "group": "vsgit@10"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "vsgit.showFileHistory",
+          "when": "(resourceScheme == file || resourceScheme == vscode-remote) && !explorerResourceIsFolder",
+          "group": "vsgit@10"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "vsgit.showFileHistory",
+          "when": "(resourceScheme == file || resourceScheme == vscode-remote) && !explorerResourceIsFolder",
+          "group": "vsgit@10"
+        }
+      ]
+    },
+    "views": {
+      "scm": [
+        {
+          "id": "vsgit.changes",
+          "name": "File Diffs",
+          "type": "webview",
+          "icon": "media/icons/sidebar.svg",
+          "contextualTitle": "VS Git Changes"
+        },
+        {
+          "id": "vsgit.fileHistory",
+          "name": "File History",
+          "type": "webview",
+          "icon": "media/icons/sidebar.svg",
+          "contextualTitle": "VS Git File History"
+        }
+      ],
+      "vsgit-panel": [
+        {
+          "id": "vsgit.log",
+          "name": "Git Log",
+          "type": "webview",
+          "icon": "media/icons/sidebar.svg",
+          "contextualTitle": "VS Git",
+          "visibility": "visible"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "VS Git",
+      "properties": {
+        "vsgit.mergeDiffStyle": {
+          "type": "string",
+          "enum": [
+            "native",
+            "jetbrains"
+          ],
+          "enumItemLabels": [
+            "Native Style",
+            "JetBrains Style"
+          ],
+          "enumDescriptions": [
+            "Align the three panes with blank blocks and show − / + gutter markers.",
+            "Keep natural line spacing and connect changes with shaded curves."
+          ],
+          "default": "native",
+          "scope": "resource",
+          "description": "Display style for the read-only three-pane historical merge diff. Changes apply to open comparisons."
+        },
+        "vsgit.history.initialCount": {
+          "type": "integer",
+          "default": 500,
+          "minimum": 0,
+          "scope": "resource",
+          "markdownDescription": "Number of commits loaded when opening Git Log or changing filters. Set to **0** to load all matching commits. Loading all commits in large repositories increases loading time and memory use. Click Refresh or reopen Git Log after changing this setting."
+        },
+        "vsgit.history.pageSize": {
+          "type": "integer",
+          "default": 500,
+          "minimum": 100,
+          "maximum": 2000,
+          "scope": "resource",
+          "markdownDescription": "Additional commits loaded when scrolling near the bottom or clicking Load more. Initial loading is controlled by `#vsgit.history.initialCount#`. Graph arrows automatically load through their target. Ignored when initialCount is 0 (load all)."
+        }
+      }
+    },
+    "viewsContainers": {
+      "panel": [
+        {
+          "id": "vsgit-panel",
+          "title": "Git Log",
+          "icon": "media/icons/sidebar.svg"
+        }
+      ]
+    },
+    "customEditors": [
+      {
+        "viewType": "vsgit.mergeDiff",
+        "displayName": "Historical Merge Diff",
+        "selector": [
+          {
+            "filenamePattern": "vsgit-merge:/"
+          }
+        ],
+        "priority": "option"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsx scripts/build.ts",
+    "typecheck": "tsc --noEmit && tsc --project tsconfig.tools.json",
+    "check": "npm run typecheck && npm run build",
+    "test": "npm run build && tsx --test test/*.test.ts",
+    "format": "prettier --write src scripts test docs README.md package.json tsconfig*.json",
+    "format:check": "prettier --check src scripts test docs README.md package.json tsconfig*.json",
+    "package": "npm run check && tsx scripts/package-icon-bridge.ts && vsce package --no-dependencies --allow-missing-repository --no-rewrite-relative-links --skip-license --out dist/vsgit.vsix"
+  },
+  "license": "GPL-3.0-only",
+  "extensionKind": [
+    "workspace"
+  ],
+  "devDependencies": {
+    "@types/jsdom": "30.0.0",
+    "@types/less": "^3.0.8",
+    "@types/node": "^26.6.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/vscode": "1.85.0",
+    "@vscode/vsce": "^4.0.0",
+    "esbuild": "^0.28.2",
+    "jsdom": "30.1.3",
+    "less": "^4.9.1",
+    "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
+    "typescript": "5.9.3"
+  },
+  "dependencies": {
+    "jsonc-parser": "3.3.1",
+    "monaco-editor": "0.57.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "vscode-oniguruma": "2.0.1",
+    "vscode-textmate": "9.3.2",
+    "zustand": "5.0.15"
+  }
+}
