@@ -1,91 +1,101 @@
 # VS Git
 
-VS Git 是面向 VS Code 的三栏 Git 日志插件，支持本地和 Remote-SSH 工作区。界面使用 VS Code 主题、文件图标主题和原生 Diff 编辑器；分支与引用标签的展示规则、历史浏览交互参考 Rebased / JetBrains，文件变更名称使用 Rebased 状态配色。
+English | [简体中文](README.zh-CN.md)
 
-主插件 ID 为 `lvliangxiong.vsgit`，本地 UI 桥接插件 ID 为 `lvliangxiong.vsgit-icon-theme`。
+VS Git is a three-pane Git history extension for local and Remote-SSH workspaces in VS Code. It uses VS Code themes, file icon themes, and the native Diff editor. Branch and reference presentation and history navigation take inspiration from Rebased / JetBrains; changed file names use Rebased status colors.
 
-## 核心功能
+The main extension is `lvliangxiong.vsgit`. Its local UI companion is `lvliangxiong.vsgit-icon-theme`.
 
-- **三栏日志与多仓库视图**：分支树、提交图、文件变更和提交详情集中展示，各仓库保存独立的筛选与视图状态。
-- **历史筛选与定位**：支持分支、作者、日期、路径、提交正文和 Hash 筛选，以及 Recent、正则、大小写匹配和 Hash / 分支 / 标签跳转。
-- **提交图与引用标签**：支持日期或拓扑排序、分页加载、图中跳转、列顺序和列宽调整；引用标签按类型着色、分组叠放，悬浮可查看和复制完整名称。
-- **Stashes**：第一栏按最新在前展示 stash 编号和说明，支持搜索和定位；主图每份 stash 显示一个节点，文件变更包含已跟踪修改和未跟踪文件。
-- **文件比较**：提供独立的 File Diffs 侧栏，支持两个版本的快照比较、所选提交的变更汇总，以及与工作区比较。
-- **文件历史**：通过 History Up To Here 或 Show File History 查看文件截至指定提交的历史，支持重命名追踪、原生 Diff、与工作区比较及定位日志。
-- **历史合并比较**：只读三栏 Merge Diff 展示两个父版本和合并结果，支持差异导航、同步滚动、栏宽调整及 Native / JetBrains 两种显示样式。
-- **多仓库分支切换**：在命令面板搜索同名分支并批量切换，独立仓库并发处理，共享 Git 数据的 worktree 顺序处理，结果通过原生通知展示。
-- **分支与提交操作**：支持创建、检出、更新、删除分支，Fetch、Push、收藏、创建标签、导出 Patch、复制 Hash，以及 Cherry-pick 的执行、继续、跳过和中止。
-- **主题与远程支持**：本地 UI 桥接为远端工作区提供文件图标、编辑器主题和语法资源；Git 操作在仓库所在的扩展宿主执行。
+## Core features
 
-## 打开与浏览
+- **Three-pane history and multiple repositories**: browse branches, the commit graph, changed files, and commit details together, with independent filters and view state for each repository.
+- **History filters and navigation**: filter by branch, author, date, path, commit message, or hash. Use recent selections, regular expressions, case matching, and hash / branch / tag navigation.
+- **Commit graph and reference labels**: choose date or topological ordering, load history in pages, follow graph links, and adjust column order and widths. Colored reference groups show full names and copy actions on hover.
+- **Stashes**: search stash numbers and descriptions in the first pane, ordered newest first, and locate them in the graph. Each stash has one graph node; its file list includes tracked changes and untracked files.
+- **File comparisons**: use the File Diffs sidebar for endpoint snapshot comparisons, changes from selected commits, and comparisons with the working tree.
+- **File history**: use History Up To Here or Show File History to browse a file up to a specified commit, including rename tracking, native diffs, working-tree comparisons, and navigation back to the log.
+- **Historical merge comparisons**: inspect both parents and the committed result in a read-only three-pane Merge Diff, with difference navigation, synchronized scrolling, resizable panes, and Native / JetBrains display styles.
+- **Branch switching across repositories**: search for a branch name and switch matching repositories from the Command Palette. Independent repositories run concurrently; worktrees sharing Git data run sequentially. Results appear in native notifications.
+- **Branch and commit actions**: create, check out, update, delete, fetch, push, and favorite branches; create tags, export patches, copy hashes, and run, continue, skip, or abort cherry-picks.
+- **Themes and remote workspaces**: the local UI bridge supplies file icons, editor themes, and grammar resources to remote workspaces. Git commands run on the host containing the repository.
 
-在 VS Code 中打开 Git 仓库，按 `Option+G`（macOS）或 `Alt+G`，也可执行 `VS Git: Open Git Log`。多仓库工作区通过底部标签切换仓库。
+## Opening and navigating the log
 
-| 区域   | 操作                                                                                                         |
-| ------ | ------------------------------------------------------------------------------------------------------------ |
-| 第一栏 | 单击选择分支，双击设置 Branch 筛选；点击 Stashes 条目定位对应提交。搜索框匹配分支、标签和 stash 编号或说明。 |
-| 第二栏 | 单击选择提交，`Cmd/Ctrl-click` 多选，`Shift-click` 范围选择；右键菜单提供比较和 Git 操作。                   |
-| 第三栏 | 浏览所选提交的文件变更和详情；双击文件或按 Enter 打开 Diff。双父合并的汇总文件可进入三栏 Merge Diff。        |
+Open a Git repository in VS Code and press `Option+G` on macOS or `Alt+G` on other platforms, or run `VS Git: Open Git Log`. Use the bottom tabs to switch repositories in a multi-repository workspace.
 
-第一栏和第三栏可用顶部按钮完全折叠，拖动分隔线到很窄时也会折叠。分支列表和第三栏上半部分的文件列表支持横向滚动。
+| Area        | Interaction                                                                                                                                                                         |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| First pane  | Click to select a branch; double-click to set the Branch filter. Click a stash to locate its commit. Search matches branches, tags, and stash numbers or descriptions.              |
+| Second pane | Click to select a commit, `Cmd/Ctrl-click` to select multiple commits, or `Shift-click` to select a range. Right-click for comparison and Git actions.                              |
+| Third pane  | Browse changed files and details for the selection. Double-click a file or press Enter to open a diff. Combined changes from a two-parent merge can open the three-pane Merge Diff. |
 
-提交列可拖动调整顺序。拖动列边界时，左侧仅紧邻边界的列改变宽度，右侧所有可见列按距离最小／最大宽度的可伸缩空间分担变化量。
+The first and third panes can collapse completely using their toolbar buttons or by dragging their dividers to a very narrow width. The branch list and the file list in the upper part of the third pane support horizontal scrolling.
 
-日期列默认显示 Author Date；View Options 中的 Commit Timestamp 改为显示 Committer Date。日期显示选项与 Graph Options 中的排序方式分别控制显示时间和提交顺序。
+Drag commit columns to reorder them. When resizing a column boundary, only the immediately adjacent column on the left changes width; all visible columns on the right share the adjustment according to their remaining capacity toward their minimum or maximum width.
 
-## 分支与引用图标
+The Date column displays Author Date by default. Enable Commit Timestamp in View Options to display Committer Date. The timestamp display setting and the ordering setting in Graph Options control separate aspects of the log.
 
-第一栏中的图标由引用状态决定：当前且已收藏使用实心金色吊牌，当前未收藏使用空心金色吊牌，其他收藏项使用星星，普通分支使用分叉图标，普通标签使用灰色吊牌。Stashes 使用暂存盒图标。空分组不显示。
+## Branch and reference icons
 
-第二栏统一使用吊牌形状表示引用：HEAD 为金色、本地分支为绿色、远端跟踪分支为紫色，标签、stash 和其他引用为灰色，配色随明暗主题切换。同一提交上的关联引用可以组合为 `origin & 分支名`。同类型引用最多绘制两层，图标层数不代表引用总数；悬浮列表展示完整引用。
+In the first pane, a filled gold tag represents the current reference when favorited; an outlined gold tag represents the current reference when not favorited. Other favorites use a star, ordinary branches use a branch icon, and ordinary tags use a gray tag icon. Stashes use a stash tray icon. Empty groups are hidden.
 
-## 文件变更与比较
+The second pane uses tag-shaped icons for all references: gold for HEAD, green for local branches, purple for remote-tracking branches, and gray for tags, stashes, and other references. Colors adapt to light and dark themes. Related references on the same commit can appear as `origin & branch-name`. Each reference type contributes at most two stacked layers, so the number of layers is not a reference count. Hover to see every reference.
 
-文件行以名称颜色及 A / M / D / R 等标记表示状态；新增为绿色、修改为蓝色、删除为灰色。行背景和操作图标使用 VS Code 风格，文件类型图标跟随当前文件图标主题。悬浮或键盘聚焦时显示 Open File，优先打开工作区文件；文件不存在时打开可用的历史只读快照。
+## Changed files and comparisons
 
-第三栏左侧工具栏依次为 Show File Diffs、History Up To Here、File View Options；右侧提供展开／折叠目录和收起面板。
+File name colors and A / M / D / R badges indicate change status: added files are green, modified files blue, and deleted files gray. Row backgrounds and action icons follow VS Code styling; file type icons follow the active file icon theme. Open File appears on hover or keyboard focus. It opens the working-tree file when available, or a read-only historical snapshot when the file is absent.
 
-| 入口                              | 行为                                                             |
-| --------------------------------- | ---------------------------------------------------------------- |
-| Compare Commit History            | 在编辑器上下两栏展示双方独有的提交。                             |
-| 第三栏 Show File Diffs            | 在 Source Control 的 File Diffs 侧栏展示当前所选提交的变更汇总。 |
-| 两个分支或提交的 Show File Diffs  | 比较两个端点的完整文件快照。                                     |
-| Show File Diffs with Working Tree | 比较指定提交与工作区。                                           |
-| Changes to xxx 行末按钮           | 比较该父提交与当前合并提交，不改变分组展开状态。                 |
-| History Up To Here                | 查看所选文件截至当前提交的历史，需要先选择文件。                 |
+The third pane's left toolbar contains Show File Diffs, History Up To Here, and File View Options, in that order. The right side contains folder expansion and pane collapse controls.
 
-比较语义：
+| Entry point                                 | Behavior                                                                                     |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Compare Commit History                      | Shows commits unique to each side in two vertically arranged editor panes.                   |
+| Show File Diffs in the third pane           | Opens the selected commits' combined changes in the File Diffs sidebar under Source Control. |
+| Show File Diffs for two branches or commits | Compares the complete file snapshots at the two endpoints.                                   |
+| Show File Diffs with Working Tree           | Compares a specified commit with the working tree.                                           |
+| Button on a Changes to xxx row              | Compares that parent with the selected merge commit without toggling the group.              |
+| History Up To Here                          | Shows the selected file's history up to the current commit; a file must be selected first.   |
 
-- 多选提交按日志顺序组合各文件的前后版本。不连续或跨分支选择时，文件差异可能包含未选提交留下的内容，不能等同于独立重放所选补丁。
-- 普通合并提交的汇总列表包含相对所有父提交都发生变化的文件。No merge conflicts 表示汇总列表为空，不代表能够还原当时的人工冲突处理过程；各父提交的差异可分别展开查看。
-- 三栏 Merge Diff 用于查看已提交的合并结果，不写入工作区或解决当前 Git 冲突。Native 样式使用对齐空白块和增删标记，JetBrains 样式使用连续代码和跨栏连线。
-- File Diffs 保存比较端点，Refresh 重新读取同一比较范围。支持相关 API 的 VS Code Git Graph 提供 Show Commit File Diffs 和 Locate in Git Log 入口。
+Comparison semantics:
 
-## 多仓库分支切换
+- Multiple selected commits are combined in log order to determine each file's before and after revisions. Noncontiguous or cross-branch selections may include content introduced by unselected commits; this is not equivalent to replaying only the selected patches.
+- An ordinary merge's combined list contains files changed relative to every parent. No merge conflicts means this combined list is empty; it does not reconstruct the original manual conflict-resolution process. Changes relative to each parent can be expanded separately.
+- The three-pane Merge Diff inspects a committed merge result. It does not write to the working tree or resolve an ongoing Git conflict. Native Style uses aligned blank blocks and addition/deletion markers; JetBrains Style uses continuous code and connectors between panes.
+- File Diffs retains its comparison endpoints. Refresh reads the same comparison again. VS Code Git Graph versions exposing the relevant API provide Show Commit File Diffs and Locate in Git Log entry points.
 
-执行 `VS Git: Switch Branch in All Repositories`，输入分支名并选择匹配项。候选来自发现的仓库中的本地和远端跟踪分支，不要求每个仓库都存在该分支。
+## Switching branches across repositories
 
-已有本地分支直接切换；仅存在唯一匹配的远端跟踪分支时创建对应本地分支并设置跟踪关系。目标本地分支被其他 worktree 占用时，以 detached HEAD 切换到该分支指向的提交。分支不存在、远端候选不唯一或本地修改阻止切换时，通过原生通知报告对应仓库的结果，不强制覆盖修改。
+Run `VS Git: Switch Branch in All Repositories`, enter a branch name, and select a match. Candidates come from local and remote-tracking branches in the discovered repositories; a branch does not have to exist in every repository.
 
-Cherry-pick 按日志从下到上的顺序应用所选提交，支持冲突后的继续、跳过和中止；需要指定主线父提交的合并提交不适用。
+An existing local branch is checked out directly. A unique remote-tracking match creates a corresponding local tracking branch. If another worktree has the target local branch checked out, the repository switches to that branch's commit in detached HEAD mode. Missing branches, ambiguous remote matches, and local changes blocking checkout are reported per repository through native notifications. Changes are not forcibly overwritten.
 
-## 设置、加载与刷新
+Cherry-pick applies selected commits from bottom to top in the log and supports continuing, skipping, or aborting after conflicts. Merge commits requiring a mainline parent are not supported by this action.
 
-| 设置                         | 默认值   | 含义                                                          |
-| ---------------------------- | -------- | ------------------------------------------------------------- |
-| `vsgit.history.initialCount` | `500`    | 打开日志或更改筛选时加载的提交数；`0` 表示加载全部匹配提交。  |
-| `vsgit.history.pageSize`     | `500`    | 后续每批加载数量，范围为 `100`–`2000`；加载全部时不使用该值。 |
-| `vsgit.mergeDiffStyle`       | `native` | 三栏历史合并比较的显示样式，可设为 `native` 或 `jetbrains`。  |
+## Settings, loading, and refresh
 
-这些设置支持按工作区文件夹配置。修改加载数量后刷新或重新打开日志；修改 Merge Diff 样式会应用到已打开的比较。
+| Setting                      | Default  | Purpose                                                                                  |
+| ---------------------------- | -------- | ---------------------------------------------------------------------------------------- |
+| `vsgit.history.initialCount` | `500`    | Commits loaded when opening the log or changing filters. `0` loads all matching commits. |
+| `vsgit.history.pageSize`     | `500`    | Additional commits per page, from `100` to `2000`. Not used when loading all history.    |
+| `vsgit.mergeDiffStyle`       | `native` | Display style for historical three-pane merge comparisons: `native` or `jetbrains`.      |
 
-接近列表底部时自动加载后续提交，也可点击 Load more commits；全部加载完成后按钮隐藏。加载全部历史会增加等待时间和内存占用。
+Settings can be configured per workspace folder. Refresh or reopen the log after changing loading limits. Merge Diff style changes apply to open comparisons.
 
-插件订阅 VS Code Git 扩展的仓库状态事件。Refresh 按当前筛选重新读取日志和仓库信息；Fetch 获取远端更新。在提交历史比较视图可见时，`Cmd+J`（macOS）或 `Ctrl+J` 切换底部面板。
+More history loads automatically near the bottom of the list or when clicking Load more commits. The button disappears when all matching commits are loaded. Loading all history increases loading time and memory use.
 
-## 构建与安装
+The extension subscribes to repository state events from VS Code's Git extension. Refresh rereads history and repository metadata with the current filters; Fetch retrieves remote updates. When a commit-history comparison view is visible, `Cmd+J` on macOS or `Ctrl+J` on other platforms toggles the bottom panel.
 
-开发需要 Node.js 22+、npm 和 Git。VS Code 版本范围由 `package.json` 的 `engines.vscode` 声明。
+## Companion installation
+
+The main extension declares `lvliangxiong.vsgit-icon-theme` in `extensionPack`. Once both extensions are published to the Marketplace, installing the main extension from the Marketplace also installs the companion. Publish the bridge before the main extension for the initial Marketplace release.
+
+For local VSIX installation, install the bridge package first, then the main package. The main-package command below skips Marketplace resolution of pack members. In Remote-SSH windows, install the bridge on the local client and the main extension on the remote workspace host.
+
+Source and support: [GitHub repository](https://github.com/lvliangxiong/vsgit) · [Issues](https://github.com/lvliangxiong/vsgit/issues).
+
+## Building and installing
+
+Development requires Node.js 22+, npm, and Git. The supported VS Code version range is declared in `engines.vscode` in `package.json`.
 
 ```sh
 npm ci
@@ -93,20 +103,20 @@ npm run check
 npm test
 npm run package
 code --install-extension dist/vsgit-icon-theme.vsix --force
-code --install-extension dist/vsgit.vsix --force
+code --install-extension dist/vsgit.vsix --force --do-not-include-pack-dependencies
 ```
 
-安装包为 `dist/vsgit.vsix` 和 `dist/vsgit-icon-theme.vsix`。主插件与桥接插件使用相同 publisher 和版本。安装后执行 `Developer: Reload Window`。
+Packages are written to `dist/vsgit.vsix` and `dist/vsgit-icon-theme.vsix`. Both extensions use the same publisher and version. Run `Developer: Reload Window` after installation.
 
-Remote-SSH 窗口中，主插件安装在远端 workspace 宿主，桥接插件安装在本地 UI 宿主；本地窗口中两者都安装在本地。
+In a Remote-SSH window, the main extension runs in the remote workspace host and the bridge runs in the local UI host. In a local window, both are installed locally.
 
-- [代码结构与数据流](docs/architecture.md)
-- [构建、验证与安装](docs/development.md)
-- [桥接插件说明](icon-theme-bridge/README.md)
-- [第三方代码与图标许可](THIRD_PARTY_NOTICES.md)
+- [Architecture and data flow](docs/architecture.md)
+- [Development, verification, and installation](docs/development.md)
+- [UI bridge](icon-theme-bridge/README.md)
+- [Third-party notices](THIRD_PARTY_NOTICES.md)
 
-## 许可证
+## License
 
 Copyright (c) 2026 VS Git contributors.
 
-原创代码采用 [GNU GPL 第 3 版（GPL-3.0-only）](LICENSE)。分发受该许可证覆盖的版本时，应按许可证要求提供对应源码及构建脚本，并保留必要声明。第三方代码、图标及依赖遵循各自许可证，详见 [第三方声明](THIRD_PARTY_NOTICES.md)。
+Original code is licensed under [GNU GPL version 3 only (GPL-3.0-only)](LICENSE). When distributing covered versions, provide the corresponding source and build scripts and retain the required notices as specified by the license. Third-party code, icons, and dependencies retain their own licenses; see [Third-party notices](THIRD_PARTY_NOTICES.md).

@@ -2,7 +2,7 @@
   "name": "vsgit",
   "displayName": "VS Git",
   "description": "A JetBrains-inspired three-pane Git history for VS Code.",
-  "version": "0.1.282",
+  "version": "0.1.284",
   "publisher": "lvliangxiong",
   "engines": {
     "vscode": "^1.85.0"
@@ -455,7 +455,7 @@
     "test": "npm run build && tsx --test test/*.test.ts",
     "format": "prettier --write src scripts test docs README.md package.json tsconfig*.json",
     "format:check": "prettier --check src scripts test docs README.md package.json tsconfig*.json",
-    "package": "npm run check && tsx scripts/package-icon-bridge.ts && vsce package --no-dependencies --allow-missing-repository --no-rewrite-relative-links --skip-license --out dist/vsgit.vsix"
+    "package": "npm run check && tsx scripts/package-icon-bridge.ts && vsce package --no-dependencies --githubBranch main --out dist/vsgit.vsix"
   },
   "license": "GPL-3.0-only",
   "extensionKind": [
@@ -484,5 +484,17 @@
     "vscode-oniguruma": "2.0.1",
     "vscode-textmate": "9.3.2",
     "zustand": "5.0.15"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lvliangxiong/vsgit.git"
+  },
+  "homepage": "https://github.com/lvliangxiong/vsgit#readme",
+  "extensionPack": [
+    "lvliangxiong.vsgit-icon-theme"
+  ],
+  "bugs": {
+    "url": "https://github.com/lvliangxiong/vsgit/issues"
+  },
+  "icon": "media/icon.png"
 }

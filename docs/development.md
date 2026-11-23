@@ -1,8 +1,10 @@
-# 构建、验证与安装
+# Development, verification, and installation
 
-## 环境与命令
+English | [简体中文](development.zh-CN.md)
 
-需要 Node.js 22+、npm 和 Git。VS Code 版本范围见主插件 manifest 的 `engines.vscode`，依赖版本由 `package-lock.json` 固定。
+## Requirements and commands
+
+Development requires Node.js 22+, npm, and Git. The main manifest's `engines.vscode` field declares the supported VS Code version range. `package-lock.json` pins dependency versions.
 
 ```sh
 npm ci
@@ -10,27 +12,27 @@ npm run check
 npm test
 ```
 
-| 命令                   | 用途                                                                      |
-| ---------------------- | ------------------------------------------------------------------------- |
-| `npm run build`        | 重建 `out/`，编译 TypeScript、React 入口和 Less，复制静态资源及依赖许可证 |
-| `npm run typecheck`    | 检查应用、脚本和测试的 TypeScript 类型                                    |
-| `npm run check`        | 执行类型检查和构建                                                        |
-| `npm test`             | 构建后运行 `test/*.test.ts`                                               |
-| `npm run format`       | 格式化源码、脚本、测试及文档                                              |
-| `npm run format:check` | 检查格式                                                                  |
-| `npm run package`      | 检查构建并生成主插件和图标桥接插件的 VSIX                                 |
+| Command                | Purpose                                                                                                        |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `npm run build`        | Rebuilds `out/`, compiles TypeScript, React entry points, and Less, and copies assets and dependency licenses. |
+| `npm run typecheck`    | Checks TypeScript types in application code, scripts, and tests.                                               |
+| `npm run check`        | Runs type checking and the build.                                                                              |
+| `npm test`             | Builds and runs `test/*.test.ts`.                                                                              |
+| `npm run format`       | Formats source, scripts, tests, and documentation.                                                             |
+| `npm run format:check` | Checks formatting.                                                                                             |
+| `npm run package`      | Checks the build and produces the main and bridge VSIX packages.                                               |
 
-`scripts/` 和 `test/` 使用 TypeScript，通过项目内的 `tsx` 执行。`tsconfig.tools.json` 配置脚本与测试环境；组件测试通过 jsdom 提供 DOM。
+`scripts/` and `test/` use TypeScript executed with the project's `tsx`. `tsconfig.tools.json` configures the script and test environment; component tests use jsdom.
 
-## 调试与测试
+## Debugging and testing
 
-构建后启动扩展开发窗口，仓库路径替换为测试仓库。需要独立用户配置时使用 `--user-data-dir` 指定临时目录：
+After building, launch an extension development window with a test repository. Use `--user-data-dir` with a temporary directory if you need isolated user configuration:
 
 ```sh
 code --extensionDevelopmentPath=. /path/to/test-repository
 ```
 
-单独运行测试：
+Run individual tests with:
 
 ```sh
 npm run build
@@ -41,46 +43,54 @@ npx tsx --test test/branch-selection.test.ts test/reference-layout.test.ts test/
 npx tsx --test test/switch-repositories.test.ts test/open-working-file.test.ts
 ```
 
-Git 写操作测试使用临时仓库和本地 bare remote。测试覆盖历史筛选、拓扑、stash、比较端点、重命名、分支操作、Cherry-pick、缓存和多仓库状态隔离。
+Tests that write to Git use temporary repositories and local bare remotes. Coverage includes history filters, topology, stashes, comparison endpoints, renames, branch operations, cherry-picking, caching, and isolation between repository sessions.
 
-React/jsdom 测试覆盖选择、键盘操作、菜单、悬浮提示、文件树和视图生命周期。jsdom 不执行真实布局，尺寸和 Canvas 由测试替身提供。焦点、缩放、主题、文件图标及 Remote-SSH 行为需要在 VS Code 中验证。
+React/jsdom tests cover selection, keyboard interaction, menus, hovers, file trees, and view lifecycles. jsdom does not perform real layout; tests supply dimensions and Canvas doubles. Focus, zoom, themes, file icons, and Remote-SSH behavior require verification in VS Code.
 
-## 打包与安装
+## Packaging and installation
 
 ```sh
 npm run package
 code --install-extension dist/vsgit-icon-theme.vsix --force
-code --install-extension dist/vsgit.vsix --force
+code --install-extension dist/vsgit.vsix --force --do-not-include-pack-dependencies
 ```
 
-产物分别为 `dist/vsgit.vsix` 和 `dist/vsgit-icon-theme.vsix`。`scripts/package-icon-bridge.ts` 将桥接插件的 publisher 和版本同步为主插件的值。安装后运行 `Developer: Reload Window` 激活更新。
+Outputs are `dist/vsgit.vsix` and `dist/vsgit-icon-theme.vsix`. `scripts/package-icon-bridge.ts` synchronizes the bridge's publisher and version with the main extension. Run `Developer: Reload Window` after installation.
 
-扩展身份如下：
-
-| 扩展                          | ID                              | 宿主        |
+| Extension                     | ID                              | Host        |
 | ----------------------------- | ------------------------------- | ----------- |
 | VS Git                        | `lvliangxiong.vsgit`            | `workspace` |
 | VS Git File Icon Theme Bridge | `lvliangxiong.vsgit-icon-theme` | `ui`        |
 
-可通过 `code --list-extensions --show-versions` 检查本地安装，通过 `code --locate-extension lvliangxiong.vsgit` 定位本地主插件安装目录。远端安装应在对应 Remote-SSH 窗口的 Extensions 视图中核对 publisher 和版本。
+Use `code --list-extensions --show-versions` to inspect local installations and `code --locate-extension lvliangxiong.vsgit` to locate the main extension. Check the publisher and version of a remote installation in the Extensions view of the corresponding Remote-SSH window.
 
-Remote-SSH 中主插件运行在远端 workspace 宿主，图标、编辑器主题和语法资源由本地 UI 桥接提供。主插件的 `extensionKind` 为 `workspace`，桥接插件为 `ui`。
+In Remote-SSH, the main extension runs in the remote workspace host. The local UI bridge supplies file icons, editor themes, and grammar resources. Their `extensionKind` values are `workspace` and `ui`, respectively.
 
-VSIX 包含编译产物、使用文档和许可证。React 等浏览器依赖以及宿主侧的 `jsonc-parser` 在构建时打包，运行不依赖开发目录中的 `node_modules`。运行依赖的许可证由构建脚本复制。
+The main extension's `extensionPack` references `lvliangxiong.vsgit-icon-theme`; publish the bridge first for the initial Marketplace release. For manual VSIX installation, install the local bridge first and use `--do-not-include-pack-dependencies` for the main package to avoid Marketplace resolution. Install the main package in the remote workspace host when using Remote-SSH.
 
-分发 GPL-3.0 覆盖的安装包时，应按许可证要求提供与发布版本匹配的对应源码及构建脚本。源码范围包括主插件、图标桥接插件、共享模块和构建配置；第三方声明见 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)。
+Both manifests declare the source repository, homepage, Issues URL, and `media/icon.png`. The 256×256 Marketplace icons share a V-shaped commit graph mark. The main icon is `media/icon.png`, rendered from `media/marketplace-icon.svg`. The bridge icon is `media/bridge-icon.png`, rendered from `media/marketplace-bridge-icon.svg` with a connected link badge, and copied to `icon-theme-bridge/media/icon.png` during packaging. SVG sources and PNG assets are version-controlled. Main README relative links are rewritten against GitHub's `main` branch; the bridge README uses its repository subdirectory as the base URL.
 
-文档变更使用 Markdown 格式和链接检查，无须增加插件版本或重新部署：
+VSIX packages include compiled outputs, documentation, Marketplace icons, and licenses. React and other browser dependencies, along with host-side `jsonc-parser`, are bundled at build time. Runtime does not depend on the development checkout's `node_modules`. Build scripts copy runtime dependency licenses.
+
+When distributing GPL-covered packages, provide the corresponding source and build scripts matching the distributed version as required by the license. Source includes the main extension, bridge, shared modules, and build configuration. See [Third-party notices](../THIRD_PARTY_NOTICES.md).
+
+Documentation-only changes require Markdown formatting and link checks, not a version bump or redeployment:
 
 ```sh
-npx prettier --check README.md docs/*.md icon-theme-bridge/README.md THIRD_PARTY_NOTICES.md
+npx prettier --check 'README*.md' 'docs/*.md' 'icon-theme-bridge/README*.md' 'THIRD_PARTY_NOTICES*.md'
 git diff --check
 ```
 
-功能或界面变更应完成相关测试，并在 VS Code 中检查真实布局、主题、焦点和操作结果。打包与安装校验不能替代界面验证。
+For feature or UI changes, run relevant tests and verify real layout, themes, focus, and actions in VS Code. Packaging and installation checks do not replace UI verification.
 
-## 本地配置与产物
+## Documentation languages
 
-构建输出、VSIX、测试日志、编辑器配置、环境变量文件和个人辅助工具配置通过 `.gitignore` 排除。文档中的路径使用通用占位形式，本机配置保存在被忽略的位置。
+English is the default language in `README.md`, the guides in `docs/`, and the bridge README. Each guide has a sibling `.zh-CN.md` translation and a language link at the top. Links within each language point to the corresponding translation where one exists. The English and Chinese third-party notices retain upstream attribution; bundled license texts remain in their original language.
 
-`VS Git Performance` 输出通道记录查询、索引和文件比较耗时。诊断输出可能包含运行时仓库路径或 Git 错误，在分享日志前检查其中的环境信息。
+Both VSIX packages include their Chinese README, and the main package includes both guide and notice languages. Marketplace descriptions use the English `README.md`. Update the language pairs together when documenting a behavior change.
+
+## Local configuration and generated files
+
+`.gitignore` excludes build outputs, VSIX files, test logs, editor configuration, environment files, and personal helper-tool configuration. Documentation uses generic example paths; machine-specific configuration belongs in ignored locations.
+
+The VS Git Performance output channel records query, indexing, and file comparison timings. Diagnostic output can contain runtime repository paths or Git errors; review environment information before sharing logs.
