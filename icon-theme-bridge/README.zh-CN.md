@@ -35,7 +35,7 @@ code --install-extension dist/vscode-git.vsix --force --do-not-include-pack-depe
 
 ## 许可证
 
-Copyright (c) 2026 VS Git contributors.
+Copyright (c) 2026 VS Code Git contributors.
 
 桥接插件原创代码采用 GNU GPL 第 3 版（SPDX: GPL-3.0-only），详见 [LICENSE](LICENSE)。分发者应按许可证要求提供对应源码及构建说明。
 

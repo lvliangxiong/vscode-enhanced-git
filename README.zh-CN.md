@@ -117,6 +117,6 @@ Remote-SSH 窗口中，主插件安装在远端 workspace 宿主，桥接插件�
 
 ## 许可证
 
-Copyright (c) 2026 VS Git contributors.
+Copyright (c) 2026 VS Code Git contributors.
 
 原创代码采用 [GNU GPL 第 3 版（GPL-3.0-only）](LICENSE)。分发受该许可证覆盖的版本时，应按许可证要求提供对应源码及构建脚本，并保留必要声明。第三方代码、图标及依赖遵循各自许可证，详见 [第三方声明](THIRD_PARTY_NOTICES.zh-CN.md)。

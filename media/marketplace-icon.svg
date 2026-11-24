@@ -1,4 +1,4 @@
-<!-- Original VS Git artwork. Copyright (c) 2026 VS Git contributors. GPL-3.0-only. -->
+<!-- Original VS Code Git artwork. Copyright (c) 2026 VS Code Git contributors. GPL-3.0-only. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none">
   <defs>
     <linearGradient id="surface" x1="28" y1="12" x2="226" y2="244" gradientUnits="userSpaceOnUse"><stop stop-color="#192A43"/><stop offset="1" stop-color="#0B1224"/></linearGradient>

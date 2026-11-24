@@ -35,7 +35,7 @@ See the [main README](https://github.com/lvliangxiong/vscode-git/blob/main/READM
 
 ## License
 
-Copyright (c) 2026 VS Git contributors.
+Copyright (c) 2026 VS Code Git contributors.
 
 Original bridge code is licensed under GNU GPL version 3 only (SPDX: GPL-3.0-only); see [LICENSE](LICENSE). Distributors must provide the corresponding source and build instructions as required by that license.
 

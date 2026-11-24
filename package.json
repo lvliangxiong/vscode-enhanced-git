@@ -2,7 +2,7 @@
   "name": "vscode-git",
   "displayName": "VS Code Git",
   "description": "A JetBrains-inspired three-pane Git history for VS Code.",
-  "version": "0.1.288",
+  "version": "0.1.289",
   "publisher": "lvliangxiong",
   "engines": {
     "vscode": "^1.85.0"

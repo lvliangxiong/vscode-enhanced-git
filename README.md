@@ -117,6 +117,6 @@ In a Remote-SSH window, the main extension runs in the remote workspace host and
 
 ## License
 
-Copyright (c) 2026 VS Git contributors.
+Copyright (c) 2026 VS Code Git contributors.
 
 Original code is licensed under [GNU GPL version 3 only (GPL-3.0-only)](LICENSE). When distributing covered versions, provide the corresponding source and build scripts and retain the required notices as specified by the license. Third-party code, icons, and dependencies retain their own licenses; see [Third-party notices](THIRD_PARTY_NOTICES.md).
