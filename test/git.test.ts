@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 const { git, refs, log, details } = require('../out/extension/git/index');
 test('reads roots, unicode paths, branches, merges and deletion changes', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-test-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-test-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Test Author']);
@@ -60,7 +60,7 @@ test('reads roots, unicode paths, branches, merges and deletion changes', async 
 });
 test('server filters and safe local branch actions with a local bare remote', async () => {
   const { branchAction, patch } = require('../out/extension/git/index');
-  const base = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-actions-'));
+  const base = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-actions-'));
   const root = path.join(base, 'repo'),
     remote = path.join(base, 'remote.git');
   await fs.mkdir(root);
@@ -109,7 +109,7 @@ test('server filters and safe local branch actions with a local bare remote', as
 });
 test('non-contiguous selections compose same-file changes and cancel additions/deletions', async () => {
   const { selectionDetails, selectionPatch, projectGraph } = require('../out/extension/git/index');
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-selection-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-selection-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Test']);
@@ -162,7 +162,7 @@ test('non-contiguous selections compose same-file changes and cancel additions/d
   }
 });
 test('combines branch and author multi-select with literal, regex and date filters', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-filters-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-filters-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Alice']);
@@ -231,7 +231,7 @@ test('combines branch and author multi-select with literal, regex and date filte
 
 test('graph jump loads through a parent past the old limit and preserves matching filters', async () => {
   const { historyThrough, projectGraph } = require('../out/extension/git/index');
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-parent-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-parent-'));
   try {
     await git(root, ['init', '-b', 'main']);
     let stream = '';

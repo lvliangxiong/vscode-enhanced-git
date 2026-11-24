@@ -3,7 +3,7 @@ import type { FileHistoryEntry, FileHistoryPage, FileHistoryDiff } from '../../s
 import { readSelectionItems } from './selection-reader';
 import { selectionDetails } from './changes';
 
-const marker = 'vscode-git-file-history';
+const marker = 'vscode-enhanced-git-file-history';
 const format = `%x00${marker}%x00%H%x00%P%x00%an%x00%ae%x00%cI%x00%s%x00%B%x00`;
 interface RecordEntry {
   entry: FileHistoryEntry;

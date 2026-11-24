@@ -15,7 +15,7 @@ export function installGraphTheme(ctx: LogContext) {
   const rootObserver = new MutationObserver(update);
   rootObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
   ctx.lifetime.listen(window, 'resize', update);
-  ctx.lifetime.listen(window, 'vsCodeGitTheme', update);
+  ctx.lifetime.listen(window, 'vsCodeEnhancedGitTheme', update);
   ctx.lifetime.add(() => {
     bodyObserver.disconnect();
     rootObserver.disconnect();

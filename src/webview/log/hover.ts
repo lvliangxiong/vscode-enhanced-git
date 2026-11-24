@@ -162,7 +162,7 @@ export function installCommitHover(
   lifetime.listen(document, 'keydown', (event: KeyboardEvent) => {
     if (event.key === 'Escape') hide();
   });
-  for (const type of ['blur', 'resize', 'vsCodeGitHidden']) lifetime.listen(window, type, hide);
+  for (const type of ['blur', 'resize', 'vsCodeEnhancedGitHidden']) lifetime.listen(window, type, hide);
   const resize = new ResizeObserver(hide);
   resize.observe(list);
   lifetime.add(() => resize.disconnect());
@@ -206,7 +206,7 @@ export function installGraphHover(ctx: LogContext, list: HTMLElement) {
   );
   lifetime.listen(list, 'focusout', () => update());
   lifetime.listen(list, 'scroll', () => update(), { passive: true });
-  for (const type of ['blur', 'vsCodeGitHidden']) lifetime.listen(window, type, () => update());
+  for (const type of ['blur', 'vsCodeEnhancedGitHidden']) lifetime.listen(window, type, () => update());
 }
 export function createHoverController(ctx: LogContext) {
   function closeTransientUi() {
@@ -216,7 +216,7 @@ export function createHoverController(ctx: LogContext) {
     ctx.actions.toolbar.closeFilesMenu();
     ctx.actions.toolbar.hideOverflow();
     ctx.ui.closeContextMenu();
-    ctx.env.window.dispatchEvent(new Event('vsCodeGitHidden'));
+    ctx.env.window.dispatchEvent(new Event('vsCodeEnhancedGitHidden'));
   }
   function start() {
     const { $ } = ctx.env;

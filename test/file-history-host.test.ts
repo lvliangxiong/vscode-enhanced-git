@@ -7,7 +7,7 @@ import { git } from '../src/extension/git/client';
 import { FileHistoryView } from '../src/extension/views/file-history';
 
 test('file history sidebar reuses the existing editor group, validates loaded entries and routes actions', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-history-host-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-history-host-'));
   let receive: (message: any) => Promise<void>, dispose: () => void;
   const messages: any[] = [],
     calls: any[] = [],
@@ -96,7 +96,7 @@ test('file history sidebar reuses the existing editor group, validates loaded en
     });
     assert.equal(
       JSON.stringify(commands.filter((call) => call[0] !== 'setContext')),
-      JSON.stringify([['vscode-git.fileHistory.focus']]),
+      JSON.stringify([['vscode-enhanced-git.fileHistory.focus']]),
     );
     commands.length = 0;
     history.resolveWebviewView(panel as any);
@@ -117,8 +117,8 @@ test('file history sidebar reuses the existing editor group, validates loaded en
       view: { author: true, date: true, hash: true, details: false },
     };
     await receive({ type: 'historyToolbarState', generation: 1, state: toolbar });
-    assert.equal(handlers.has('vscode-git.fileHistory.compare'), false);
-    await handlers.get('vscode-git.fileHistory.compareLocal')();
+    assert.equal(handlers.has('vscode-enhanced-git.fileHistory.compare'), false);
+    await handlers.get('vscode-enhanced-git.fileHistory.compareLocal')();
     assert.deepEqual(messages.at(-1), {
       type: 'historyAction',
       action: 'compareLocal',
@@ -130,10 +130,10 @@ test('file history sidebar reuses the existing editor group, validates loaded en
       state: { ...toolbar, loading: true },
     });
     const beforeBusy = messages.length;
-    await handlers.get('vscode-git.fileHistory.refresh')();
+    await handlers.get('vscode-enhanced-git.fileHistory.refresh')();
     assert.equal(messages.length, beforeBusy, 'native title commands respect loading state');
     await receive({ type: 'historyToolbarState', generation: 0, state: toolbar });
-    await handlers.get('vscode-git.fileHistory.refresh')();
+    await handlers.get('vscode-enhanced-git.fileHistory.refresh')();
     assert.equal(
       messages.length,
       beforeBusy,
@@ -141,14 +141,14 @@ test('file history sidebar reuses the existing editor group, validates loaded en
     );
     await receive({ type: 'historyToolbarState', generation: 1, state: toolbar });
     picked = [];
-    await handlers.get('vscode-git.fileHistory.viewOptions')();
+    await handlers.get('vscode-enhanced-git.fileHistory.viewOptions')();
     assert.deepEqual(messages.at(-1), {
       type: 'historyViewOptions',
       view: { author: false, date: false, hash: false, details: false },
     });
     picked = undefined;
     const beforeCancel = messages.length;
-    await handlers.get('vscode-git.fileHistory.viewOptions')();
+    await handlers.get('vscode-enhanced-git.fileHistory.viewOptions')();
     assert.equal(messages.length, beforeCancel, 'cancelled preferences are unchanged');
     const html = panel.webview.html;
     const loaded = messages.length;

@@ -34,7 +34,7 @@ test('initial count is independent of page size, resets with filters/settings, a
 });
 
 test('finite and unlimited history retain filtering, hash search, signatures, ranges and navigation', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-history-settings-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-history-settings-'));
   try {
     await git(root, ['init', '-b', 'main']);
     const empty = await loadHistoryPage(root, '', 0);

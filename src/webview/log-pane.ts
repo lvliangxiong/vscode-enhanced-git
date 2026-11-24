@@ -104,9 +104,9 @@ export const createPane: PaneFactory = (element, html, { state, send }) => {
             'resize',
             'focus',
             'blur',
-            'vsCodeGitHidden',
-            'vsCodeGitTheme',
-            'vsCodeGitDispose',
+            'vsCodeEnhancedGitHidden',
+            'vsCodeEnhancedGitTheme',
+            'vsCodeEnhancedGitDispose',
           ].includes(type)
             ? events
             : shadow;
@@ -121,13 +121,13 @@ export const createPane: PaneFactory = (element, html, { state, send }) => {
   fontStyle.nonce = nonce;
   document.head.append(fontStyle);
   const scope: MountLogOptions['scope'] = {
-    vsCodeGitVisible: visible,
-    vsCodeGitFontSheet: fontStyle.sheet,
-    vsCodeGitFontPrefix: `pane-${window.crypto.randomUUID()}-`,
+    vsCodeEnhancedGitVisible: visible,
+    vsCodeEnhancedGitFontSheet: fontStyle.sheet,
+    vsCodeEnhancedGitFontPrefix: `pane-${window.crypto.randomUUID()}-`,
   };
   const config = shadow.getElementById('frame-config');
   const settings = config ? JSON.parse(config.textContent) : {};
-  if (!settings.repositoryFrame) scope.vsCodeGitComparison = settings;
+  if (!settings.repositoryFrame) scope.vsCodeEnhancedGitComparison = settings;
   syncPaneTheme(body, document.body);
   for (const type of ['focus', 'blur'])
     window.addEventListener(type, () => events.dispatchEvent(new window.Event(type)), {
@@ -175,12 +175,12 @@ export const createPane: PaneFactory = (element, html, { state, send }) => {
     element,
     receive(message) {
       if (disposed) return;
-      if (message.type === 'vsCodeGitTheme') {
+      if (message.type === 'vsCodeEnhancedGitTheme') {
         syncPaneTheme(body, document.body);
-        events.dispatchEvent(new window.Event('vsCodeGitTheme'));
+        events.dispatchEvent(new window.Event('vsCodeEnhancedGitTheme'));
         return;
       }
-      if (message.type === 'vsCodeGitVisibility') visible = message.visible;
+      if (message.type === 'vsCodeEnhancedGitVisibility') visible = message.visible;
       // Deliver to every pane-scoped subscriber, including the file-icon service.
       // Calling only the log router drops icon replies and theme invalidations.
       events.dispatchEvent(new window.MessageEvent('message', { data: message }));

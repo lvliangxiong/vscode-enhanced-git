@@ -53,11 +53,11 @@ class ChangesView implements VSCode.WebviewViewProvider {
     };
     for (const [name, action] of Object.entries(actions))
       context.subscriptions.push(
-        vscode.commands.registerCommand(`vscode-git.changes.${name}`, async () => {
+        vscode.commands.registerCommand(`vscode-enhanced-git.changes.${name}`, async () => {
           try {
             await action();
           } catch (error) {
-            await vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
+            await vscode.window.showErrorMessage(`Enhanced Git: ${error.message}`);
           }
         }),
       );
@@ -84,7 +84,7 @@ class ChangesView implements VSCode.WebviewViewProvider {
           this.contexts.set(key, value);
           return this.vscode.commands.executeCommand(
             'setContext',
-            `vscode-git.changes.${key}`,
+            `vscode-enhanced-git.changes.${key}`,
             value,
           );
         }),
@@ -108,7 +108,7 @@ class ChangesView implements VSCode.WebviewViewProvider {
     this.expanded = false;
     await this.updateContexts();
     await this.publish();
-    await this.vscode.commands.executeCommand('vscode-git.changes.focus');
+    await this.vscode.commands.executeCommand('vscode-enhanced-git.changes.focus');
   }
   async refresh() {
     if (!this.comparison || !this.loadComparison || this.refreshing) return;
@@ -178,7 +178,7 @@ class ChangesView implements VSCode.WebviewViewProvider {
           )
             return;
           if (message.type === 'openGitLog')
-            await this.vscode.commands.executeCommand('vscode-git.open');
+            await this.vscode.commands.executeCommand('vscode-enhanced-git.open');
           if (message.type === 'ready') {
             this.ready = true;
             await this.publish();
@@ -194,7 +194,7 @@ class ChangesView implements VSCode.WebviewViewProvider {
           }
           if (message.type === 'branchChangesFile') await this.openFile(message);
         } catch (error) {
-          await vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
+          await vscode.window.showErrorMessage(`Enhanced Git: ${error.message}`);
         }
       },
       null,
@@ -251,7 +251,7 @@ class ChangesView implements VSCode.WebviewViewProvider {
     if (this.comparison !== data) return;
     const make = (text: string, label: 'before' | 'after', revision: Revision | null) => {
       const uri = this.vscode.Uri.from({
-        scheme: 'vscode-git',
+        scheme: 'vscode-enhanced-git',
         path: '/' + (data.kind === 'selection' ? revision?.path || change.path : change.path),
         query: crypto.randomUUID() + label,
       });

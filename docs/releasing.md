@@ -20,7 +20,7 @@ The Marketplace publisher must exist and belong to an account you control. This 
    | Field            | Value                 |
    | ---------------- | --------------------- |
    | Repository owner | `lvliangxiong`        |
-   | Repository       | `vscode-git`          |
+   | Repository       | `vscode-enhanced-git` |
    | Workflow         | `publish-release.yml` |
    | Environment      | `marketplace`         |
 
@@ -40,7 +40,7 @@ For example, after both manifests and the lockfile contain `0.1.285`:
 
 ```sh
 git push origin main
-git tag -a v0.1.285 -m "VS Code Git 0.1.285"
+git tag -a v0.1.285 -m "Enhanced Git for Visual Studio Code 0.1.285"
 git push origin v0.1.285
 ```
 

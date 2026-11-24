@@ -20,7 +20,7 @@ async function snapshot(root: string) {
   ]);
 }
 async function fixture(t) {
-  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-update-'));
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-update-'));
   t.after(() => fs.rm(dir, { recursive: true, force: true }));
   const root = path.join(dir, 'main'),
     remote = path.join(dir, 'remote.git');

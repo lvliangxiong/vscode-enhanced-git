@@ -36,8 +36,8 @@ export type LogMessage =
   | DetailMessage
   | ({ type: 'favorites'; root: string } & BranchSnapshot)
   | ({ type: 'branches' } & BranchSnapshot)
-  | { type: 'vsCodeGitVisibility' | 'hostVisibility'; visible: boolean }
-  | { type: 'vsCodeGitRefresh' }
+  | { type: 'vsCodeEnhancedGitVisibility' | 'hostVisibility'; visible: boolean }
+  | { type: 'vsCodeEnhancedGitRefresh' }
   | { type: 'repositoryChanged'; root: string; version: number; [key: string]: unknown }
   | { type: 'repos'; roots: string[] }
   | { type: 'filterOptions'; recents?: RecentGroups; authors: Author[]; paths: string[] }
@@ -63,14 +63,14 @@ export function receiveLogMessage(ctx: LogContext, data: LogMessage) {
   const { store, actions, env } = ctx;
   const state = store.getState;
   switch (data.type) {
-    case 'vsCodeGitVisibility':
+    case 'vsCodeEnhancedGitVisibility':
     case 'hostVisibility':
-      env.scope.vsCodeGitVisible = data.visible;
+      env.scope.vsCodeEnhancedGitVisible = data.visible;
       store.setState({ visible: data.visible });
       if (data.visible) actions.history.refreshCoordinator.check();
       else actions.hover.closeTransientUi();
       return;
-    case 'vsCodeGitRefresh':
+    case 'vsCodeEnhancedGitRefresh':
       actions.history.load();
       return;
     case 'repositoryChanged':

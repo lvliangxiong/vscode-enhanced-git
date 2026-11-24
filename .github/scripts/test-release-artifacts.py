@@ -17,7 +17,7 @@ spec.loader.exec_module(release)
 
 class ReleaseArtifactsTests(unittest.TestCase):
     def setUp(self):
-        temporary = tempfile.TemporaryDirectory(prefix="vscode-git-release-validation-")
+        temporary = tempfile.TemporaryDirectory(prefix="vscode-enhanced-git-release-validation-")
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name)
         self.dist = self.root / "dist"
@@ -44,17 +44,17 @@ class ReleaseArtifactsTests(unittest.TestCase):
         record = self.describe()
         self.assertEqual(record["tag"], self.tag)
         self.assertEqual(record["commit"], self.commit)
-        self.assertEqual(record["packages"]["vscode-git.vsix"]["id"], "fixture.vscode-git")
-        self.assertEqual(record["packages"]["vscode-git-icon-theme.vsix"]["id"], "fixture.vscode-git-icon-theme")
+        self.assertEqual(record["packages"]["vscode-enhanced-git.vsix"]["id"], "fixture.vscode-enhanced-git")
+        self.assertEqual(record["packages"]["vscode-enhanced-git-icon-theme.vsix"]["id"], "fixture.vscode-enhanced-git-icon-theme")
         self.assertEqual(record, self.describe())
 
     def test_changed_package_contents_change_checksum(self):
         before = self.describe()
         manifest = json.loads((self.root / "package.json").read_text())
-        self.write_package("vscode-git.vsix", manifest, "tampered code")
+        self.write_package("vscode-enhanced-git.vsix", manifest, "tampered code")
         after = self.describe()
         self.assertNotEqual(before, after)
-        self.assertEqual(before["packages"]["vscode-git-icon-theme.vsix"], after["packages"]["vscode-git-icon-theme.vsix"])
+        self.assertEqual(before["packages"]["vscode-enhanced-git-icon-theme.vsix"], after["packages"]["vscode-enhanced-git-icon-theme.vsix"])
 
     def test_mismatched_tag_bridge_and_lock_versions_are_rejected(self):
         with self.assertRaises(ValueError):
@@ -72,14 +72,14 @@ class ReleaseArtifactsTests(unittest.TestCase):
         manifest = json.loads((self.root / "package.json").read_text())
         for key, value in [("name", "other"), ("publisher", "other"), ("version", "2.0.0"), ("extensionKind", ["ui"])]:
             with self.subTest(field=key):
-                self.write_package("vscode-git.vsix", {**manifest, key: value})
+                self.write_package("vscode-enhanced-git.vsix", {**manifest, key: value})
                 with self.assertRaises(ValueError):
                     self.describe()
 
     def test_missing_package_and_invalid_commit_are_rejected(self):
         with self.assertRaises(ValueError):
             release.describe_packages(self.root, self.dist, self.tag, "main")
-        (self.dist / "vscode-git-icon-theme.vsix").unlink()
+        (self.dist / "vscode-enhanced-git-icon-theme.vsix").unlink()
         with self.assertRaises(FileNotFoundError):
             self.describe()
 

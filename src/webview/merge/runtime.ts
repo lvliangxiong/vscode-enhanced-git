@@ -52,8 +52,8 @@ export const mountMergeEditors: MountMergeEditors = async (containers, data) => 
     const updateTheme = () => {
       const style = getComputedStyle(document.body);
       font = mergeFont(style);
-      monaco.editor.defineTheme('vscode-git-merge', mergeTheme(style, document.body.className));
-      monaco.editor.setTheme('vscode-git-merge');
+      monaco.editor.defineTheme('vscode-enhanced-git-merge', mergeTheme(style, document.body.className));
+      monaco.editor.setTheme('vscode-enhanced-git-merge');
       syntax?.applyColors();
       editors.forEach((editor) => editor.updateOptions(font));
       updateAlignment();
@@ -66,7 +66,7 @@ export const mountMergeEditors: MountMergeEditors = async (containers, data) => 
       models.push(model);
       const editor = monaco.editor.create(container, {
         model,
-        theme: 'vscode-git-merge',
+        theme: 'vscode-enhanced-git-merge',
         ...font,
         readOnly: true,
         domReadOnly: true,

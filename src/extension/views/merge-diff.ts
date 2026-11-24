@@ -53,7 +53,7 @@ async function renderMergeDiff(
   );
   const make = (revision: Revision | null, text: string) => {
     const uri = vscode.Uri.from({
-      scheme: 'vscode-git',
+      scheme: 'vscode-enhanced-git',
       path: '/' + (revision?.path || change.path),
       query: new URLSearchParams({
         revision: revision?.hash || 'empty',
@@ -130,11 +130,11 @@ async function renderMergeDiff(
   const style = () =>
     mergeDiffStyle(
       vscode.workspace
-        .getConfiguration?.('vscode-git', repository)
+        .getConfiguration?.('vscode-enhanced-git', repository)
         ?.get('mergeDiffStyle', 'native'),
     );
   const styleListener = vscode.workspace.onDidChangeConfiguration?.((event) => {
-    if (event.affectsConfiguration('vscode-git.mergeDiffStyle', repository))
+    if (event.affectsConfiguration('vscode-enhanced-git.mergeDiffStyle', repository))
       void panel.webview.postMessage({ type: 'mergeDiffStyle', style: style() });
   });
   const hoverStats = new Map<string, ReturnType<typeof readCommitHoverStats>>();
@@ -205,7 +205,7 @@ async function renderMergeDiff(
       if (message.type === 'compareParent' && (message.parent === 0 || message.parent === 1))
         await compare(message.parent === 0 ? 0 : 2, 1);
     } catch (error) {
-      void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
+      void vscode.window.showErrorMessage(`Enhanced Git: ${error.message}`);
     }
   });
   panel.onDidDispose(() => {

@@ -120,7 +120,7 @@ test('merge-result colors distinguish insertions, deletions, equal edits and con
 });
 
 test('merge matching keeps repeated function bodies together instead of matching an error line hundreds of lines later', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-merge-matching-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-merge-matching-'));
   const func = (name: string, operation: string, response = name) =>
     [
       `function ${name}() {`,

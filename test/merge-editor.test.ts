@@ -161,7 +161,7 @@ test('native title actions follow the active merge tab, readiness and disposal',
       },
     ),
   );
-  const command = (action: string) => h.commands.get('vscode-git.merge.' + action)();
+  const command = (action: string) => h.commands.get('vscode-enhanced-git.merge.' + action)();
   panels[0].focus(true);
   await command('next');
   assert.deepEqual(messages, [[], []], 'loading views cannot navigate');
@@ -190,7 +190,7 @@ test('native title actions follow the active merge tab, readiness and disposal',
   assert.equal(comparisons.length, 1, 'closed views cannot receive commands');
   await command('openFile');
   assert.deepEqual(openedFiles, [0, 1]);
-  assert.deepEqual(h.contexts.at(-1), ['vscode-git.merge.canNavigate', false]);
+  assert.deepEqual(h.contexts.at(-1), ['vscode-enhanced-git.merge.canNavigate', false]);
   panels[0].focus(true);
   attachments[0].dispose();
   const failing = controller.attach(
@@ -205,8 +205,8 @@ test('native title actions follow the active merge tab, readiness and disposal',
   await command('compareParent1');
   await command('openFile');
   assert.deepEqual(h.errors, [
-    'VS Code Git: comparison failed',
-    'VS Code Git: file no longer exists in the working tree',
+    'Enhanced Git: comparison failed',
+    'Enhanced Git: file no longer exists in the working tree',
   ]);
   failing.dispose();
 });

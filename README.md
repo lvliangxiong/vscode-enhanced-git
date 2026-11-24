@@ -1,10 +1,10 @@
-# VS Code Git
+# Enhanced Git for Visual Studio Code
 
 English | [简体中文](README.zh-CN.md)
 
-VS Code Git is a three-pane Git history extension for local and Remote-SSH workspaces in VS Code. It uses VS Code themes, file icon themes, and the native Diff editor. Branch and reference presentation and history navigation take inspiration from Rebased / JetBrains; changed file names use Rebased status colors.
+Enhanced Git is a three-pane Git history extension for local and Remote-SSH workspaces in VS Code. It uses VS Code themes, file icon themes, and the native Diff editor. Branch and reference presentation and history navigation take inspiration from Rebased / JetBrains; changed file names use Rebased status colors.
 
-The main extension is `lvliangxiong.vscode-git`. Its local UI companion is `lvliangxiong.vscode-git-icon-theme`.
+The main extension is `lvliangxiong.vscode-enhanced-git`. Its local UI companion is `lvliangxiong.vscode-enhanced-git-icon-theme`.
 
 ## Core features
 
@@ -21,7 +21,7 @@ The main extension is `lvliangxiong.vscode-git`. Its local UI companion is `lvli
 
 ## Opening and navigating the log
 
-Open a Git repository in VS Code and press `Option+G` on macOS or `Alt+G` on other platforms, or run `VS Code Git: Open Git Log`. Use the bottom tabs to switch repositories in a multi-repository workspace.
+Open a Git repository in VS Code and press `Option+G` on macOS or `Alt+G` on other platforms, or run `Enhanced Git: Open Git Log`. Use the bottom tabs to switch repositories in a multi-repository workspace.
 
 | Area        | Interaction                                                                                                                                                                         |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -61,11 +61,11 @@ Comparison semantics:
 - Multiple selected commits are combined in log order to determine each file's before and after revisions. Noncontiguous or cross-branch selections may include content introduced by unselected commits; this is not equivalent to replaying only the selected patches.
 - An ordinary merge's combined list contains files changed relative to every parent. No merge conflicts means this combined list is empty; it does not reconstruct the original manual conflict-resolution process. Changes relative to each parent can be expanded separately.
 - The three-pane Merge Diff inspects a committed merge result. It does not write to the working tree or resolve an ongoing Git conflict. Native Style uses aligned blank blocks and addition/deletion markers; JetBrains Style uses continuous code and connectors between panes.
-- File Diffs retains its comparison endpoints. Refresh reads the same comparison again. VS Code Git Graph versions exposing the relevant API provide Show Commit File Diffs and Locate in Git Log entry points.
+- File Diffs retains its comparison endpoints. Refresh reads the same comparison again. When the built-in Git extension in VS Code exposes the history item API, its graph offers Show Commit File Diffs and Locate in Git Log.
 
 ## Switching branches across repositories
 
-Run `VS Code Git: Switch Branch in All Repositories`, enter a branch name, and select a match. Candidates come from local and remote-tracking branches in the discovered repositories; a branch does not have to exist in every repository.
+Run `Enhanced Git: Switch Branch in All Repositories`, enter a branch name, and select a match. Candidates come from local and remote-tracking branches in the discovered repositories; a branch does not have to exist in every repository.
 
 An existing local branch is checked out directly. A unique remote-tracking match creates a corresponding local tracking branch. If another worktree has the target local branch checked out, the repository switches to that branch's commit in detached HEAD mode. Missing branches, ambiguous remote matches, and local changes blocking checkout are reported per repository through native notifications. Changes are not forcibly overwritten.
 
@@ -75,9 +75,9 @@ Cherry-pick applies selected commits from bottom to top in the log and supports 
 
 | Setting                           | Default  | Purpose                                                                                  |
 | --------------------------------- | -------- | ---------------------------------------------------------------------------------------- |
-| `vscode-git.history.initialCount` | `500`    | Commits loaded when opening the log or changing filters. `0` loads all matching commits. |
-| `vscode-git.history.pageSize`     | `500`    | Additional commits per page, from `100` to `2000`. Not used when loading all history.    |
-| `vscode-git.mergeDiffStyle`       | `native` | Display style for historical three-pane merge comparisons: `native` or `jetbrains`.      |
+| `vscode-enhanced-git.history.initialCount` | `500`    | Commits loaded when opening the log or changing filters. `0` loads all matching commits. |
+| `vscode-enhanced-git.history.pageSize`     | `500`    | Additional commits per page, from `100` to `2000`. Not used when loading all history.    |
+| `vscode-enhanced-git.mergeDiffStyle`       | `native` | Display style for historical three-pane merge comparisons: `native` or `jetbrains`.      |
 
 Settings can be configured per workspace folder. Refresh or reopen the log after changing loading limits. Merge Diff style changes apply to open comparisons.
 
@@ -87,11 +87,11 @@ The extension subscribes to repository state events from VS Code's Git extension
 
 ## Companion installation
 
-The main extension declares `lvliangxiong.vscode-git-icon-theme` in `extensionPack`. Once both extensions are published to the Marketplace, installing the main extension from the Marketplace also installs the companion. Publish the bridge before the main extension for the initial Marketplace release.
+The main extension declares `lvliangxiong.vscode-enhanced-git-icon-theme` in `extensionPack`. Once both extensions are published to the Marketplace, installing the main extension from the Marketplace also installs the companion. Publish the bridge before the main extension for the initial Marketplace release.
 
 For local VSIX installation, install the bridge package first, then the main package. The main-package command below skips Marketplace resolution of pack members. In Remote-SSH windows, install the bridge on the local client and the main extension on the remote workspace host.
 
-Source and support: [GitHub repository](https://github.com/lvliangxiong/vscode-git) · [Issues](https://github.com/lvliangxiong/vscode-git/issues).
+Source and support: [GitHub repository](https://github.com/lvliangxiong/vscode-enhanced-git) · [Issues](https://github.com/lvliangxiong/vscode-enhanced-git/issues).
 
 ## Building and installing
 
@@ -102,11 +102,11 @@ npm ci
 npm run check
 npm test
 npm run package
-code --install-extension dist/vscode-git-icon-theme.vsix --force
-code --install-extension dist/vscode-git.vsix --force --do-not-include-pack-dependencies
+code --install-extension dist/vscode-enhanced-git-icon-theme.vsix --force
+code --install-extension dist/vscode-enhanced-git.vsix --force --do-not-include-pack-dependencies
 ```
 
-Packages are written to `dist/vscode-git.vsix` and `dist/vscode-git-icon-theme.vsix`. Both extensions use the same publisher and version. Run `Developer: Reload Window` after installation.
+Packages are written to `dist/vscode-enhanced-git.vsix` and `dist/vscode-enhanced-git-icon-theme.vsix`. Both extensions use the same publisher and version. Run `Developer: Reload Window` after installation.
 
 In a Remote-SSH window, the main extension runs in the remote workspace host and the bridge runs in the local UI host. In a local window, both are installed locally.
 
@@ -117,6 +117,6 @@ In a Remote-SSH window, the main extension runs in the remote workspace host and
 
 ## License
 
-Copyright (c) 2026 VS Code Git contributors.
+Copyright (c) 2026 Enhanced Git contributors.
 
 Original code is licensed under [GNU GPL version 3 only (GPL-3.0-only)](LICENSE). When distributing covered versions, provide the corresponding source and build scripts and retain the required notices as specified by the license. Third-party code, icons, and dependencies retain their own licenses; see [Third-party notices](THIRD_PARTY_NOTICES.md).

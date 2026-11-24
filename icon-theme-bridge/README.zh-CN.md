@@ -1,8 +1,8 @@
-# VS Code Git File Icon Theme Bridge
+# Enhanced Git File Icon Theme Bridge
 
 [English](README.md) | 简体中文
 
-VS Code Git 的本地 UI 配套扩展，扩展 ID 为 `lvliangxiong.vscode-git-icon-theme`，主插件 ID 为 `lvliangxiong.vscode-git`。
+Enhanced Git 的本地 UI 配套扩展，扩展 ID 为 `lvliangxiong.vscode-enhanced-git-icon-theme`，主插件 ID 为 `lvliangxiong.vscode-enhanced-git`。
 
 ## 职责
 
@@ -16,7 +16,7 @@ VS Code Git 的本地 UI 配套扩展，扩展 ID 为 `lvliangxiong.vscode-git-i
 
 主插件在 `extensionPack` 中声明此桥接插件。两个包均发布到 Marketplace 后，从市场安装主插件可以一并安装桥接插件。首次发布市场时先发布桥接插件。本地 VSIX 安装显式使用两个安装包；下面的主包安装命令跳过从市场解析扩展包成员。
 
-[源码仓库](https://github.com/lvliangxiong/vscode-git/tree/main/icon-theme-bridge) · [反馈问题](https://github.com/lvliangxiong/vscode-git/issues)
+[源码仓库](https://github.com/lvliangxiong/vscode-enhanced-git/tree/main/icon-theme-bridge) · [反馈问题](https://github.com/lvliangxiong/vscode-enhanced-git/issues)
 
 ## 构建与安装
 
@@ -25,20 +25,20 @@ VS Code Git 的本地 UI 配套扩展，扩展 ID 为 `lvliangxiong.vscode-git-i
 ```sh
 npm ci
 npm run package
-code --install-extension dist/vscode-git-icon-theme.vsix --force
-code --install-extension dist/vscode-git.vsix --force --do-not-include-pack-dependencies
+code --install-extension dist/vscode-enhanced-git-icon-theme.vsix --force
+code --install-extension dist/vscode-enhanced-git.vsix --force --do-not-include-pack-dependencies
 ```
 
 打包脚本将桥接插件的 publisher 和版本同步为主插件的值。在本地 VS Code 客户端安装桥接插件，在仓库所在宿主安装主插件，然后执行 `Developer: Reload Window`。
 
-使用方式和验证说明见[主 README](https://github.com/lvliangxiong/vscode-git/blob/main/README.zh-CN.md) 和[开发指南](https://github.com/lvliangxiong/vscode-git/blob/main/docs/development.zh-CN.md)。
+使用方式和验证说明见[主 README](https://github.com/lvliangxiong/vscode-enhanced-git/blob/main/README.zh-CN.md) 和[开发指南](https://github.com/lvliangxiong/vscode-enhanced-git/blob/main/docs/development.zh-CN.md)。
 
 ## 许可证
 
-Copyright (c) 2026 VS Code Git contributors.
+Copyright (c) 2026 Enhanced Git contributors.
 
 桥接插件原创代码采用 GNU GPL 第 3 版（SPDX: GPL-3.0-only），详见 [LICENSE](LICENSE)。分发者应按许可证要求提供对应源码及构建说明。
 
 随包分发的 jsonc-parser 和 vscode-textmate 保留各自的 MIT 许可证，分别位于 `out/jsonc-parser-LICENSE.md` 和 `out/vscode-textmate-LICENSE.txt`。用户安装的第三方主题和语言语法在运行时读取，不随本插件的 VSIX 重新分发。
 
-市场图标沿用 VS Code Git 的 V 形提交图标识，并添加连接的链路徽标以标明配套扩展身份。SVG 和 PNG 是 VS Code Git 原创图形，采用 GPL-3.0-only；源图位于主仓库的 `media/marketplace-bridge-icon.svg`。
+市场图标沿用 Enhanced Git 的 V 形提交图标识，并添加连接的链路徽标以标明配套扩展身份。SVG 和 PNG 是 Enhanced Git 原创图形，采用 GPL-3.0-only；源图位于主仓库的 `media/marketplace-bridge-icon.svg`。

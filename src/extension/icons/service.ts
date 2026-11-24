@@ -7,7 +7,7 @@ function createIconThemeService(vscode, context) {
     for (const listener of listeners) listener();
   };
   context.subscriptions.push(
-    vscode.commands.registerCommand('vscode-git.icons.changed', changed),
+    vscode.commands.registerCommand('vscode-enhanced-git.icons.changed', changed),
     vscode.workspace.onDidChangeConfiguration((event) => {
       if (
         event.affectsConfiguration('workbench.iconTheme') ||
@@ -39,7 +39,7 @@ function createIconThemeService(vscode, context) {
       };
       try {
         const result = vscode.env.remoteName
-          ? await vscode.commands.executeCommand('vscode-git.icons.resolve', request)
+          ? await vscode.commands.executeCommand('vscode-enhanced-git.icons.resolve', request)
           : await resolver.resolve(request);
         await post({
           type: 'fileIcons',
@@ -54,7 +54,7 @@ function createIconThemeService(vscode, context) {
           generation: message.generation,
           unavailable: true,
         });
-        console.warn('VS Code Git file icon theme:', error.message);
+        console.warn('Enhanced Git file icon theme:', error.message);
       }
       return true;
     },

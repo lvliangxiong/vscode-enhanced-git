@@ -59,7 +59,7 @@ test('language associations include remote languages, filenames, longest extensi
   assert.equal(languageFor('x.go', langs, { '*.go': 'plaintext' }), 'plaintext');
 });
 test('JSONC themes resolve only needed assets and font glyphs; reset follows theme changes', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-theme-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-theme-'));
   try {
     // A packaged extension cannot resolve dependencies from our development
     // node_modules. Allow only Node built-ins to catch accidental external imports.

@@ -9,8 +9,8 @@ import vm from 'node:vm';
 import { createRequire } from 'node:module';
 const { git, refs } = require('../out/extension/git/index');
 test('comparison host embeds executable resources and isolates both logs and native branch diffs', async () => {
-  const root = await fsp.mkdtemp(path.join(os.tmpdir(), 'vscode-git-host-')),
-    otherRoot = await fsp.mkdtemp(path.join(os.tmpdir(), 'vscode-git-other-'));
+  const root = await fsp.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-host-')),
+    otherRoot = await fsp.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-other-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Fixture']);
@@ -136,11 +136,11 @@ test('comparison host embeds executable resources and isolates both logs and nat
         executeCommand: async (name, ...args) => {
           if (name === 'setContext') contexts.set(args[0], args[1]);
           if (name === 'vscode.diff') diffs.push([name, ...args]);
-          if (name === 'vscode-git.log.focus' && !logView) {
+          if (name === 'vscode-enhanced-git.log.focus' && !logView) {
             logView = surface();
             logProvider.resolveWebviewView(logView);
           }
-          if (name === 'vscode-git.changes.focus' && !sidebar) {
+          if (name === 'vscode-enhanced-git.changes.focus' && !sidebar) {
             sidebar = surface();
             changesProvider.resolveWebviewView(sidebar);
             await sidebar.receive({ type: 'ready' });
@@ -159,13 +159,13 @@ test('comparison host embeds executable resources and isolates both logs and nat
         showWarningMessage: async (_message, _options, action) => action,
         withProgress: async (_options, task) => task(),
         registerWebviewViewProvider: (id, value, options) => {
-          if (id === 'vscode-git.log') {
+          if (id === 'vscode-enhanced-git.log') {
             logProvider = value;
             logOptions = options;
-          } else if (id === 'vscode-git.fileHistory') {
+          } else if (id === 'vscode-enhanced-git.fileHistory') {
             historyOptions = options;
           } else {
-            assert.equal(id, 'vscode-git.changes');
+            assert.equal(id, 'vscode-enhanced-git.changes');
             changesProvider = value;
             changesOptions = options;
           }
@@ -208,7 +208,7 @@ test('comparison host embeds executable resources and isolates both logs and nat
         },
       },
     });
-    await commands.get('vscode-git.open')();
+    await commands.get('vscode-enhanced-git.open')();
     const original = logView;
     await original.receive({ type: 'repositoryHostReady' });
     assert.equal(original.messages.find((m) => m.type === 'repositories').repositories.length, 2);
@@ -327,8 +327,8 @@ test('comparison host embeds executable resources and isolates both logs and nat
     const retainedHtml = original.webview.html,
       retainedMessages = original.messages.length,
       retainedHandlers = original.handlers.length;
-    await commands.get('vscode-git.open')();
-    await commands.get('vscode-git.open')();
+    await commands.get('vscode-enhanced-git.open')();
+    await commands.get('vscode-enhanced-git.open')();
     assert.equal(
       panels.length,
       0,
@@ -352,7 +352,7 @@ test('comparison host embeds executable resources and isolates both logs and nat
         .some((m) => m.type === 'error' && /No remotes/.test(m.message)),
     );
     assert.equal(original.messages.at(-1).type, 'branchToolsFinished', 'failure restores toolbar');
-    assert.match(notifications.at(-1), /^VS Code Git: .*No remotes/s);
+    assert.match(notifications.at(-1), /^Enhanced Git: .*No remotes/s);
     assert.doesNotMatch(original.webview.html, /id="error"/);
     const headBeforeNavigation = (await git(root, ['rev-parse', 'HEAD'])).trim();
     const otherHead = (await git(root, ['rev-parse', 'other'])).trim();
@@ -529,13 +529,13 @@ test('comparison host embeds executable resources and isolates both logs and nat
       1,
     );
     const manifest = require('../package.json');
-    assert.equal(manifest.contributes.viewsContainers.panel[0].id, 'vscode-git-panel');
+    assert.equal(manifest.contributes.viewsContainers.panel[0].id, 'vscode-enhanced-git-panel');
     assert.match(
       manifest.contributes.viewsContainers.panel[0].id,
       /^[a-zA-Z0-9_-]+$/,
       'VS Code rejects punctuation in view container IDs',
     );
-    assert.equal(manifest.contributes.views['vscode-git-panel'][0].id, 'vscode-git.log');
+    assert.equal(manifest.contributes.views['vscode-enhanced-git-panel'][0].id, 'vscode-enhanced-git.log');
     await original.receive({
       type: 'branchCompare',
       refs: ['refs/heads/main', 'refs/heads/other'],
@@ -596,8 +596,8 @@ test('comparison host embeds executable resources and isolates both logs and nat
       hasFolders: false,
       expanded: false,
     });
-    await commands.get('vscode-git.changes.toggleLayout')();
-    assert.equal(contexts.get('vscode-git.changes.tree'), true);
+    await commands.get('vscode-enhanced-git.changes.toggleLayout')();
+    assert.equal(contexts.get('vscode-enhanced-git.changes.tree'), true);
     assert.deepEqual(sidebar.messages.at(-1), {
       type: 'comparisonAction',
       action: 'tree',
@@ -610,18 +610,18 @@ test('comparison host embeds executable resources and isolates both logs and nat
       hasFolders: true,
       expanded: true,
     });
-    await commands.get('vscode-git.changes.toggleExpansion')();
+    await commands.get('vscode-enhanced-git.changes.toggleExpansion')();
     assert.equal(sidebar.messages.at(-1).expanded, false);
-    assert.equal(contexts.get('vscode-git.changes.expanded'), false);
-    await commands.get('vscode-git.changes.toggleExpansion')();
+    assert.equal(contexts.get('vscode-enhanced-git.changes.expanded'), false);
+    await commands.get('vscode-enhanced-git.changes.toggleExpansion')();
     assert.equal(sidebar.messages.at(-1).expanded, true);
-    await commands.get('vscode-git.changes.toggleLayout')();
-    assert.equal(contexts.get('vscode-git.changes.tree'), false);
+    await commands.get('vscode-enhanced-git.changes.toggleLayout')();
+    assert.equal(contexts.get('vscode-enhanced-git.changes.tree'), false);
     const messagesBefore = sidebar.messages.length;
-    await commands.get('vscode-git.changes.toggleExpansion')();
+    await commands.get('vscode-enhanced-git.changes.toggleExpansion')();
     assert.equal(sidebar.messages.length, messagesBefore);
     for (const removed of ['showDiff', 'clear', 'toggleDirectory', 'expandAll', 'collapseAll'])
-      assert.equal(commands.has('vscode-git.changes.' + removed), false);
+      assert.equal(commands.has('vscode-enhanced-git.changes.' + removed), false);
     assert.doesNotMatch(
       original.webview.html,
       /branch-changes.js/,
@@ -678,7 +678,7 @@ test('comparison host embeds executable resources and isolates both logs and nat
     for (let i = 0; i < 3; i++) {
       sidebar.setVisible(false);
       sidebar.setVisible(true);
-      await vscode.commands.executeCommand('vscode-git.changes.focus');
+      await vscode.commands.executeCommand('vscode-enhanced-git.changes.focus');
     }
     assert.equal(sidebar.webview.html, comparisonHtml);
     assert.equal(
@@ -718,7 +718,7 @@ test('comparison host embeds executable resources and isolates both logs and nat
     await original.receive({ type: 'layoutState', layout: { ...layout, left: -1 } });
     await original.receive({ type: 'layoutState', layout: { ...layout, detailRatio: 2 } });
     assert.match(repositoryHtml, /id="app"/, 'React mounts the split controls inside the log root');
-    await commands.get('vscode-git.open')(true);
+    await commands.get('vscode-enhanced-git.open')(true);
     assert.equal(panels.at(-1).title, `Git Log — ${path.basename(repositoryRoot)}`);
     const restored = JSON.parse(
       panels.at(-1).webview.html.match(/<script id="saved-layout"[^>]*>([\s\S]*?)<\/script>/)[1],
@@ -809,7 +809,7 @@ test('comparison host embeds executable resources and isolates both logs and nat
     assert.equal(currentPairs[1].commits.length, 0);
     const panelCount = panels.length;
     pickIndex = -1;
-    await commands.get('vscode-git.open')(true);
+    await commands.get('vscode-enhanced-git.open')(true);
     assert.equal(panels.length, panelCount, 'cancelling the picker does not open a tab');
     pickIndex = 1;
     await original.receive({ type: 'newTab' });
@@ -847,7 +847,7 @@ test('comparison host embeds executable resources and isolates both logs and nat
     });
     assert.equal(second.messages.at(-1).type, 'commitRefError');
     assert.equal(second.messages.at(-1).dialogId, 'tag-test');
-    assert.equal(notifications.at(-1), 'VS Code Git: ' + second.messages.at(-1).message);
+    assert.equal(notifications.at(-1), 'Enhanced Git: ' + second.messages.at(-1).message);
     await second.receive({
       type: 'commitAction',
       action: 'tag',
@@ -1015,7 +1015,7 @@ test('comparison host embeds executable resources and isolates both logs and nat
     await sidebar.receive({ type: 'branchChangesFile', index: 0, id: commitId });
     assert.equal(diffs.length, 3, 'closing source log editors leaves the comparison usable');
     assert.equal(provider.provideTextDocumentContent(diffs[2][1]), 'base');
-    await commands.get('vscode-git.changes.reset')();
+    await commands.get('vscode-enhanced-git.changes.reset')();
     assert.equal(sidebar.messages.at(-1).pair, undefined);
     assert.equal(sidebar.description, undefined);
     await sidebar.receive({
@@ -1025,9 +1025,9 @@ test('comparison host embeds executable resources and isolates both logs and nat
       hasFolders: true,
       expanded: true,
     });
-    assert.equal(contexts.get('vscode-git.changes.hasComparison'), false);
-    assert.equal(contexts.get('vscode-git.changes.hasFolders'), false);
-    assert.equal(contexts.get('vscode-git.changes.expanded'), false);
+    assert.equal(contexts.get('vscode-enhanced-git.changes.hasComparison'), false);
+    assert.equal(contexts.get('vscode-enhanced-git.changes.hasFolders'), false);
+    assert.equal(contexts.get('vscode-enhanced-git.changes.expanded'), false);
     await sidebar.receive({ type: 'branchChangesFile', index: 0, id: commitId });
     assert.equal(diffs.length, 3, 'reset ignores delayed clicks from the old comparison');
     await assertSelectionSidebar({
@@ -1035,7 +1035,7 @@ test('comparison host embeds executable resources and isolates both logs and nat
       otherRoot,
       openLog: async (repositoryIndex) => {
         pickIndex = repositoryIndex;
-        await commands.get('vscode-git.open')(true);
+        await commands.get('vscode-enhanced-git.open')(true);
         const log = panels.at(-1);
         await log.receive({ type: 'init' });
         return log;
@@ -1197,7 +1197,7 @@ async function assertSelectionSidebar({
     await log.receive({ type: 'select', hashes: [skipped], key: 'new-log-selection' });
     await otherLog.receive({ type: 'select', hashes: [foreignHash], key: 'other-repository' });
     assert.equal(sidebar.messages.length, sidebarCount, 'log selections do not replace snapshot');
-    await commands.get('vscode-git.changes.refresh')();
+    await commands.get('vscode-enhanced-git.changes.refresh')();
     const refreshed = sidebar.messages.at(-1);
     assert.notEqual(refreshed.id, snapshot.id);
     assert.equal(refreshed.previousId, snapshot.id);
@@ -1210,16 +1210,16 @@ async function assertSelectionSidebar({
     log.dispose();
     otherLog.dispose();
     logsDisposed = true;
-    await commands.get('vscode-git.changes.refresh')();
+    await commands.get('vscode-enhanced-git.changes.refresh')();
     assert.deepEqual(sidebar.messages.at(-1).files, snapshot.files, 'closing logs keeps snapshot');
     const latestId = sidebar.messages.at(-1).id;
     await sidebar.receive({ type: 'branchChangesFile', index: 0, id: latestId });
     assert.equal(diffs.length, openedCount + 1, 'closed source logs do not prevent opening diff');
-    await commands.get('vscode-git.changes.reset')();
+    await commands.get('vscode-enhanced-git.changes.reset')();
     assert.equal(sidebar.messages.at(-1).commits, undefined);
-    assert.equal(contexts.get('vscode-git.changes.hasComparison'), false);
+    assert.equal(contexts.get('vscode-enhanced-git.changes.hasComparison'), false);
     sidebarCount = sidebar.messages.length;
-    await commands.get('vscode-git.changes.refresh')();
+    await commands.get('vscode-enhanced-git.changes.refresh')();
     assert.equal(sidebar.messages.length, sidebarCount, 'reset removes the selected-set loader');
     await sidebar.receive({ type: 'branchChangesFile', index: 0, id: latestId });
     assert.equal(diffs.length, openedCount + 1, 'reset ignores stale selection file clicks');

@@ -50,7 +50,7 @@ export function registerCommitFileDiffs(
   });
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      'vscode-git.showCommitFileDiffs',
+      'vscode-enhanced-git.showCommitFileDiffs',
       async (uri: VSCode.Uri, hash: string) => {
         try {
           if (!uri || !['file', 'vscode-remote'].includes(uri.scheme))
@@ -59,7 +59,7 @@ export function registerCommitFileDiffs(
           const root = (await git(uri.fsPath, ['rev-parse', '--show-toplevel'])).trim();
           await show(root, () => commitFileDiffs(root, hash));
         } catch (error) {
-          void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
+          void vscode.window.showErrorMessage(`Enhanced Git: ${error.message}`);
         }
       },
     ),
@@ -67,7 +67,7 @@ export function registerCommitFileDiffs(
   if (locate)
     context.subscriptions.push(
       vscode.commands.registerCommand(
-        'vscode-git.locateCommit',
+        'vscode-enhanced-git.locateCommit',
         async (uri: VSCode.Uri, hash: string) => {
           try {
             if (!uri || !['file', 'vscode-remote'].includes(uri.scheme))
@@ -76,7 +76,7 @@ export function registerCommitFileDiffs(
             const root = (await git(uri.fsPath, ['rev-parse', '--show-toplevel'])).trim();
             await locate(root, hash);
           } catch (error) {
-            void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
+            void vscode.window.showErrorMessage(`Enhanced Git: ${error.message}`);
           }
         },
       ),
@@ -97,7 +97,7 @@ export function registerCommitFileDiffs(
           {
             title: '$(diff-multiple) Show File Diffs',
             tooltip: 'Show this commit’s changed files in File Diffs',
-            command: 'vscode-git.showCommitFileDiffs',
+            command: 'vscode-enhanced-git.showCommitFileDiffs',
             arguments: [repository.rootUri],
           },
           ...(locate
@@ -105,7 +105,7 @@ export function registerCommitFileDiffs(
                 {
                   title: '$(target) Locate in Git Log',
                   tooltip: 'Locate this commit in the bottom Git Log graph',
-                  command: 'vscode-git.locateCommit',
+                  command: 'vscode-enhanced-git.locateCommit',
                   arguments: [repository.rootUri],
                 },
               ]

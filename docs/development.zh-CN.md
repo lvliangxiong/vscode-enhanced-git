@@ -51,24 +51,24 @@ React/jsdom 测试覆盖选择、键盘操作、菜单、悬浮提示、文件�
 
 ```sh
 npm run package
-code --install-extension dist/vscode-git-icon-theme.vsix --force
-code --install-extension dist/vscode-git.vsix --force --do-not-include-pack-dependencies
+code --install-extension dist/vscode-enhanced-git-icon-theme.vsix --force
+code --install-extension dist/vscode-enhanced-git.vsix --force --do-not-include-pack-dependencies
 ```
 
-产物分别为 `dist/vscode-git.vsix` 和 `dist/vscode-git-icon-theme.vsix`。`scripts/package-icon-bridge.ts` 将桥接插件的 publisher 和版本同步为主插件的值。安装后运行 `Developer: Reload Window` 激活更新。
+产物分别为 `dist/vscode-enhanced-git.vsix` 和 `dist/vscode-enhanced-git-icon-theme.vsix`。`scripts/package-icon-bridge.ts` 将桥接插件的 publisher 和版本同步为主插件的值。安装后运行 `Developer: Reload Window` 激活更新。
 
 扩展身份如下：
 
 | 扩展                               | ID                                   | 宿主        |
 | ---------------------------------- | ------------------------------------ | ----------- |
-| VS Code Git                        | `lvliangxiong.vscode-git`            | `workspace` |
-| VS Code Git File Icon Theme Bridge | `lvliangxiong.vscode-git-icon-theme` | `ui`        |
+| Enhanced Git for Visual Studio Code | `lvliangxiong.vscode-enhanced-git`   | `workspace` |
+| Enhanced Git File Icon Theme Bridge | `lvliangxiong.vscode-enhanced-git-icon-theme` | `ui`        |
 
-可通过 `code --list-extensions --show-versions` 检查本地安装，通过 `code --locate-extension lvliangxiong.vscode-git` 定位本地主插件安装目录。远端安装应在对应 Remote-SSH 窗口的 Extensions 视图中核对 publisher 和版本。
+可通过 `code --list-extensions --show-versions` 检查本地安装，通过 `code --locate-extension lvliangxiong.vscode-enhanced-git` 定位本地主插件安装目录。远端安装应在对应 Remote-SSH 窗口的 Extensions 视图中核对 publisher 和版本。
 
 Remote-SSH 中主插件运行在远端 workspace 宿主，图标、编辑器主题和语法资源由本地 UI 桥接提供。主插件的 `extensionKind` 为 `workspace`，桥接插件为 `ui`。
 
-主插件的 `extensionPack` 指向 `lvliangxiong.vscode-git-icon-theme`，首次市场发布应先发布桥接插件。手动安装 VSIX 时先安装本地桥接包，主包使用 `--do-not-include-pack-dependencies`，避免依赖市场解析。Remote-SSH 主包安装在工作区宿主，桥接包安装在本地客户端。
+主插件的 `extensionPack` 指向 `lvliangxiong.vscode-enhanced-git-icon-theme`，首次市场发布应先发布桥接插件。手动安装 VSIX 时先安装本地桥接包，主包使用 `--do-not-include-pack-dependencies`，避免依赖市场解析。Remote-SSH 主包安装在工作区宿主，桥接包安装在本地客户端。
 
 两个 manifest 都声明源码仓库、主页、Issues 和 `media/icon.png`。市场图标为 256×256 PNG，采用同一套 V 形提交图标识：主插件使用 `media/marketplace-icon.svg` 对应的 `media/icon.png`；桥接插件使用带链路徽标的 `media/marketplace-bridge-icon.svg` 对应的 `media/bridge-icon.png`，打包时复制到 `icon-theme-bridge/media/icon.png`。SVG 源图和 PNG 资源均纳入版本控制。主包 README 的相对链接按 GitHub `main` 分支重写，桥接包使用仓库子目录作为链接基准。
 
@@ -95,4 +95,4 @@ git diff --check
 
 构建输出、VSIX、测试日志、编辑器配置、环境变量文件和个人辅助工具配置通过 `.gitignore` 排除。文档中的路径使用通用占位形式，本机配置保存在被忽略的位置。
 
-`VS Code Git Performance` 输出通道记录查询、索引和文件比较耗时。诊断输出可能包含运行时仓库路径或 Git 错误，在分享日志前检查其中的环境信息。
+`Enhanced Git Performance` 输出通道记录查询、索引和文件比较耗时。诊断输出可能包含运行时仓库路径或 Git 错误，在分享日志前检查其中的环境信息。

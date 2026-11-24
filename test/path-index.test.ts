@@ -10,7 +10,7 @@ const { createHistoryCache } = require('../out/extension/git/history-cache');
 const { log } = require('../out/extension/git/history');
 
 test('private incremental path index matches Git across rename, merge, literal paths and ref changes', async () => {
-  const base = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-path-index-'));
+  const base = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-path-index-'));
   const root = path.join(base, 'repo with space');
   const storage = path.join(base, 'cache');
   const git = client.git;

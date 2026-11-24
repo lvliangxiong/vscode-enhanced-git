@@ -7,7 +7,7 @@ import { BranchesContent } from '../react/branches-panel';
 import { FilesContent, MessageContent, PreviewContent } from '../react/details-panel';
 import { FilterSurface } from '../react/filter-surface';
 import { LogBranchSummary } from '../react/branch-summary';
-import { VsCodeGitFileIcons } from '../theme-file-icons';
+import { VsCodeEnhancedGitFileIcons } from '../theme-file-icons';
 import { Lifetime } from './lifetime';
 import { createBranchesController } from './branches';
 import { createBranchToolsController } from './branch-tools';
@@ -40,7 +40,7 @@ export function mountLog(options: MountLogOptions) {
   const layoutSheet = $<HTMLStyleElement>('layout-style').sheet!;
   const savedLayout = JSON.parse($('saved-layout')?.textContent || '{}');
   const frameConfig = JSON.parse($('frame-config')?.textContent || '{}');
-  const comparison = scope.vsCodeGitComparison || (frameConfig.start ? frameConfig : undefined);
+  const comparison = scope.vsCodeEnhancedGitComparison || (frameConfig.start ? frameConfig : undefined);
   const store = createLogStore(
     api.getState(),
     api.getState()?.layout ?? savedLayout,
@@ -57,7 +57,7 @@ export function mountLog(options: MountLogOptions) {
     comparison,
   });
   if (comparison) document.body.classList.add('compare-log');
-  const themedFileIcons = VsCodeGitFileIcons.create({
+  const themedFileIcons = VsCodeEnhancedGitFileIcons.create({
     send,
     sheet: layoutSheet,
     document,
@@ -146,7 +146,7 @@ export function mountLog(options: MountLogOptions) {
     lifetime.dispose();
     ui.dispose();
   };
-  lifetime.listen(window, 'vsCodeGitDispose', dispose);
+  lifetime.listen(window, 'vsCodeEnhancedGitDispose', dispose);
   lifetime.listen(window, 'pagehide', dispose);
   actions.history.requestHistory('init', {});
   return { store, actions, receive, dispose, context: ctx };

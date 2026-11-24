@@ -160,7 +160,7 @@ async function selectionPatch(
   const fs = require('node:fs/promises'),
     os = require('node:os'),
     path = require('node:path');
-  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-diff-'));
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-diff-'));
   try {
     const before = path.join(dir, 'before'),
       after = path.join(dir, 'after');

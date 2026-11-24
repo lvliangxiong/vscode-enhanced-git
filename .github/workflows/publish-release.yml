@@ -76,8 +76,8 @@ jobs:
         with:
           name: release-vsix-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
-            dist/vscode-git.vsix
-            dist/vscode-git-icon-theme.vsix
+            dist/vscode-enhanced-git.vsix
+            dist/vscode-enhanced-git-icon-theme.vsix
             dist/release-manifest.json
           if-no-files-found: error
           retention-days: 30
@@ -120,9 +120,9 @@ jobs:
       # Each invocation requests its own short-lived OIDC credential.
       # skip-duplicate allows retrying after one of the two packages succeeds.
       - name: Publish bridge to Marketplace
-        run: '"$RUNNER_TEMP/vsce-publish/node_modules/.bin/vsce" publish --oidc --packagePath dist/vscode-git-icon-theme.vsix --skip-duplicate'
+        run: '"$RUNNER_TEMP/vsce-publish/node_modules/.bin/vsce" publish --oidc --packagePath dist/vscode-enhanced-git-icon-theme.vsix --skip-duplicate'
       - name: Publish main extension to Marketplace
-        run: '"$RUNNER_TEMP/vsce-publish/node_modules/.bin/vsce" publish --oidc --packagePath dist/vscode-git.vsix --skip-duplicate'
+        run: '"$RUNNER_TEMP/vsce-publish/node_modules/.bin/vsce" publish --oidc --packagePath dist/vscode-enhanced-git.vsix --skip-duplicate'
 
   release:
     name: Create GitHub Release with both VSIX packages
@@ -153,7 +153,7 @@ jobs:
         run: |
           if gh release view "$RELEASE_TAG" --json assets --jq '.assets[].name' > "$RUNNER_TEMP/release-assets"; then
             # Resume a partial release without overwriting already uploaded assets.
-            for asset in vscode-git-icon-theme.vsix vscode-git.vsix; do
+            for asset in vscode-enhanced-git-icon-theme.vsix vscode-enhanced-git.vsix; do
               if ! grep -Fxq "$asset" "$RUNNER_TEMP/release-assets"; then
                 gh release upload "$RELEASE_TAG" "dist/$asset"
               fi
@@ -162,7 +162,7 @@ jobs:
               gh release edit "$RELEASE_TAG" --draft=false
             fi
           else
-            gh release create "$RELEASE_TAG" dist/vscode-git-icon-theme.vsix dist/vscode-git.vsix \
-              --verify-tag --title "VS Code Git $RELEASE_TAG" --generate-notes
+            gh release create "$RELEASE_TAG" dist/vscode-enhanced-git-icon-theme.vsix dist/vscode-enhanced-git.vsix \
+              --verify-tag --title "Enhanced Git for Visual Studio Code $RELEASE_TAG" --generate-notes
           fi
           gh release view "$RELEASE_TAG" --json url --jq '.url' >> "$GITHUB_STEP_SUMMARY"

@@ -6,7 +6,7 @@ import path from 'node:path';
 const { git, commitLocalFiles } = require('../out/extension/git/index');
 const { ChangesView } = require('../out/extension/views/changes-view');
 test('compare local uses commit to working tree, including staged/unstaged changes and renames', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-local-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-local-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Test']);

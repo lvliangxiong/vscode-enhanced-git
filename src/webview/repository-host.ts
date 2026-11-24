@@ -47,7 +47,7 @@ export function mountRepositoryHost({
     if (!hostVisible || document.hidden) dismiss();
     for (const [key, frame] of frames)
       frame.receive({
-        type: 'vsCodeGitVisibility',
+        type: 'vsCodeEnhancedGitVisibility',
         visible: key === store.getState().active && hostVisible && !document.hidden,
       });
   }
@@ -145,9 +145,9 @@ export function mountRepositoryHost({
   }
   const message = (event: MessageEvent) => receive(event.data);
   const theme = new MutationObserver(() =>
-    frames.forEach((frame) => frame.receive({ type: 'vsCodeGitTheme' })),
+    frames.forEach((frame) => frame.receive({ type: 'vsCodeEnhancedGitTheme' })),
   );
-  const refresh = () => frames.get(store.getState().active)?.receive({ type: 'vsCodeGitRefresh' });
+  const refresh = () => frames.get(store.getState().active)?.receive({ type: 'vsCodeEnhancedGitRefresh' });
   flushSync(() =>
     root.render(createElement(RepositoryHost, { store, document, window, sheet, select, refresh })),
   );

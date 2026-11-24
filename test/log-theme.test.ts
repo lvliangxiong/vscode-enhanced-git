@@ -62,12 +62,12 @@ test('theme and zoom changes coalesce Canvas repaints, including same-kind theme
     } as unknown as LogContext);
     observers[0]();
     observers[1]();
-    events['vsCodeGitTheme']();
+    events['vsCodeEnhancedGitTheme']();
     events['resize']();
     assert.equal(frames.length, 1);
     frames.shift()();
     assert.equal(paints, 1);
-    events['vsCodeGitTheme']();
+    events['vsCodeEnhancedGitTheme']();
     frames.shift()();
     assert.equal(paints, 2);
     lifetime.dispose();

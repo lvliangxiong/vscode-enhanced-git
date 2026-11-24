@@ -1,8 +1,8 @@
 {
-  "name": "vscode-git",
-  "displayName": "VS Code Git",
+  "name": "vscode-enhanced-git",
+  "displayName": "Enhanced Git for Visual Studio Code",
   "description": "A JetBrains-inspired three-pane Git history for VS Code.",
-  "version": "0.1.289",
+  "version": "0.1.292",
   "publisher": "lvliangxiong",
   "engines": {
     "vscode": "^1.85.0"
@@ -12,386 +12,386 @@
   ],
   "main": "./out/extension/extension.js",
   "activationEvents": [
-    "onCommand:vscode-git.open",
-    "onView:vscode-git.changes",
-    "onView:vscode-git.log",
-    "onView:vscode-git.fileHistory",
+    "onCommand:vscode-enhanced-git.open",
+    "onView:vscode-enhanced-git.changes",
+    "onView:vscode-enhanced-git.log",
+    "onView:vscode-enhanced-git.fileHistory",
     "onStartupFinished"
   ],
   "contributes": {
     "commands": [
       {
-        "command": "vscode-git.changes.reset",
+        "command": "vscode-enhanced-git.changes.reset",
         "title": "Reset Comparison",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(clear-all)",
-        "enablement": "vscode-git.changes.hasComparison"
+        "enablement": "vscode-enhanced-git.changes.hasComparison"
       },
       {
-        "command": "vscode-git.changes.refresh",
+        "command": "vscode-enhanced-git.changes.refresh",
         "title": "Refresh",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(refresh)",
-        "enablement": "vscode-git.changes.hasComparison && !vscode-git.changes.refreshing"
+        "enablement": "vscode-enhanced-git.changes.hasComparison && !vscode-enhanced-git.changes.refreshing"
       },
       {
-        "command": "vscode-git.open",
-        "title": "VS Code Git: Open Git Log",
+        "command": "vscode-enhanced-git.open",
+        "title": "Enhanced Git: Open Git Log",
         "icon": "$(git-branch)"
       },
       {
-        "command": "vscode-git.changes.toggleLayout",
+        "command": "vscode-enhanced-git.changes.toggleLayout",
         "title": "View as Tree",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(list-tree)",
         "toggled": {
-          "condition": "vscode-git.changes.tree",
+          "condition": "vscode-enhanced-git.changes.tree",
           "title": "View as List",
           "icon": "$(list-flat)"
         }
       },
       {
-        "command": "vscode-git.changes.toggleExpansion",
+        "command": "vscode-enhanced-git.changes.toggleExpansion",
         "title": "Expand All",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(expand-all)",
-        "enablement": "vscode-git.changes.tree && vscode-git.changes.hasFolders",
+        "enablement": "vscode-enhanced-git.changes.tree && vscode-enhanced-git.changes.hasFolders",
         "toggled": {
-          "condition": "vscode-git.changes.expanded",
+          "condition": "vscode-enhanced-git.changes.expanded",
           "title": "Collapse All",
           "icon": "$(collapse-all)"
         }
       },
       {
-        "command": "vscode-git.merge.previous",
+        "command": "vscode-enhanced-git.merge.previous",
         "title": "Previous Difference",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(arrow-up)",
-        "enablement": "vscode-git.merge.canNavigate"
+        "enablement": "vscode-enhanced-git.merge.canNavigate"
       },
       {
-        "command": "vscode-git.merge.next",
+        "command": "vscode-enhanced-git.merge.next",
         "title": "Next Difference",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(arrow-down)",
-        "enablement": "vscode-git.merge.canNavigate"
+        "enablement": "vscode-enhanced-git.merge.canNavigate"
       },
       {
-        "command": "vscode-git.merge.compareParent1",
+        "command": "vscode-enhanced-git.merge.compareParent1",
         "title": "Compare with Parent 1",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(git-compare)"
       },
       {
-        "command": "vscode-git.merge.compareParent2",
+        "command": "vscode-enhanced-git.merge.compareParent2",
         "title": "Compare with Parent 2",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(git-compare)"
       },
       {
-        "command": "vscode-git.merge.openFile",
+        "command": "vscode-enhanced-git.merge.openFile",
         "title": "Open File",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(go-to-file)"
       },
       {
-        "command": "vscode-git.fileHistory.openFile",
+        "command": "vscode-enhanced-git.fileHistory.openFile",
         "title": "Open File",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(go-to-file)"
       },
       {
-        "command": "vscode-git.fileHistory.refresh",
+        "command": "vscode-enhanced-git.fileHistory.refresh",
         "title": "Refresh",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(refresh)",
-        "enablement": "vscode-git.fileHistory.canRefresh"
+        "enablement": "vscode-enhanced-git.fileHistory.canRefresh"
       },
       {
-        "command": "vscode-git.fileHistory.compareLocal",
+        "command": "vscode-enhanced-git.fileHistory.compareLocal",
         "title": "Compare with Working Tree",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(compare-changes)",
-        "enablement": "vscode-git.fileHistory.canCompareLocal"
+        "enablement": "vscode-enhanced-git.fileHistory.canCompareLocal"
       },
       {
-        "command": "vscode-git.fileHistory.affected",
+        "command": "vscode-enhanced-git.fileHistory.affected",
         "title": "Show All Affected Files",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(files)",
-        "enablement": "vscode-git.fileHistory.canAffected"
+        "enablement": "vscode-enhanced-git.fileHistory.canAffected"
       },
       {
-        "command": "vscode-git.fileHistory.viewOptions",
+        "command": "vscode-enhanced-git.fileHistory.viewOptions",
         "title": "View Options",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(eye)"
       },
       {
-        "command": "vscode-git.fileHistory.locate",
+        "command": "vscode-enhanced-git.fileHistory.locate",
         "title": "Select in Git Log",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(target)",
-        "enablement": "vscode-git.fileHistory.canLocate"
+        "enablement": "vscode-enhanced-git.fileHistory.canLocate"
       },
       {
-        "command": "vscode-git.showFileHistory",
+        "command": "vscode-enhanced-git.showFileHistory",
         "title": "Show File History",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(history)"
       },
       {
-        "command": "vscode-git.showCommitFileDiffs",
+        "command": "vscode-enhanced-git.showCommitFileDiffs",
         "title": "Show Commit File Diffs",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(diff-multiple)"
       },
       {
-        "command": "vscode-git.locateCommit",
+        "command": "vscode-enhanced-git.locateCommit",
         "title": "Locate in Git Log",
-        "category": "VS Code Git",
+        "category": "Enhanced Git",
         "icon": "$(target)"
       },
       {
-        "command": "vscode-git.toggleComparisonPanel",
+        "command": "vscode-enhanced-git.toggleComparisonPanel",
         "title": "Toggle Panel",
-        "category": "VS Code Git"
+        "category": "Enhanced Git"
       },
       {
-        "command": "vscode-git.switchRepositoriesBranch",
+        "command": "vscode-enhanced-git.switchRepositoriesBranch",
         "title": "Switch Branch in All Repositories",
-        "category": "VS Code Git"
+        "category": "Enhanced Git"
       }
     ],
     "keybindings": [
       {
-        "command": "vscode-git.open",
+        "command": "vscode-enhanced-git.open",
         "key": "alt+g"
       },
       {
-        "command": "vscode-git.toggleComparisonPanel",
+        "command": "vscode-enhanced-git.toggleComparisonPanel",
         "key": "ctrl+j",
         "mac": "cmd+j",
-        "when": "vscode-git.comparisonVisible"
+        "when": "vscode-enhanced-git.comparisonVisible"
       }
     ],
     "menus": {
       "commandPalette": [
         {
-          "command": "vscode-git.changes.reset",
+          "command": "vscode-enhanced-git.changes.reset",
           "when": "false"
         },
         {
-          "command": "vscode-git.changes.refresh",
+          "command": "vscode-enhanced-git.changes.refresh",
           "when": "false"
         },
         {
-          "command": "vscode-git.open"
+          "command": "vscode-enhanced-git.open"
         },
         {
-          "command": "vscode-git.changes.toggleLayout",
+          "command": "vscode-enhanced-git.changes.toggleLayout",
           "when": "false"
         },
         {
-          "command": "vscode-git.changes.toggleExpansion",
+          "command": "vscode-enhanced-git.changes.toggleExpansion",
           "when": "false"
         },
         {
-          "command": "vscode-git.merge.previous",
+          "command": "vscode-enhanced-git.merge.previous",
           "when": "false"
         },
         {
-          "command": "vscode-git.merge.next",
+          "command": "vscode-enhanced-git.merge.next",
           "when": "false"
         },
         {
-          "command": "vscode-git.merge.compareParent1",
+          "command": "vscode-enhanced-git.merge.compareParent1",
           "when": "false"
         },
         {
-          "command": "vscode-git.merge.compareParent2",
+          "command": "vscode-enhanced-git.merge.compareParent2",
           "when": "false"
         },
         {
-          "command": "vscode-git.merge.openFile",
+          "command": "vscode-enhanced-git.merge.openFile",
           "when": "false"
         },
         {
-          "command": "vscode-git.fileHistory.openFile",
+          "command": "vscode-enhanced-git.fileHistory.openFile",
           "when": "false"
         },
         {
-          "command": "vscode-git.fileHistory.refresh",
+          "command": "vscode-enhanced-git.fileHistory.refresh",
           "when": "false"
         },
         {
-          "command": "vscode-git.fileHistory.compareLocal",
+          "command": "vscode-enhanced-git.fileHistory.compareLocal",
           "when": "false"
         },
         {
-          "command": "vscode-git.fileHistory.affected",
+          "command": "vscode-enhanced-git.fileHistory.affected",
           "when": "false"
         },
         {
-          "command": "vscode-git.fileHistory.viewOptions",
+          "command": "vscode-enhanced-git.fileHistory.viewOptions",
           "when": "false"
         },
         {
-          "command": "vscode-git.fileHistory.locate",
+          "command": "vscode-enhanced-git.fileHistory.locate",
           "when": "false"
         },
         {
-          "command": "vscode-git.showCommitFileDiffs",
+          "command": "vscode-enhanced-git.showCommitFileDiffs",
           "when": "false"
         },
         {
-          "command": "vscode-git.locateCommit",
+          "command": "vscode-enhanced-git.locateCommit",
           "when": "false"
         },
         {
-          "command": "vscode-git.toggleComparisonPanel",
+          "command": "vscode-enhanced-git.toggleComparisonPanel",
           "when": "false"
         }
       ],
       "scm/title": [
         {
-          "command": "vscode-git.open",
+          "command": "vscode-enhanced-git.open",
           "group": "navigation"
         }
       ],
       "view/title": [
         {
-          "command": "vscode-git.changes.reset",
-          "when": "view == vscode-git.changes",
+          "command": "vscode-enhanced-git.changes.reset",
+          "when": "view == vscode-enhanced-git.changes",
           "group": "navigation@3"
         },
         {
-          "command": "vscode-git.changes.refresh",
-          "when": "view == vscode-git.changes",
+          "command": "vscode-enhanced-git.changes.refresh",
+          "when": "view == vscode-enhanced-git.changes",
           "group": "navigation@0"
         },
         {
-          "command": "vscode-git.changes.toggleLayout",
-          "when": "view == vscode-git.changes",
+          "command": "vscode-enhanced-git.changes.toggleLayout",
+          "when": "view == vscode-enhanced-git.changes",
           "group": "navigation@1"
         },
         {
-          "command": "vscode-git.changes.toggleExpansion",
-          "when": "view == vscode-git.changes",
+          "command": "vscode-enhanced-git.changes.toggleExpansion",
+          "when": "view == vscode-enhanced-git.changes",
           "group": "navigation@2"
         },
         {
-          "command": "vscode-git.fileHistory.refresh",
-          "when": "view == vscode-git.fileHistory",
+          "command": "vscode-enhanced-git.fileHistory.refresh",
+          "when": "view == vscode-enhanced-git.fileHistory",
           "group": "navigation@0"
         },
         {
-          "command": "vscode-git.fileHistory.compareLocal",
-          "when": "view == vscode-git.fileHistory",
+          "command": "vscode-enhanced-git.fileHistory.compareLocal",
+          "when": "view == vscode-enhanced-git.fileHistory",
           "group": "navigation@2"
         },
         {
-          "command": "vscode-git.fileHistory.affected",
-          "when": "view == vscode-git.fileHistory",
+          "command": "vscode-enhanced-git.fileHistory.affected",
+          "when": "view == vscode-enhanced-git.fileHistory",
           "group": "navigation@3"
         },
         {
-          "command": "vscode-git.fileHistory.viewOptions",
-          "when": "view == vscode-git.fileHistory",
+          "command": "vscode-enhanced-git.fileHistory.viewOptions",
+          "when": "view == vscode-enhanced-git.fileHistory",
           "group": "navigation@4"
         },
         {
-          "command": "vscode-git.fileHistory.locate",
-          "when": "view == vscode-git.fileHistory",
+          "command": "vscode-enhanced-git.fileHistory.locate",
+          "when": "view == vscode-enhanced-git.fileHistory",
           "group": "navigation@5"
         }
       ],
       "editor/title": [
         {
-          "command": "vscode-git.merge.previous",
-          "when": "activeWebviewPanelId == vscode-git.mergeDiff",
+          "command": "vscode-enhanced-git.merge.previous",
+          "when": "activeWebviewPanelId == vscode-enhanced-git.mergeDiff",
           "group": "navigation@20"
         },
         {
-          "command": "vscode-git.merge.next",
-          "when": "activeWebviewPanelId == vscode-git.mergeDiff",
+          "command": "vscode-enhanced-git.merge.next",
+          "when": "activeWebviewPanelId == vscode-enhanced-git.mergeDiff",
           "group": "navigation@21"
         },
         {
-          "command": "vscode-git.merge.compareParent1",
-          "when": "activeWebviewPanelId == vscode-git.mergeDiff",
+          "command": "vscode-enhanced-git.merge.compareParent1",
+          "when": "activeWebviewPanelId == vscode-enhanced-git.mergeDiff",
           "group": "1_compare@1"
         },
         {
-          "command": "vscode-git.merge.compareParent2",
-          "when": "activeWebviewPanelId == vscode-git.mergeDiff",
+          "command": "vscode-enhanced-git.merge.compareParent2",
+          "when": "activeWebviewPanelId == vscode-enhanced-git.mergeDiff",
           "group": "1_compare@2"
         },
         {
-          "command": "vscode-git.merge.openFile",
-          "when": "activeWebviewPanelId == vscode-git.mergeDiff",
+          "command": "vscode-enhanced-git.merge.openFile",
+          "when": "activeWebviewPanelId == vscode-enhanced-git.mergeDiff",
           "group": "navigation@19"
         },
         {
-          "command": "vscode-git.fileHistory.openFile",
-          "when": "resourceScheme == vscode-git-history && isInDiffEditor",
+          "command": "vscode-enhanced-git.fileHistory.openFile",
+          "when": "resourceScheme == vscode-enhanced-git-history && isInDiffEditor",
           "group": "navigation@19"
         }
       ],
       "explorer/context": [
         {
-          "command": "vscode-git.showFileHistory",
+          "command": "vscode-enhanced-git.showFileHistory",
           "when": "(resourceScheme == file || resourceScheme == vscode-remote) && !explorerResourceIsFolder",
-          "group": "vscode-git@10"
+          "group": "vscode-enhanced-git@10"
         }
       ],
       "editor/context": [
         {
-          "command": "vscode-git.showFileHistory",
+          "command": "vscode-enhanced-git.showFileHistory",
           "when": "(resourceScheme == file || resourceScheme == vscode-remote) && !explorerResourceIsFolder",
-          "group": "vscode-git@10"
+          "group": "vscode-enhanced-git@10"
         }
       ],
       "editor/title/context": [
         {
-          "command": "vscode-git.showFileHistory",
+          "command": "vscode-enhanced-git.showFileHistory",
           "when": "(resourceScheme == file || resourceScheme == vscode-remote) && !explorerResourceIsFolder",
-          "group": "vscode-git@10"
+          "group": "vscode-enhanced-git@10"
         }
       ]
     },
     "views": {
       "scm": [
         {
-          "id": "vscode-git.changes",
+          "id": "vscode-enhanced-git.changes",
           "name": "File Diffs",
           "type": "webview",
           "icon": "media/icons/sidebar.svg",
-          "contextualTitle": "VS Code Git Changes"
+          "contextualTitle": "Enhanced Git Changes"
         },
         {
-          "id": "vscode-git.fileHistory",
+          "id": "vscode-enhanced-git.fileHistory",
           "name": "File History",
           "type": "webview",
           "icon": "media/icons/sidebar.svg",
-          "contextualTitle": "VS Code Git File History"
+          "contextualTitle": "Enhanced Git File History"
         }
       ],
-      "vscode-git-panel": [
+      "vscode-enhanced-git-panel": [
         {
-          "id": "vscode-git.log",
+          "id": "vscode-enhanced-git.log",
           "name": "Git Log",
           "type": "webview",
           "icon": "media/icons/sidebar.svg",
-          "contextualTitle": "VS Code Git",
+          "contextualTitle": "Enhanced Git",
           "visibility": "visible"
         }
       ]
     },
     "configuration": {
-      "title": "VS Code Git",
+      "title": "Enhanced Git",
       "properties": {
-        "vscode-git.mergeDiffStyle": {
+        "vscode-enhanced-git.mergeDiffStyle": {
           "type": "string",
           "enum": [
             "native",
@@ -409,27 +409,27 @@
           "scope": "resource",
           "description": "Display style for the read-only three-pane historical merge diff. Changes apply to open comparisons."
         },
-        "vscode-git.history.initialCount": {
+        "vscode-enhanced-git.history.initialCount": {
           "type": "integer",
           "default": 500,
           "minimum": 0,
           "scope": "resource",
           "markdownDescription": "Number of commits loaded when opening Git Log or changing filters. Set to **0** to load all matching commits. Loading all commits in large repositories increases loading time and memory use. Click Refresh or reopen Git Log after changing this setting."
         },
-        "vscode-git.history.pageSize": {
+        "vscode-enhanced-git.history.pageSize": {
           "type": "integer",
           "default": 500,
           "minimum": 100,
           "maximum": 2000,
           "scope": "resource",
-          "markdownDescription": "Additional commits loaded when scrolling near the bottom or clicking Load more. Initial loading is controlled by `#vscode-git.history.initialCount#`. Graph arrows automatically load through their target. Ignored when initialCount is 0 (load all)."
+          "markdownDescription": "Additional commits loaded when scrolling near the bottom or clicking Load more. Initial loading is controlled by `#vscode-enhanced-git.history.initialCount#`. Graph arrows automatically load through their target. Ignored when initialCount is 0 (load all)."
         }
       }
     },
     "viewsContainers": {
       "panel": [
         {
-          "id": "vscode-git-panel",
+          "id": "vscode-enhanced-git-panel",
           "title": "Git Log",
           "icon": "media/icons/sidebar.svg"
         }
@@ -437,11 +437,11 @@
     },
     "customEditors": [
       {
-        "viewType": "vscode-git.mergeDiff",
+        "viewType": "vscode-enhanced-git.mergeDiff",
         "displayName": "Historical Merge Diff",
         "selector": [
           {
-            "filenamePattern": "vscode-git-merge:/"
+            "filenamePattern": "vscode-enhanced-git-merge:/"
           }
         ],
         "priority": "option"
@@ -455,7 +455,7 @@
     "test": "npm run build && tsx --test test/*.test.ts",
     "format": "prettier --write src scripts test docs README.md package.json tsconfig*.json",
     "format:check": "prettier --check src scripts test docs README.md package.json tsconfig*.json",
-    "package": "npm run check && tsx scripts/package-icon-bridge.ts && vsce package --no-dependencies --githubBranch main --out dist/vscode-git.vsix"
+    "package": "npm run check && tsx scripts/package-icon-bridge.ts && vsce package --no-dependencies --githubBranch main --out dist/vscode-enhanced-git.vsix"
   },
   "license": "GPL-3.0-only",
   "extensionKind": [
@@ -487,14 +487,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lvliangxiong/vscode-git.git"
+    "url": "https://github.com/lvliangxiong/vscode-enhanced-git.git"
   },
-  "homepage": "https://github.com/lvliangxiong/vscode-git#readme",
+  "homepage": "https://github.com/lvliangxiong/vscode-enhanced-git#readme",
   "extensionPack": [
-    "lvliangxiong.vscode-git-icon-theme"
+    "lvliangxiong.vscode-enhanced-git-icon-theme"
   ],
   "bugs": {
-    "url": "https://github.com/lvliangxiong/vscode-git/issues"
+    "url": "https://github.com/lvliangxiong/vscode-enhanced-git/issues"
   },
   "icon": "media/icon.png"
 }

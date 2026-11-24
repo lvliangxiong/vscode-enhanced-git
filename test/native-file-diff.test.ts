@@ -6,7 +6,7 @@ import path from 'node:path';
 import { nativeFileDiff, registerHistoryDiffFiles } from '../src/extension/views/native-file-diff';
 
 test('native history diff opens the real file, retains pinned mappings and releases closed contents', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-history-diff-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-history-diff-'));
   const snapshots = new Map<string, string>(),
     commands: any[] = [],
     notifications: string[] = [];
@@ -61,7 +61,7 @@ test('native history diff opens the real file, retains pinned mappings and relea
   const files = registerHistoryDiffFiles(vscode, context);
   const source = vscode.Uri.file(path.join(root, 'current-name.go'));
   const controller = nativeFileDiff(vscode, () => 3, snapshots, source, files);
-  const openFile = handlers.get('vscode-git.fileHistory.openFile');
+  const openFile = handlers.get('vscode-enhanced-git.fileHistory.openFile');
   const data = {
     hash: 'a'.repeat(40),
     path: 'old-name.go',
@@ -73,7 +73,7 @@ test('native history diff opens the real file, retains pinned mappings and relea
     await fs.writeFile(source.fsPath, 'working tree');
     await controller.open(data);
     assert.equal(snapshots.size, 2);
-    assert.equal(commands.at(-1)[1].scheme, 'vscode-git-history');
+    assert.equal(commands.at(-1)[1].scheme, 'vscode-enhanced-git-history');
     const pinnedUri = tabs[0].input.modified;
     tabs[0].pinned = true;
     await controller.open({ ...data, contents: ['before', 'second'] });

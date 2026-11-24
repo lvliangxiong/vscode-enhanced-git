@@ -157,12 +157,12 @@ function ChangesApp({
     );
     drawer.title = state.data
       ? [
-          'Provided by the VS Code Git extension',
+          'Provided by the Enhanced Git extension',
           selection ? selectedLabel : `File Diffs: ${pair![0].name} ↔ ${pair![1].name}`,
           state.data.repository,
           ...(selection ? selection.commits : pair!).map((part) => part.hash),
         ].join('\n')
-      : 'Provided by the VS Code Git extension';
+      : 'Provided by the Enhanced Git extension';
   }, [env, state.data, workingTree, kind, selection, selectedLabel, pair]);
   return (
     <>
@@ -252,12 +252,12 @@ export function mountChanges(env: ChangesEnvironment) {
     disposed = true;
     env.window.removeEventListener('message', receive);
     env.window.removeEventListener('unload', dispose);
-    env.window.removeEventListener('vsCodeGitDispose', dispose);
+    env.window.removeEventListener('vsCodeEnhancedGitDispose', dispose);
     flushSync(() => root.unmount());
   };
   env.window.addEventListener('message', receive);
   env.window.addEventListener('unload', dispose);
-  env.window.addEventListener('vsCodeGitDispose', dispose);
+  env.window.addEventListener('vsCodeEnhancedGitDispose', dispose);
   flushSync(() => root.render(<ChangesApp env={env} controller={controller} />));
   env.api.postMessage({ type: 'ready' });
   return { controller, dispose };

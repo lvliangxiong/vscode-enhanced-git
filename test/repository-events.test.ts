@@ -187,7 +187,7 @@ test('symlink workspace paths share version and event identity with git canonica
   const fs = require('node:fs'),
     os = require('node:os'),
     path = require('node:path');
-  const base = fs.mkdtempSync(path.join(os.tmpdir(), 'vscode-git-events-'));
+  const base = fs.mkdtempSync(path.join(os.tmpdir(), 'vscode-enhanced-git-events-'));
   try {
     fs.mkdirSync(path.join(base, 'real'));
     fs.symlinkSync(path.join(base, 'real'), path.join(base, 'alias'));

@@ -10,7 +10,7 @@ export function registerComparisonPanelToggle(
   let release: ReturnType<typeof setTimeout> | undefined;
   let disposed = false;
   context.subscriptions.push(
-    vscode.commands.registerCommand('vscode-git.toggleComparisonPanel', () => {
+    vscode.commands.registerCommand('vscode-enhanced-git.toggleComparisonPanel', () => {
       if (pending) return pending;
       const operation = Promise.resolve().then(() =>
         vscode.commands.executeCommand('workbench.action.togglePanel'),
@@ -31,7 +31,7 @@ export function registerComparisonPanelToggle(
   const publish = () => {
     void vscode.commands.executeCommand(
       'setContext',
-      'vscode-git.comparisonVisible',
+      'vscode-enhanced-git.comparisonVisible',
       visible.size > 0,
     );
   };

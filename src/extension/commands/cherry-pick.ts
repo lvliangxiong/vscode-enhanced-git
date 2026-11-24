@@ -63,7 +63,7 @@ export async function runCherryPick(
   }
   try {
     await vscode.window.withProgress(
-      { location: vscode.ProgressLocation.Notification, title: 'VS Code Git: Cherry-pick' },
+      { location: vscode.ProgressLocation.Notification, title: 'Enhanced Git: Cherry-pick' },
       operation,
     );
     return true;

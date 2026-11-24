@@ -9,7 +9,7 @@ export function registerHistoryDiffFiles(vscode: typeof VSCode, context: VSCode.
   const files = new Map<string, VSCode.Uri>();
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      'vscode-git.fileHistory.openFile',
+      'vscode-enhanced-git.fileHistory.openFile',
       async (resource?: VSCode.Uri) => {
         const input = vscode.window.tabGroups?.activeTabGroup.activeTab
           ?.input as VSCode.TabInputTextDiff;
@@ -27,7 +27,7 @@ export function registerHistoryDiffFiles(vscode: typeof VSCode, context: VSCode.
             void vscode.window.showInformationMessage(
               `The file no longer exists in the working tree: ${file.fsPath}`,
             );
-          else void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
+          else void vscode.window.showErrorMessage(`Enhanced Git: ${error.message}`);
         }
       },
     ),
@@ -92,7 +92,7 @@ export function nativeFileDiff(
       if (!pairs.has(key)) {
         const make = (text: string, side: number) => {
           const uri = vscode.Uri.from({
-            scheme: 'vscode-git-history',
+            scheme: 'vscode-enhanced-git-history',
             path: '/' + data.path,
             query: new URLSearchParams({
               snapshot: randomUUID(),

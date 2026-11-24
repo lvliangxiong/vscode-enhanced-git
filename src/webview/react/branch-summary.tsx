@@ -57,13 +57,13 @@ export function BranchSummary({
     document.addEventListener('pointerdown', close);
     document.addEventListener('keydown', key);
     window.addEventListener('resize', resize);
-    window.addEventListener('vsCodeGitHidden', resize);
+    window.addEventListener('vsCodeEnhancedGitHidden', resize);
     window.addEventListener('blur', resize);
     return () => {
       document.removeEventListener('pointerdown', close);
       document.removeEventListener('keydown', key);
       window.removeEventListener('resize', resize);
-      window.removeEventListener('vsCodeGitHidden', resize);
+      window.removeEventListener('vsCodeEnhancedGitHidden', resize);
       window.removeEventListener('blur', resize);
     };
   }, [document, window, open]);

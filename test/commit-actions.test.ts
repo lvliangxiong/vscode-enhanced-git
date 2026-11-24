@@ -15,7 +15,7 @@ test('copy revision numbers matches Rebased oldest-first, space-separated full h
 });
 
 async function fixture(run) {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-commit-actions-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-commit-actions-'));
   const write = (name, data) => fs.writeFile(path.join(root, name), data);
   const commit = async (message) => {
     await git(root, ['add', '.']);
@@ -71,7 +71,7 @@ test('patch exports composed non-adjacent changes, binary data, modes and rename
     const patch = await createPatch(root, [last, first]);
     assert.deepEqual(await fs.readFile(path.join(root, '.git/index')), indexBefore);
     assert.doesNotMatch(patch.toString(), /unselected|dirty/);
-    const target = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-patch-apply-'));
+    const target = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-patch-apply-'));
     try {
       await git(target, ['clone', '--no-local', root, '.']);
       await git(target, ['checkout', '--detach', base]);

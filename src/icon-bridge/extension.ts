@@ -7,17 +7,17 @@ export const activate = (context) => {
   const changed = () => {
     resolver.reset();
     syntax.reset();
-    void vscode.commands.executeCommand('vscode-git.icons.changed').then(undefined, () => {});
-    void vscode.commands.executeCommand('vscode-git.syntax.changed').then(undefined, () => {});
+    void vscode.commands.executeCommand('vscode-enhanced-git.icons.changed').then(undefined, () => {});
+    void vscode.commands.executeCommand('vscode-enhanced-git.syntax.changed').then(undefined, () => {});
   };
   context.subscriptions.push(
-    vscode.commands.registerCommand('vscode-git.icons.resolve', (request) =>
+    vscode.commands.registerCommand('vscode-enhanced-git.icons.resolve', (request) =>
       resolver.resolve(request),
     ),
-    vscode.commands.registerCommand('vscode-git.syntax.snapshot', (request) =>
+    vscode.commands.registerCommand('vscode-enhanced-git.syntax.snapshot', (request) =>
       syntax.snapshot(request),
     ),
-    vscode.commands.registerCommand('vscode-git.syntax.grammar', (scope) => syntax.grammar(scope)),
+    vscode.commands.registerCommand('vscode-enhanced-git.syntax.grammar', (scope) => syntax.grammar(scope)),
     vscode.workspace.onDidChangeConfiguration((event) => {
       if (
         event.affectsConfiguration('workbench.iconTheme') ||

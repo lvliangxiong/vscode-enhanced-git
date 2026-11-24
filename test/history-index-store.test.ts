@@ -27,7 +27,7 @@ test('bounded trigram candidates never lose exact matches, including overflow an
 });
 
 test('search index persists, shares across views, invalidates and recovers from corrupt storage', async () => {
-  const base = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-index-store-'));
+  const base = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-index-store-'));
   const root = path.join(base, 'repo');
   const storage = path.join(base, 'storage');
   const git = client.git;

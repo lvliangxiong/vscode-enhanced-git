@@ -45,10 +45,10 @@ test('Canvas hit testing highlights a branch color; arrows stay individually sco
     const before = paints.length;
     t.event(arrow, 'pointermove');
     assert.equal(paints.length, before);
-    for (const event of ['scroll', 'pointerleave', 'blur', 'vsCodeGitHidden']) {
+    for (const event of ['scroll', 'pointerleave', 'blur', 'vsCodeEnhancedGitHidden']) {
       t.event(arrow, 'pointermove');
       t.event(
-        event === 'blur' || event === 'vsCodeGitHidden' ? (t.window as unknown as Window) : list,
+        event === 'blur' || event === 'vsCodeEnhancedGitHidden' ? (t.window as unknown as Window) : list,
         event,
       );
       assert.ok(paints.at(-1).every((value) => value === undefined));

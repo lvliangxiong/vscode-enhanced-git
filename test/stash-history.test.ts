@@ -19,7 +19,7 @@ import { readSelectionStats } from '../src/extension/git/selection-reader';
 import { historyIdentity } from '../src/extension/git/history-identity';
 
 test('stash history shows one node per entry with pagination, graph and complete file diffs', async (t) => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-stash-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-stash-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   await git(root, ['init', '-b', 'main']);
   await git(root, ['config', 'user.name', 'Fixture']);

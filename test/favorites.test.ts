@@ -12,7 +12,7 @@ import { createRepositoryFavorites } from '../src/extension/repositories/favorit
 import { git } from '../src/extension/git/client';
 
 test('favorites merge concurrent pane changes, broadcast saved revisions and recover after failed saves', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-favorites-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-favorites-'));
   const persisted = new Map<string, string[]>();
   let failSave = false;
   const favorites = createRepositoryFavorites({

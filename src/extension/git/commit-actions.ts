@@ -52,7 +52,7 @@ function run(root: string, args: string[], env: NodeJS.ProcessEnv, input?: strin
 async function createPatch(root, hashes) {
   const { files } = await selectionDetails(root, hashes);
   if (!files.length) throw Error('The selected commits have no changes to export');
-  const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-patch-'));
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-patch-'));
   try {
     const objects = (
       await git(root, ['rev-parse', '--path-format=absolute', '--git-path', 'objects'])

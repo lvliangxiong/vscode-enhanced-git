@@ -97,7 +97,7 @@ export function installToolbarTooltips(ctx: LogContext) {
     if (event.key === 'Escape') hide();
   });
   lifetime.listen(document, 'visibilitychange', hide);
-  for (const type of ['blur', 'resize', 'vsCodeGitHidden']) lifetime.listen(window, type, hide);
+  for (const type of ['blur', 'resize', 'vsCodeEnhancedGitHidden']) lifetime.listen(window, type, hide);
   const sync = () => {
     for (const root of roots)
       for (const button of root.querySelectorAll<HTMLElement>('button'))

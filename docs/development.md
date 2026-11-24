@@ -51,22 +51,22 @@ React/jsdom tests cover selection, keyboard interaction, menus, hovers, file tre
 
 ```sh
 npm run package
-code --install-extension dist/vscode-git-icon-theme.vsix --force
-code --install-extension dist/vscode-git.vsix --force --do-not-include-pack-dependencies
+code --install-extension dist/vscode-enhanced-git-icon-theme.vsix --force
+code --install-extension dist/vscode-enhanced-git.vsix --force --do-not-include-pack-dependencies
 ```
 
-Outputs are `dist/vscode-git.vsix` and `dist/vscode-git-icon-theme.vsix`. `scripts/package-icon-bridge.ts` synchronizes the bridge's publisher and version with the main extension. Run `Developer: Reload Window` after installation.
+Outputs are `dist/vscode-enhanced-git.vsix` and `dist/vscode-enhanced-git-icon-theme.vsix`. `scripts/package-icon-bridge.ts` synchronizes the bridge's publisher and version with the main extension. Run `Developer: Reload Window` after installation.
 
 | Extension                          | ID                                   | Host        |
 | ---------------------------------- | ------------------------------------ | ----------- |
-| VS Code Git                        | `lvliangxiong.vscode-git`            | `workspace` |
-| VS Code Git File Icon Theme Bridge | `lvliangxiong.vscode-git-icon-theme` | `ui`        |
+| Enhanced Git for Visual Studio Code | `lvliangxiong.vscode-enhanced-git`   | `workspace` |
+| Enhanced Git File Icon Theme Bridge | `lvliangxiong.vscode-enhanced-git-icon-theme` | `ui`        |
 
-Use `code --list-extensions --show-versions` to inspect local installations and `code --locate-extension lvliangxiong.vscode-git` to locate the main extension. Check the publisher and version of a remote installation in the Extensions view of the corresponding Remote-SSH window.
+Use `code --list-extensions --show-versions` to inspect local installations and `code --locate-extension lvliangxiong.vscode-enhanced-git` to locate the main extension. Check the publisher and version of a remote installation in the Extensions view of the corresponding Remote-SSH window.
 
 In Remote-SSH, the main extension runs in the remote workspace host. The local UI bridge supplies file icons, editor themes, and grammar resources. Their `extensionKind` values are `workspace` and `ui`, respectively.
 
-The main extension's `extensionPack` references `lvliangxiong.vscode-git-icon-theme`; publish the bridge first for the initial Marketplace release. For manual VSIX installation, install the local bridge first and use `--do-not-include-pack-dependencies` for the main package to avoid Marketplace resolution. Install the main package in the remote workspace host when using Remote-SSH.
+The main extension's `extensionPack` references `lvliangxiong.vscode-enhanced-git-icon-theme`; publish the bridge first for the initial Marketplace release. For manual VSIX installation, install the local bridge first and use `--do-not-include-pack-dependencies` for the main package to avoid Marketplace resolution. Install the main package in the remote workspace host when using Remote-SSH.
 
 Both manifests declare the source repository, homepage, Issues URL, and `media/icon.png`. The 256×256 Marketplace icons share a V-shaped commit graph mark. The main icon is `media/icon.png`, rendered from `media/marketplace-icon.svg`. The bridge icon is `media/bridge-icon.png`, rendered from `media/marketplace-bridge-icon.svg` with a connected link badge, and copied to `icon-theme-bridge/media/icon.png` during packaging. SVG sources and PNG assets are version-controlled. Main README relative links are rewritten against GitHub's `main` branch; the bridge README uses its repository subdirectory as the base URL.
 
@@ -93,4 +93,4 @@ Both VSIX packages include their Chinese README, and the main package includes b
 
 `.gitignore` excludes build outputs, VSIX files, test logs, editor configuration, environment files, and personal helper-tool configuration. Documentation uses generic example paths; machine-specific configuration belongs in ignored locations.
 
-The VS Code Git Performance output channel records query, indexing, and file comparison timings. Diagnostic output can contain runtime repository paths or Git errors; review environment information before sharing logs.
+The Enhanced Git Performance output channel records query, indexing, and file comparison timings. Diagnostic output can contain runtime repository paths or Git errors; review environment information before sharing logs.

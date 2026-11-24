@@ -1,9 +1,9 @@
 {
-  "name": "vscode-git-icon-theme",
-  "displayName": "VS Code Git File Icon Theme Bridge",
-  "description": "Shares the local VS Code file icon theme with VS Code Git, including Remote SSH windows.",
+  "name": "vscode-enhanced-git-icon-theme",
+  "displayName": "Enhanced Git File Icon Theme Bridge",
+  "description": "Shares the local VS Code file icon theme with Enhanced Git, including Remote SSH windows.",
   "publisher": "lvliangxiong",
-  "version": "0.1.289",
+  "version": "0.1.292",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -12,19 +12,19 @@
     "ui"
   ],
   "activationEvents": [
-    "onCommand:vscode-git.icons.resolve",
-    "onCommand:vscode-git.syntax.snapshot",
-    "onCommand:vscode-git.syntax.grammar"
+    "onCommand:vscode-enhanced-git.icons.resolve",
+    "onCommand:vscode-enhanced-git.syntax.snapshot",
+    "onCommand:vscode-enhanced-git.syntax.grammar"
   ],
   "license": "GPL-3.0-only",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lvliangxiong/vscode-git.git",
+    "url": "https://github.com/lvliangxiong/vscode-enhanced-git.git",
     "directory": "icon-theme-bridge"
   },
-  "homepage": "https://github.com/lvliangxiong/vscode-git/tree/main/icon-theme-bridge#readme",
+  "homepage": "https://github.com/lvliangxiong/vscode-enhanced-git/tree/main/icon-theme-bridge#readme",
   "bugs": {
-    "url": "https://github.com/lvliangxiong/vscode-git/issues"
+    "url": "https://github.com/lvliangxiong/vscode-enhanced-git/issues"
   },
   "icon": "media/icon.png"
 }

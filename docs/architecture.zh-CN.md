@@ -24,7 +24,7 @@
 
 ## 宿主与视图
 
-主插件 `lvliangxiong.vscode-git` 运行在 workspace 扩展宿主，Git 操作与仓库位于同一台机器。桥接插件 `lvliangxiong.vscode-git-icon-theme` 运行在本地 UI 宿主，通过 VS Code 命令提供请求的文件图标、编辑器主题和已安装 TextMate 语法资源。
+主插件 `lvliangxiong.vscode-enhanced-git` 运行在 workspace 扩展宿主，Git 操作与仓库位于同一台机器。桥接插件 `lvliangxiong.vscode-enhanced-git-icon-theme` 运行在本地 UI 宿主，通过 VS Code 命令提供请求的文件图标、编辑器主题和已安装 TextMate 语法资源。
 
 浏览器入口包括独立日志 `main.ts`、多仓库容器 `repository-host.ts`、双向比较容器 `compare-host.ts` 、File Diffs `branch-changes.ts`、文件历史 `file-history.ts` 和三栏比较 `merge-diff.ts`。底部多仓库视图与双向比较使用 Shadow DOM 隔离各日志实例的 DOM、样式、消息及焦点。
 
@@ -47,7 +47,7 @@ React 组件订阅会话及领域 Store，通过回调触发控制器。控制�
 4. 宿主将响应返回对应会话；请求序号、选择键和比较身份用于丢弃过期结果。
 5. Store 更新后，React 协调 DOM，图形服务重绘可见区域。
 
-`repositories/events.ts` 订阅 VS Code Git API 的仓库事件；前端 `history-refresh.ts` 合并刷新请求，并结合可见性和交互状态安排刷新。
+`repositories/events.ts` 订阅 VS Code 内置 Git 扩展 API 的仓库事件；前端 `history-refresh.ts` 合并刷新请求，并结合可见性和交互状态安排刷新。
 
 ## 历史查询、缓存与索引
 

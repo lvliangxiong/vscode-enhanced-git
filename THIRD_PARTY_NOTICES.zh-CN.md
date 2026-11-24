@@ -2,7 +2,7 @@
 
 [English](THIRD_PARTY_NOTICES.md) | 简体中文
 
-VS Code Git 原创代码采用 GPL-3.0-only，详见 LICENSE。以下第三方组件保留各自的许可证和版权声明。本文提供中文归属及集成说明；随附许可证条款保留原文。
+Enhanced Git 原创代码采用 GPL-3.0-only，详见 LICENSE。以下第三方组件保留各自的许可证和版权声明。本文提供中文归属及集成说明；随附许可证条款保留原文。
 
 `src/extension/git/topology.ts` 中的稀疏筛选图算法改编自 JetBrains IntelliJ / Rebased 的 `DottedFilterEdgesGenerator.kt`。
 

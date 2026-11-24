@@ -1,10 +1,10 @@
-# VS Code Git
+# Enhanced Git for Visual Studio Code
 
 [English](README.md) | 简体中文
 
-VS Code Git 是面向 VS Code 的三栏 Git 日志插件，支持本地和 Remote-SSH 工作区。界面使用 VS Code 主题、文件图标主题和原生 Diff 编辑器；分支与引用标签的展示规则、历史浏览交互参考 Rebased / JetBrains，文件变更名称使用 Rebased 状态配色。
+Enhanced Git 是面向 VS Code 的三栏 Git 日志插件，支持本地和 Remote-SSH 工作区。界面使用 VS Code 主题、文件图标主题和原生 Diff 编辑器；分支与引用标签的展示规则、历史浏览交互参考 Rebased / JetBrains，文件变更名称使用 Rebased 状态配色。
 
-主插件 ID 为 `lvliangxiong.vscode-git`，本地 UI 桥接插件 ID 为 `lvliangxiong.vscode-git-icon-theme`。
+主插件 ID 为 `lvliangxiong.vscode-enhanced-git`，本地 UI 桥接插件 ID 为 `lvliangxiong.vscode-enhanced-git-icon-theme`。
 
 ## 核心功能
 
@@ -21,7 +21,7 @@ VS Code Git 是面向 VS Code 的三栏 Git 日志插件，支持本地和 Remot
 
 ## 打开与浏览
 
-在 VS Code 中打开 Git 仓库，按 `Option+G`（macOS）或 `Alt+G`，也可执行 `VS Code Git: Open Git Log`。多仓库工作区通过底部标签切换仓库。
+在 VS Code 中打开 Git 仓库，按 `Option+G`（macOS）或 `Alt+G`，也可执行 `Enhanced Git: Open Git Log`。多仓库工作区通过底部标签切换仓库。
 
 | 区域   | 操作                                                                                                         |
 | ------ | ------------------------------------------------------------------------------------------------------------ |
@@ -61,11 +61,11 @@ VS Code Git 是面向 VS Code 的三栏 Git 日志插件，支持本地和 Remot
 - 多选提交按日志顺序组合各文件的前后版本。不连续或跨分支选择时，文件差异可能包含未选提交留下的内容，不能等同于独立重放所选补丁。
 - 普通合并提交的汇总列表包含相对所有父提交都发生变化的文件。No merge conflicts 表示汇总列表为空，不代表能够还原当时的人工冲突处理过程；各父提交的差异可分别展开查看。
 - 三栏 Merge Diff 用于查看已提交的合并结果，不写入工作区或解决当前 Git 冲突。Native 样式使用对齐空白块和增删标记，JetBrains 样式使用连续代码和跨栏连线。
-- File Diffs 保存比较端点，Refresh 重新读取同一比较范围。支持相关 API 的 VS Code Git Graph 提供 Show Commit File Diffs 和 Locate in Git Log 入口。
+- File Diffs 保存比较端点，Refresh 重新读取同一比较范围。当 VS Code 内置 Git 扩展提供相应 API 时，提交图中会出现 Show Commit File Diffs 和 Locate in Git Log 入口。
 
 ## 多仓库分支切换
 
-执行 `VS Code Git: Switch Branch in All Repositories`，输入分支名并选择匹配项。候选来自发现的仓库中的本地和远端跟踪分支，不要求每个仓库都存在该分支。
+执行 `Enhanced Git: Switch Branch in All Repositories`，输入分支名并选择匹配项。候选来自发现的仓库中的本地和远端跟踪分支，不要求每个仓库都存在该分支。
 
 已有本地分支直接切换；仅存在唯一匹配的远端跟踪分支时创建对应本地分支并设置跟踪关系。目标本地分支被其他 worktree 占用时，以 detached HEAD 切换到该分支指向的提交。分支不存在、远端候选不唯一或本地修改阻止切换时，通过原生通知报告对应仓库的结果，不强制覆盖修改。
 
@@ -75,23 +75,23 @@ Cherry-pick 按日志从下到上的顺序应用所选提交，支持冲突后�
 
 | 设置                              | 默认值   | 含义                                                          |
 | --------------------------------- | -------- | ------------------------------------------------------------- |
-| `vscode-git.history.initialCount` | `500`    | 打开日志或更改筛选时加载的提交数；`0` 表示加载全部匹配提交。  |
-| `vscode-git.history.pageSize`     | `500`    | 后续每批加载数量，范围为 `100`–`2000`；加载全部时不使用该值。 |
-| `vscode-git.mergeDiffStyle`       | `native` | 三栏历史合并比较的显示样式，可设为 `native` 或 `jetbrains`。  |
+| `vscode-enhanced-git.history.initialCount` | `500`    | 打开日志或更改筛选时加载的提交数；`0` 表示加载全部匹配提交。  |
+| `vscode-enhanced-git.history.pageSize`     | `500`    | 后续每批加载数量，范围为 `100`–`2000`；加载全部时不使用该值。 |
+| `vscode-enhanced-git.mergeDiffStyle`       | `native` | 三栏历史合并比较的显示样式，可设为 `native` 或 `jetbrains`。  |
 
 这些设置支持按工作区文件夹配置。修改加载数量后刷新或重新打开日志；修改 Merge Diff 样式会应用到已打开的比较。
 
 接近列表底部时自动加载后续提交，也可点击 Load more commits；全部加载完成后按钮隐藏。加载全部历史会增加等待时间和内存占用。
 
-插件订阅 VS Code Git 扩展的仓库状态事件。Refresh 按当前筛选重新读取日志和仓库信息；Fetch 获取远端更新。在提交历史比较视图可见时，`Cmd+J`（macOS）或 `Ctrl+J` 切换底部面板。
+插件订阅 VS Code 内置 Git 扩展的仓库状态事件。Refresh 按当前筛选重新读取日志和仓库信息；Fetch 获取远端更新。在提交历史比较视图可见时，`Cmd+J`（macOS）或 `Ctrl+J` 切换底部面板。
 
 ## 安装关联
 
-主插件通过 `extensionPack` 声明桥接插件 `lvliangxiong.vscode-git-icon-theme`。两个扩展均在 Marketplace 发布后，从市场安装主插件会一并安装桥接插件。首次市场发布时应先发布桥接插件，再发布主插件。
+主插件通过 `extensionPack` 声明桥接插件 `lvliangxiong.vscode-enhanced-git-icon-theme`。两个扩展均在 Marketplace 发布后，从市场安装主插件会一并安装桥接插件。首次市场发布时应先发布桥接插件，再发布主插件。
 
 使用本地 VSIX 时先安装桥接包，再安装主包；主包安装命令跳过从市场解析扩展包成员。Remote-SSH 窗口中需将桥接包安装在本地客户端，主包安装在远端工作区宿主。
 
-源码、使用说明及反馈入口分别为 [GitHub 仓库](https://github.com/lvliangxiong/vscode-git)、本 README 和 [Issues](https://github.com/lvliangxiong/vscode-git/issues)。
+源码、使用说明及反馈入口分别为 [GitHub 仓库](https://github.com/lvliangxiong/vscode-enhanced-git)、本 README 和 [Issues](https://github.com/lvliangxiong/vscode-enhanced-git/issues)。
 
 ## 构建与安装
 
@@ -102,11 +102,11 @@ npm ci
 npm run check
 npm test
 npm run package
-code --install-extension dist/vscode-git-icon-theme.vsix --force
-code --install-extension dist/vscode-git.vsix --force --do-not-include-pack-dependencies
+code --install-extension dist/vscode-enhanced-git-icon-theme.vsix --force
+code --install-extension dist/vscode-enhanced-git.vsix --force --do-not-include-pack-dependencies
 ```
 
-安装包为 `dist/vscode-git.vsix` 和 `dist/vscode-git-icon-theme.vsix`。主插件与桥接插件使用相同 publisher 和版本。安装后执行 `Developer: Reload Window`。
+安装包为 `dist/vscode-enhanced-git.vsix` 和 `dist/vscode-enhanced-git-icon-theme.vsix`。主插件与桥接插件使用相同 publisher 和版本。安装后执行 `Developer: Reload Window`。
 
 Remote-SSH 窗口中，主插件安装在远端 workspace 宿主，桥接插件安装在本地 UI 宿主；本地窗口中两者都安装在本地。
 
@@ -117,6 +117,6 @@ Remote-SSH 窗口中，主插件安装在远端 workspace 宿主，桥接插件�
 
 ## 许可证
 
-Copyright (c) 2026 VS Code Git contributors.
+Copyright (c) 2026 Enhanced Git contributors.
 
 原创代码采用 [GNU GPL 第 3 版（GPL-3.0-only）](LICENSE)。分发受该许可证覆盖的版本时，应按许可证要求提供对应源码及构建脚本，并保留必要声明。第三方代码、图标及依赖遵循各自许可证，详见 [第三方声明](THIRD_PARTY_NOTICES.zh-CN.md)。

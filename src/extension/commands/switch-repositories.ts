@@ -71,7 +71,7 @@ export async function switchRepositories(
 ) {
   const roots = [...new Set(await discover())];
   if (!roots.length) {
-    await vscode.window.showWarningMessage('VS Code Git: No Git repositories found in this workspace.');
+    await vscode.window.showWarningMessage('Enhanced Git: No Git repositories found in this workspace.');
     return;
   }
   const snapshots = await Promise.all(
@@ -127,7 +127,7 @@ export async function switchRepositories(
   await vscode.window.withProgress(
     {
       location: vscode.ProgressLocation.Notification,
-      title: `VS Code Git: Switching to ${selected}`,
+      title: `Enhanced Git: Switching to ${selected}`,
     },
     async (progress) => {
       let completed = 0;
@@ -147,7 +147,7 @@ export async function switchRepositories(
             ]);
             return await realpath(dir.trimEnd());
           } catch (error) {
-            void vscode.window.showErrorMessage(`VS Code Git — ${root}: ${error.message}`);
+            void vscode.window.showErrorMessage(`Enhanced Git — ${root}: ${error.message}`);
             report();
             return undefined;
           }
@@ -165,7 +165,7 @@ export async function switchRepositories(
         const familyLock = `switch-worktrees:${dir}`;
         if (locks.has(root) || locks.has(familyLock)) {
           void vscode.window.showErrorMessage(
-            `VS Code Git — ${root}: A Git operation is already running.`,
+            `Enhanced Git — ${root}: A Git operation is already running.`,
           );
           report();
           return;
@@ -174,9 +174,9 @@ export async function switchRepositories(
         locks.add(familyLock);
         try {
           const result = await switchRepositoryBranch(root, selected);
-          void vscode.window.showInformationMessage(`VS Code Git — ${root}: ${result}`);
+          void vscode.window.showInformationMessage(`Enhanced Git — ${root}: ${result}`);
         } catch (error) {
-          void vscode.window.showErrorMessage(`VS Code Git — ${root}: ${error.message}`);
+          void vscode.window.showErrorMessage(`Enhanced Git — ${root}: ${error.message}`);
         } finally {
           locks.delete(root);
           locks.delete(familyLock);

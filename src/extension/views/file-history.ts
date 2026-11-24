@@ -39,9 +39,9 @@ export class FileHistoryView implements VSCode.WebviewViewProvider {
   ) {
     for (const action of ['refresh', 'compareLocal', 'affected', 'viewOptions', 'locate'])
       context.subscriptions.push(
-        vscode.commands.registerCommand(`vscode-git.fileHistory.${action}`, () =>
+        vscode.commands.registerCommand(`vscode-enhanced-git.fileHistory.${action}`, () =>
           this.runAction(action).catch((error) => {
-            void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
+            void vscode.window.showErrorMessage(`Enhanced Git: ${error.message}`);
           }),
         ),
       );
@@ -62,7 +62,7 @@ export class FileHistoryView implements VSCode.WebviewViewProvider {
       this.contexts.set(key, value);
       void this.vscode.commands.executeCommand(
         'setContext',
-        `vscode-git.fileHistory.${key}`,
+        `vscode-enhanced-git.fileHistory.${key}`,
         value,
       );
     }
@@ -119,7 +119,7 @@ export class FileHistoryView implements VSCode.WebviewViewProvider {
       file,
       actions,
     };
-    void this.vscode.commands.executeCommand('vscode-git.fileHistory.focus');
+    void this.vscode.commands.executeCommand('vscode-enhanced-git.fileHistory.focus');
     if (this.ready) await this.start();
   }
 
@@ -150,7 +150,7 @@ export class FileHistoryView implements VSCode.WebviewViewProvider {
     };
     const subscription = view.webview.onDidReceiveMessage(async (message) => {
       if (message.type === 'openGitLog') {
-        await this.vscode.commands.executeCommand('vscode-git.open');
+        await this.vscode.commands.executeCommand('vscode-enhanced-git.open');
       } else if (message.type === 'ready') {
         if (this.ready) return;
         this.ready = true;
@@ -353,7 +353,7 @@ function historySession(
       }
     } catch (error) {
       if (disposed || receivedGeneration !== generation) return;
-      void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
+      void vscode.window.showErrorMessage(`Enhanced Git: ${error.message}`);
       await panel.webview.postMessage({
         type: 'historyError',
         key: message.key,

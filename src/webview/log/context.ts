@@ -19,22 +19,22 @@ import type { createDetailsController } from './details';
 import type { SessionUi } from '../react/session-ui';
 
 export interface BrowserScope {
-  vsCodeGitVisible?: boolean;
-  vsCodeGitComparison?: {
+  vsCodeEnhancedGitVisible?: boolean;
+  vsCodeEnhancedGitComparison?: {
     ref?: string;
     start: import('../../shared/model').ComparisonEndpoint;
     end: import('../../shared/model').ComparisonEndpoint;
     [key: string]: unknown;
   };
-  vsCodeGitFontSheet?: CSSStyleSheet;
-  vsCodeGitFontPrefix?: string;
+  vsCodeEnhancedGitFontSheet?: CSSStyleSheet;
+  vsCodeEnhancedGitFontPrefix?: string;
 }
 export interface LogEnvironment {
   window: Window;
   document: Document;
   scope: BrowserScope;
   api: WebviewApi;
-  comparison?: BrowserScope['vsCodeGitComparison'];
+  comparison?: BrowserScope['vsCodeEnhancedGitComparison'];
   scriptStarted: number;
   $<T extends HTMLElement = HTMLElement>(id: string): T;
   send(type: string, payload?: Record<string, unknown>): void;

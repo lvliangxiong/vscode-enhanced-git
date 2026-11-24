@@ -151,7 +151,7 @@ test('me and author names resolve multiple identities, email prefixes and case',
   assert.deepEqual(resolveUsers(['unknown'], authors, { name: '', email: '' }), []);
 });
 test('menus produce working branch ranges, author and timestamp filters, and safe remote-capable path trees', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-popup-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-popup-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Alice']);

@@ -13,7 +13,7 @@ interface CommitInfo {
 // diffs. A per-call random marker cannot be confused with ordinary file names.
 async function treeBatch(root: string, pairs: string[], kind: '--name-status' | '--numstat') {
   if (!pairs.length) return [];
-  const marker = `vscode-git-${randomUUID()}:`;
+  const marker = `vscode-enhanced-git-${randomUUID()}:`;
   const input = pairs.map((pair, i) => `${marker}${i}\n${pair}\n`).join('');
   const output = await git(
     root,

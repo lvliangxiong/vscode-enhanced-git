@@ -8,7 +8,7 @@ const { log } = require('../out/extension/git/history');
 const { projectGraph } = require('../out/extension/git/topology');
 
 test('first block skips full graph; graph cache revalidates refs, HEAD and shallow boundaries', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-topology-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-topology-'));
   const git = client.git;
   try {
     await git(root, ['init', '-b', 'main']);

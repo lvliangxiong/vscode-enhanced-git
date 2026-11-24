@@ -24,7 +24,7 @@ export async function openWorkingFile(
     if (!revision) throw new Error('The file no longer exists in the working tree.');
     const text = await git(root, ['show', `${revision.hash}:${revision.path}`]);
     const snapshot = vscode.Uri.from({
-      scheme: 'vscode-git',
+      scheme: 'vscode-enhanced-git',
       path: '/' + revision.path,
       query: new URLSearchParams({ revision: revision.hash, snapshot: randomUUID() }).toString(),
     });

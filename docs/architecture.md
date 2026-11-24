@@ -24,7 +24,7 @@ English | [简体中文](architecture.zh-CN.md)
 
 ## Hosts and views
 
-The main extension, `lvliangxiong.vscode-git`, runs in the workspace extension host, on the same machine as the repository. The companion, `lvliangxiong.vscode-git-icon-theme`, runs in the local UI host and supplies requested file icons, editor themes, and installed TextMate grammar resources through VS Code commands.
+The main extension, `lvliangxiong.vscode-enhanced-git`, runs in the workspace extension host, on the same machine as the repository. The companion, `lvliangxiong.vscode-enhanced-git-icon-theme`, runs in the local UI host and supplies requested file icons, editor themes, and installed TextMate grammar resources through VS Code commands.
 
 Browser entry points include the standalone log (`main.ts`), multi-repository container (`repository-host.ts`), two-way comparison container (`compare-host.ts`), File Diffs (`branch-changes.ts`), file history (`file-history.ts`), and three-pane merge comparison (`merge-diff.ts`). The multi-repository panel and two-way comparisons use Shadow DOM to isolate each log instance's DOM, styles, messages, and focus.
 
@@ -47,7 +47,7 @@ Request flow:
 4. The host returns results to the corresponding session. Request numbers, selection keys, and comparison identities reject stale responses.
 5. Store updates trigger React reconciliation and redraw the visible graph region.
 
-`repositories/events.ts` subscribes to VS Code Git API repository events. The frontend's `history-refresh.ts` coalesces refresh requests and schedules them according to visibility and interaction state.
+`repositories/events.ts` subscribes to repository events from the built-in Git extension in VS Code. The frontend's `history-refresh.ts` coalesces refresh requests and schedules them according to visibility and interaction state.
 
 ## History queries, caches, and indexes
 

@@ -123,7 +123,7 @@ export function createTextMateAdapter(models: monaco.editor.ITextModel[]) {
           .map((item) => item.scopeName),
     });
     // A private language leaves the built-in provider intact for reliable fallback.
-    const id = 'vscode-git-textmate-' + snapshot.language;
+    const id = 'vscode-enhanced-git-textmate-' + snapshot.language;
     if (!languageRegistrations.has(id)) {
       monaco.languages.register({ id });
       languageRegistrations.set(id, [
@@ -184,7 +184,7 @@ export function createTextMateAdapter(models: monaco.editor.ITextModel[]) {
     void refresh().catch((error) => {
       if (!disposed && expected === generation) {
         fallback();
-        console.warn('VS Code Git syntax fallback:', error.message);
+        console.warn('Enhanced Git syntax fallback:', error.message);
       }
     });
   };

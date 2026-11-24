@@ -146,7 +146,7 @@ test('branch rail follows selection, toggles each favorite and expands nested gr
 });
 
 test('rail New Branch, Fetch and tag deletion use disposable repositories and preserve checkout when requested', async () => {
-  const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-rail-'));
+  const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-enhanced-git-rail-'));
   const root = path.join(temp, 'repo'),
     remote = path.join(temp, 'remote.git');
   await fs.mkdir(root);
