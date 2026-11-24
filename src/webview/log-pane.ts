@@ -104,9 +104,9 @@ export const createPane: PaneFactory = (element, html, { state, send }) => {
             'resize',
             'focus',
             'blur',
-            'vsgitHidden',
-            'vsgitTheme',
-            'vsgitDispose',
+            'vsCodeGitHidden',
+            'vsCodeGitTheme',
+            'vsCodeGitDispose',
           ].includes(type)
             ? events
             : shadow;
@@ -121,13 +121,13 @@ export const createPane: PaneFactory = (element, html, { state, send }) => {
   fontStyle.nonce = nonce;
   document.head.append(fontStyle);
   const scope: MountLogOptions['scope'] = {
-    vsgitVisible: visible,
-    vsgitFontSheet: fontStyle.sheet,
-    vsgitFontPrefix: `pane-${window.crypto.randomUUID()}-`,
+    vsCodeGitVisible: visible,
+    vsCodeGitFontSheet: fontStyle.sheet,
+    vsCodeGitFontPrefix: `pane-${window.crypto.randomUUID()}-`,
   };
   const config = shadow.getElementById('frame-config');
   const settings = config ? JSON.parse(config.textContent) : {};
-  if (!settings.repositoryFrame) scope.vsgitComparison = settings;
+  if (!settings.repositoryFrame) scope.vsCodeGitComparison = settings;
   syncPaneTheme(body, document.body);
   for (const type of ['focus', 'blur'])
     window.addEventListener(type, () => events.dispatchEvent(new window.Event(type)), {
@@ -175,12 +175,12 @@ export const createPane: PaneFactory = (element, html, { state, send }) => {
     element,
     receive(message) {
       if (disposed) return;
-      if (message.type === 'vsgitTheme') {
+      if (message.type === 'vsCodeGitTheme') {
         syncPaneTheme(body, document.body);
-        events.dispatchEvent(new window.Event('vsgitTheme'));
+        events.dispatchEvent(new window.Event('vsCodeGitTheme'));
         return;
       }
-      if (message.type === 'vsgitVisibility') visible = message.visible;
+      if (message.type === 'vsCodeGitVisibility') visible = message.visible;
       // Deliver to every pane-scoped subscriber, including the file-icon service.
       // Calling only the log router drops icon replies and theme invalidations.
       events.dispatchEvent(new window.MessageEvent('message', { data: message }));

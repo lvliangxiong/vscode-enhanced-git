@@ -39,7 +39,7 @@ export class FileHistoryView implements VSCode.WebviewViewProvider {
   ) {
     for (const action of ['refresh', 'compareLocal', 'affected', 'viewOptions', 'locate'])
       context.subscriptions.push(
-        vscode.commands.registerCommand(`vsgit.fileHistory.${action}`, () =>
+        vscode.commands.registerCommand(`vscode-git.fileHistory.${action}`, () =>
           this.runAction(action).catch((error) => {
             void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
           }),
@@ -60,7 +60,11 @@ export class FileHistoryView implements VSCode.WebviewViewProvider {
     for (const [key, value] of Object.entries(values)) {
       if (this.contexts.get(key) === value) continue;
       this.contexts.set(key, value);
-      void this.vscode.commands.executeCommand('setContext', `vsgit.fileHistory.${key}`, value);
+      void this.vscode.commands.executeCommand(
+        'setContext',
+        `vscode-git.fileHistory.${key}`,
+        value,
+      );
     }
   }
 
@@ -115,7 +119,7 @@ export class FileHistoryView implements VSCode.WebviewViewProvider {
       file,
       actions,
     };
-    void this.vscode.commands.executeCommand('vsgit.fileHistory.focus');
+    void this.vscode.commands.executeCommand('vscode-git.fileHistory.focus');
     if (this.ready) await this.start();
   }
 
@@ -146,7 +150,7 @@ export class FileHistoryView implements VSCode.WebviewViewProvider {
     };
     const subscription = view.webview.onDidReceiveMessage(async (message) => {
       if (message.type === 'openGitLog') {
-        await this.vscode.commands.executeCommand('vsgit.open');
+        await this.vscode.commands.executeCommand('vscode-git.open');
       } else if (message.type === 'ready') {
         if (this.ready) return;
         this.ready = true;

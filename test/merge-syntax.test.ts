@@ -27,7 +27,7 @@ test('token overrides honor global rules, matching theme selectors and wildcard 
 });
 
 test('syntax resolver reads inherited JSONC themes, file associations, injected grammars and cache invalidation', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-syntax-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-syntax-'));
   try {
     await fs.writeFile(
       path.join(root, 'base.json'),
@@ -148,7 +148,7 @@ test('packaged TextMate engine preserves multiline state and applies updated the
 });
 
 test('Remote syntax uses the UI theme, prefers workspace grammars and routes missing scopes to the UI bridge', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-remote-syntax-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-remote-syntax-'));
   const commands = new Map<string, (...args: any[]) => void>();
   const subscriptions: any[] = [];
   try {
@@ -201,7 +201,7 @@ test('Remote syntax uses the UI theme, prefers workspace grammars and routes mis
         },
         executeCommand: async (name, ...args) => {
           calls.push([name, ...args]);
-          return name === 'vsgit.syntax.snapshot'
+          return name === 'vscode-git.syntax.snapshot'
             ? local
             : { scopeName: 'source.ui', patterns: [] };
         },
@@ -209,7 +209,10 @@ test('Remote syntax uses the UI theme, prefers workspace grammars and routes mis
     } as any;
     const service = mergeSyntaxService(api, { subscriptions } as any);
     const snapshot = await service.snapshot(path.join(root, 'file.go'), 'Local Theme');
-    assert.equal(calls.find(([name]) => name === 'vsgit.syntax.snapshot')[1].theme, 'Local Theme');
+    assert.equal(
+      calls.find(([name]) => name === 'vscode-git.syntax.snapshot')[1].theme,
+      'Local Theme',
+    );
     assert.equal(snapshot.name, 'Local Theme');
     assert.deepEqual(snapshot.settings, local.settings);
     assert.equal(snapshot.language, 'remote');
@@ -218,15 +221,15 @@ test('Remote syntax uses the UI theme, prefers workspace grammars and routes mis
       'remote',
     );
     assert.equal((await service.grammar('source.shared')).scopeName, 'source.remote');
-    assert.equal(calls.filter(([name]) => name === 'vsgit.syntax.grammar').length, 0);
+    assert.equal(calls.filter(([name]) => name === 'vscode-git.syntax.grammar').length, 0);
     assert.equal((await service.grammar('source.ui')).scopeName, 'source.ui');
-    assert.equal(calls.at(-1)[0], 'vsgit.syntax.grammar');
+    assert.equal(calls.at(-1)[0], 'vscode-git.syntax.grammar');
     let changed = 0;
     const listener = service.subscribe(() => changed++);
-    commands.get('vsgit.syntax.changed')();
+    commands.get('vscode-git.syntax.changed')();
     assert.equal(changed, 1);
     listener.dispose();
-    commands.get('vsgit.syntax.changed')();
+    commands.get('vscode-git.syntax.changed')();
     assert.equal(changed, 1);
   } finally {
     subscriptions.forEach((item) => item.dispose());
@@ -235,7 +238,7 @@ test('Remote syntax uses the UI theme, prefers workspace grammars and routes mis
 });
 
 test('actual webview theme overrides a stale configured theme and applies the matching token customizations', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-active-theme-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-active-theme-'));
   try {
     await fs.writeFile(
       path.join(root, 'dark.json'),

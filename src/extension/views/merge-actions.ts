@@ -1,6 +1,6 @@
 import type * as VSCode from 'vscode';
 
-export const mergeViewType = 'vsgit.mergeDiff';
+export const mergeViewType = 'vscode-git.mergeDiff';
 const controllers = new WeakMap<VSCode.ExtensionContext, ReturnType<typeof createController>>();
 
 /** Native editor/title actions route only to the active historical merge view. */
@@ -21,7 +21,7 @@ function createController(vscode: typeof VSCode, context: VSCode.ExtensionContex
   const update = () => {
     void vscode.commands.executeCommand(
       'setContext',
-      'vsgit.merge.canNavigate',
+      'vscode-git.merge.canNavigate',
       !!active()?.[1].ready,
     );
   };
@@ -41,7 +41,7 @@ function createController(vscode: typeof VSCode, context: VSCode.ExtensionContex
     ['openFile', 'openFile'],
   ] as const)
     context.subscriptions.push(
-      vscode.commands.registerCommand('vsgit.merge.' + name, async () => {
+      vscode.commands.registerCommand('vscode-git.merge.' + name, async () => {
         try {
           await run(action);
         } catch (error) {

@@ -12,7 +12,7 @@ import {
 } from '../src/extension/commands/switch-repositories';
 
 test('multi-repository branch switching handles missing, occupied, remote and dirty branches', async (t) => {
-  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-switch-'));
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-switch-'));
   t.after(() => fs.rm(dir, { recursive: true, force: true }));
   async function repo(name: string) {
     const root = path.join(dir, name);

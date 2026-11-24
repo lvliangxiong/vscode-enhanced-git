@@ -14,7 +14,7 @@ const {
   branchBatchAction,
 } = require('../out/extension/git/index');
 async function fixture() {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-branches-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-branches-'));
   await git(root, ['init', '-b', 'main']);
   await git(root, ['config', 'user.name', 'Fixture']);
   await git(root, ['config', 'user.email', 'fixture@example.com']);
@@ -167,7 +167,7 @@ test('batch delete preflights every branch, including current and unmerged branc
 });
 test('batch update fast-forwards two tracking branches; batch remote deletion removes both', async () => {
   const root = await fixture(),
-    remote = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-remote-'));
+    remote = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-remote-'));
   try {
     await git(remote, ['init', '--bare']);
     await git(root, ['remote', 'add', 'origin', remote]);

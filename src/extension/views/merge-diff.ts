@@ -53,7 +53,7 @@ async function renderMergeDiff(
   );
   const make = (revision: Revision | null, text: string) => {
     const uri = vscode.Uri.from({
-      scheme: 'vsgit',
+      scheme: 'vscode-git',
       path: '/' + (revision?.path || change.path),
       query: new URLSearchParams({
         revision: revision?.hash || 'empty',
@@ -129,10 +129,12 @@ async function renderMergeDiff(
   const repository = vscode.Uri.file?.(root);
   const style = () =>
     mergeDiffStyle(
-      vscode.workspace.getConfiguration?.('vsgit', repository)?.get('mergeDiffStyle', 'native'),
+      vscode.workspace
+        .getConfiguration?.('vscode-git', repository)
+        ?.get('mergeDiffStyle', 'native'),
     );
   const styleListener = vscode.workspace.onDidChangeConfiguration?.((event) => {
-    if (event.affectsConfiguration('vsgit.mergeDiffStyle', repository))
+    if (event.affectsConfiguration('vscode-git.mergeDiffStyle', repository))
       void panel.webview.postMessage({ type: 'mergeDiffStyle', style: style() });
   });
   const hoverStats = new Map<string, ReturnType<typeof readCommitHoverStats>>();

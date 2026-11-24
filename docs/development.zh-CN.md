@@ -51,11 +51,11 @@ React/jsdom 测试覆盖选择、键盘操作、菜单、悬浮提示、文件�
 
 ```sh
 npm run package
-code --install-extension dist/vsgit-icon-theme.vsix --force
-code --install-extension dist/vsgit.vsix --force --do-not-include-pack-dependencies
+code --install-extension dist/vscode-git-icon-theme.vsix --force
+code --install-extension dist/vscode-git.vsix --force --do-not-include-pack-dependencies
 ```
 
-产物分别为 `dist/vsgit.vsix` 和 `dist/vsgit-icon-theme.vsix`。`scripts/package-icon-bridge.ts` 将桥接插件的 publisher 和版本同步为主插件的值。安装后运行 `Developer: Reload Window` 激活更新。
+产物分别为 `dist/vscode-git.vsix` 和 `dist/vscode-git-icon-theme.vsix`。`scripts/package-icon-bridge.ts` 将桥接插件的 publisher 和版本同步为主插件的值。安装后运行 `Developer: Reload Window` 激活更新。
 
 扩展身份如下：
 

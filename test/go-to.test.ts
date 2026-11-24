@@ -9,7 +9,7 @@ import { resolveLogDestination } from '../src/extension/git/navigation';
 import { pickLogDestination } from '../src/extension/commands/go-to';
 
 async function fixture(run: (root: string, hashes: string[]) => Promise<void>) {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-go-to-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-go-to-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Test']);

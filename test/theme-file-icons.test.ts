@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { VsGitFileIcons } from '../src/webview/theme-file-icons';
+import { VsCodeGitFileIcons } from '../src/webview/theme-file-icons';
 const tick = () => new Promise((resolve) => setTimeout(resolve, 5));
 test('themed icons batch/deduplicate requests, reuse CSS and discard responses from old themes', async () => {
   const sent = [],
@@ -29,7 +29,7 @@ test('themed icons batch/deduplicate requests, reuse CSS and discard responses f
     };
   }
   const css = sheet();
-  const api = VsGitFileIcons.create({
+  const api = VsCodeGitFileIcons.create({
     send: (type, msg) => sent.push({ type, ...msg }),
     sheet: css as unknown as CSSStyleSheet,
     window: {
@@ -81,7 +81,9 @@ test('themed icons batch/deduplicate requests, reuse CSS and discard responses f
   });
   assert.match(a.className, /theme-file-1-0/);
   assert.ok(
-    css.cssRules[0].cssRules.some((rule) => rule.style.fontFamily?.startsWith('vsgit-file-font-1')),
+    css.cssRules[0].cssRules.some((rule) =>
+      rule.style.fontFamily?.startsWith('vscode-git-file-font-1'),
+    ),
   );
   const folder = api.node('src', true);
   await tick();
@@ -134,7 +136,7 @@ test('remote icon requests route to the UI bridge with associations and notify s
     (msg) => posts.push(msg),
     '/repo',
   );
-  assert.equal(calls[0].name, 'vsgit.icons.resolve');
+  assert.equal(calls[0].name, 'vscode-git.icons.resolve');
   assert.equal(calls[0].request.languages[0].id, 'go');
   assert.deepEqual(calls[0].request.associations, { '*.go': 'go' });
   assert.equal(posts[0].generation, 2);
@@ -171,10 +173,13 @@ test('shadow panes register uniquely named fonts in the outer document and clear
   }
   const outer = sheet(),
     inner = sheet();
-  const api = VsGitFileIcons.create({
+  const api = VsCodeGitFileIcons.create({
     send() {},
     sheet: inner as unknown as CSSStyleSheet,
-    scope: { vsgitFontSheet: outer as unknown as CSSStyleSheet, vsgitFontPrefix: 'pane-7-' },
+    scope: {
+      vsCodeGitFontSheet: outer as unknown as CSSStyleSheet,
+      vsCodeGitFontPrefix: 'pane-7-',
+    },
     window: { addEventListener() {}, removeEventListener() {} } as unknown as Window,
     document: { querySelectorAll: () => [] } as unknown as Document,
   });
@@ -188,7 +193,7 @@ test('shadow panes register uniquely named fonts in the outer document and clear
   const face = outer.cssRules[0].cssRules[0],
     icon = inner.cssRules[0].cssRules[0];
   assert.equal(face.text, '@font-face {}');
-  assert.equal(face.style.fontFamily, 'vsgit-file-font-pane-7-0-0');
+  assert.equal(face.style.fontFamily, 'vscode-git-file-font-pane-7-0-0');
   assert.equal(icon.style.fontFamily, face.style.fontFamily);
   assert.equal(inner.cssRules[0].cssRules.length, 1);
   api.reset();

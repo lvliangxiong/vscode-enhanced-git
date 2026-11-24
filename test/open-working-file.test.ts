@@ -8,7 +8,7 @@ import { openWorkingFile } from '../src/extension/views/open-working-file';
 import type { FileChange } from '../src/shared/model';
 
 test('Open File uses the working copy or a read-only historical snapshot without recreating deleted files', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-open-file-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-open-file-'));
   const snapshots = new Map<string, string>();
   const commands: any[][] = [];
   const vscode = {
@@ -72,7 +72,7 @@ test('Open File uses the working copy or a read-only historical snapshot without
       snapshots,
     );
     const snapshot = commands.at(-1)[1];
-    assert.equal(snapshot.scheme, 'vsgit');
+    assert.equal(snapshot.scheme, 'vscode-git');
     assert.equal(snapshots.get(snapshot.toString()), 'historical contents\n');
     await assert.rejects(fs.stat(path.join(root, 'source.ts')), { code: 'ENOENT' });
     await assert.rejects(

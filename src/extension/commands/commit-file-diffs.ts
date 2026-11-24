@@ -50,7 +50,7 @@ export function registerCommitFileDiffs(
   });
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      'vsgit.showCommitFileDiffs',
+      'vscode-git.showCommitFileDiffs',
       async (uri: VSCode.Uri, hash: string) => {
         try {
           if (!uri || !['file', 'vscode-remote'].includes(uri.scheme))
@@ -67,7 +67,7 @@ export function registerCommitFileDiffs(
   if (locate)
     context.subscriptions.push(
       vscode.commands.registerCommand(
-        'vsgit.locateCommit',
+        'vscode-git.locateCommit',
         async (uri: VSCode.Uri, hash: string) => {
           try {
             if (!uri || !['file', 'vscode-remote'].includes(uri.scheme))
@@ -97,7 +97,7 @@ export function registerCommitFileDiffs(
           {
             title: '$(diff-multiple) Show File Diffs',
             tooltip: 'Show this commit’s changed files in File Diffs',
-            command: 'vsgit.showCommitFileDiffs',
+            command: 'vscode-git.showCommitFileDiffs',
             arguments: [repository.rootUri],
           },
           ...(locate
@@ -105,7 +105,7 @@ export function registerCommitFileDiffs(
                 {
                   title: '$(target) Locate in Git Log',
                   tooltip: 'Locate this commit in the bottom Git Log graph',
-                  command: 'vsgit.locateCommit',
+                  command: 'vscode-git.locateCommit',
                   arguments: [repository.rootUri],
                 },
               ]

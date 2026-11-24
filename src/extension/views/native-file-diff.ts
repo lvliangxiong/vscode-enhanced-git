@@ -8,26 +8,29 @@ import type { FileHistoryDiff } from '../../shared/file-history';
 export function registerHistoryDiffFiles(vscode: typeof VSCode, context: VSCode.ExtensionContext) {
   const files = new Map<string, VSCode.Uri>();
   context.subscriptions.push(
-    vscode.commands.registerCommand('vsgit.fileHistory.openFile', async (resource?: VSCode.Uri) => {
-      const input = vscode.window.tabGroups?.activeTabGroup.activeTab
-        ?.input as VSCode.TabInputTextDiff;
-      const uri = resource || input?.modified || vscode.window.activeTextEditor?.document.uri;
-      const file = uri && files.get(uri.toString());
-      if (!file) return;
-      try {
-        await fs.stat(file.fsPath);
-        await vscode.commands.executeCommand('vscode.open', file, {
-          viewColumn: vscode.ViewColumn.Active,
-          preview: false,
-        });
-      } catch (error) {
-        if (error.code === 'ENOENT')
-          void vscode.window.showInformationMessage(
-            `The file no longer exists in the working tree: ${file.fsPath}`,
-          );
-        else void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
-      }
-    }),
+    vscode.commands.registerCommand(
+      'vscode-git.fileHistory.openFile',
+      async (resource?: VSCode.Uri) => {
+        const input = vscode.window.tabGroups?.activeTabGroup.activeTab
+          ?.input as VSCode.TabInputTextDiff;
+        const uri = resource || input?.modified || vscode.window.activeTextEditor?.document.uri;
+        const file = uri && files.get(uri.toString());
+        if (!file) return;
+        try {
+          await fs.stat(file.fsPath);
+          await vscode.commands.executeCommand('vscode.open', file, {
+            viewColumn: vscode.ViewColumn.Active,
+            preview: false,
+          });
+        } catch (error) {
+          if (error.code === 'ENOENT')
+            void vscode.window.showInformationMessage(
+              `The file no longer exists in the working tree: ${file.fsPath}`,
+            );
+          else void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
+        }
+      },
+    ),
     { dispose: () => files.clear() },
   );
   return files;
@@ -89,7 +92,7 @@ export function nativeFileDiff(
       if (!pairs.has(key)) {
         const make = (text: string, side: number) => {
           const uri = vscode.Uri.from({
-            scheme: 'vsgit-history',
+            scheme: 'vscode-git-history',
             path: '/' + data.path,
             query: new URLSearchParams({
               snapshot: randomUUID(),

@@ -87,7 +87,7 @@ function activate(context: vscode.ExtensionContext) {
 
   const discoverRepositories = () => workspaceRepositories(vscode, repositoryEvents, git);
   context.subscriptions.push(
-    vscode.commands.registerCommand('vsgit.switchRepositoriesBranch', () =>
+    vscode.commands.registerCommand('vscode-git.switchRepositoriesBranch', () =>
       switchRepositories(vscode, discoverRepositories, gitWriteLocks).catch(notifyError),
     ),
   );
@@ -96,15 +96,15 @@ function activate(context: vscode.ExtensionContext) {
     provideTextDocumentContent: (uri: vscode.Uri) => snapshots.get(uri.toString()) || '',
   };
   context.subscriptions.push(
-    vscode.workspace.registerTextDocumentContentProvider('vsgit', snapshotProvider),
-    vscode.workspace.registerTextDocumentContentProvider('vsgit-history', snapshotProvider),
+    vscode.workspace.registerTextDocumentContentProvider('vscode-git', snapshotProvider),
+    vscode.workspace.registerTextDocumentContentProvider('vscode-git-history', snapshotProvider),
   );
 
   let pendingBottomLocate: { root: string; target: string } | undefined;
   let bottomLogLocator: (() => Promise<void>) | undefined;
   async function locateInBottomLog(root: string, target: string) {
     pendingBottomLocate = { root, target };
-    await vscode.commands.executeCommand('vsgit.log.focus');
+    await vscode.commands.executeCommand('vscode-git.log.focus');
     await bottomLogLocator?.();
   }
   const changesView = new ChangesView(vscode, context, snapshots, iconThemes);
@@ -118,7 +118,7 @@ function activate(context: vscode.ExtensionContext) {
   // Keep the comparison DOM (folder expansion, selection and scroll) when the
   // sidebar or its section is hidden, just as we retain the bottom Git Log.
   context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider('vsgit.changes', changesView, {
+    vscode.window.registerWebviewViewProvider('vscode-git.changes', changesView, {
       webviewOptions: { retainContextWhenHidden: true },
     }),
   );
@@ -129,12 +129,12 @@ function activate(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(
     fileHistoryView,
-    vscode.window.registerWebviewViewProvider('vsgit.fileHistory', fileHistoryView, {
+    vscode.window.registerWebviewViewProvider('vscode-git.fileHistory', fileHistoryView, {
       webviewOptions: { retainContextWhenHidden: true },
     }),
   );
   context.subscriptions.push(
-    vscode.commands.registerCommand('vsgit.showFileHistory', (uri?: vscode.Uri) =>
+    vscode.commands.registerCommand('vscode-git.showFileHistory', (uri?: vscode.Uri) =>
       openFileHistory(
         vscode,
         (root, revision, file) => fileHistoryView.show(root, revision, file, { snapshots }),
@@ -146,7 +146,7 @@ function activate(context: vscode.ExtensionContext) {
   // its HTML or request history again; the webview owns the live UI state.
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(
-      'vsgit.log',
+      'vscode-git.log',
       {
         resolveWebviewView(view) {
           view.webview.options = {
@@ -160,8 +160,10 @@ function activate(context: vscode.ExtensionContext) {
     ),
   );
   context.subscriptions.push(
-    vscode.commands.registerCommand('vsgit.open', (newTab = false) =>
-      newTab === true ? openRepositoryLog() : vscode.commands.executeCommand('vsgit.log.focus'),
+    vscode.commands.registerCommand('vscode-git.open', (newTab = false) =>
+      newTab === true
+        ? openRepositoryLog()
+        : vscode.commands.executeCommand('vscode-git.log.focus'),
     ),
   );
   async function openRepositoryLog() {
@@ -265,11 +267,16 @@ function activate(context: vscode.ExtensionContext) {
     view.webview.html = repositoryHostDocument(vscode, context, view, nonce);
   }
   function createLogPanel(comparison, repositoryRoot?) {
-    const view = vscode.window.createWebviewPanel('vsgit', 'Git Log', vscode.ViewColumn.Active, {
-      enableScripts: true,
-      retainContextWhenHidden: true,
-      localResourceRoots: [vscode.Uri.joinPath(context.extensionUri, 'out', 'webview')],
-    });
+    const view = vscode.window.createWebviewPanel(
+      'vscode-git',
+      'Git Log',
+      vscode.ViewColumn.Active,
+      {
+        enableScripts: true,
+        retainContextWhenHidden: true,
+        localResourceRoots: [vscode.Uri.joinPath(context.extensionUri, 'out', 'webview')],
+      },
+    );
     watchLogVisibility(view);
     const nonce = crypto.randomBytes(16).toString('hex');
     if (comparison) {
@@ -400,7 +407,7 @@ function activate(context: vscode.ExtensionContext) {
                   layout.detailRatio >= 0 &&
                   layout.detailRatio <= 1))
             )
-              await context.workspaceState.update(`vsgit.layout:${root}`, {
+              await context.workspaceState.update(`vscode-git.layout:${root}`, {
                 left: layout.left,
                 right: layout.right,
                 branchesCollapsed: layout.branchesCollapsed,
@@ -684,7 +691,10 @@ function activate(context: vscode.ExtensionContext) {
               if (!accepted) return;
               try {
                 await vscode.window.withProgress(
-                  { location: vscode.ProgressLocation.Notification, title: `VS Code Git: ${label}` },
+                  {
+                    location: vscode.ProgressLocation.Notification,
+                    title: `VS Code Git: ${label}`,
+                  },
                   () => branchBatchAction(targetRoot, msg.refs, msg.action),
                 );
               } finally {
@@ -833,7 +843,7 @@ function activate(context: vscode.ExtensionContext) {
             )
               throw Error('Unknown graph destination');
             const configuration = vscode.workspace.getConfiguration(
-              'vsgit',
+              'vscode-git',
               vscode.Uri.file(currentRoot),
             );
             const settings = historyLoading(
@@ -1157,7 +1167,7 @@ function activate(context: vscode.ExtensionContext) {
               const contentsMs = now() - started - selectionMs;
               const make = (text, revision) => {
                 const uri = vscode.Uri.from({
-                  scheme: 'vsgit',
+                  scheme: 'vscode-git',
                   path: '/' + (revision?.path || change.path),
                   query: new URLSearchParams({
                     revision: revision?.hash || 'empty',
@@ -1217,7 +1227,7 @@ function activate(context: vscode.ExtensionContext) {
             ]);
             const make = (rev, text) => {
               const uri = vscode.Uri.from({
-                scheme: 'vsgit',
+                scheme: 'vscode-git',
                 path: '/' + msg.path,
                 query: crypto.randomUUID() + '-' + rev,
               });

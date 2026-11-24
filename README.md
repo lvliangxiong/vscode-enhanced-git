@@ -73,11 +73,11 @@ Cherry-pick applies selected commits from bottom to top in the log and supports 
 
 ## Settings, loading, and refresh
 
-| Setting                      | Default  | Purpose                                                                                  |
-| ---------------------------- | -------- | ---------------------------------------------------------------------------------------- |
-| `vsgit.history.initialCount` | `500`    | Commits loaded when opening the log or changing filters. `0` loads all matching commits. |
-| `vsgit.history.pageSize`     | `500`    | Additional commits per page, from `100` to `2000`. Not used when loading all history.    |
-| `vsgit.mergeDiffStyle`       | `native` | Display style for historical three-pane merge comparisons: `native` or `jetbrains`.      |
+| Setting                           | Default  | Purpose                                                                                  |
+| --------------------------------- | -------- | ---------------------------------------------------------------------------------------- |
+| `vscode-git.history.initialCount` | `500`    | Commits loaded when opening the log or changing filters. `0` loads all matching commits. |
+| `vscode-git.history.pageSize`     | `500`    | Additional commits per page, from `100` to `2000`. Not used when loading all history.    |
+| `vscode-git.mergeDiffStyle`       | `native` | Display style for historical three-pane merge comparisons: `native` or `jetbrains`.      |
 
 Settings can be configured per workspace folder. Refresh or reopen the log after changing loading limits. Merge Diff style changes apply to open comparisons.
 
@@ -102,11 +102,11 @@ npm ci
 npm run check
 npm test
 npm run package
-code --install-extension dist/vsgit-icon-theme.vsix --force
-code --install-extension dist/vsgit.vsix --force --do-not-include-pack-dependencies
+code --install-extension dist/vscode-git-icon-theme.vsix --force
+code --install-extension dist/vscode-git.vsix --force --do-not-include-pack-dependencies
 ```
 
-Packages are written to `dist/vsgit.vsix` and `dist/vsgit-icon-theme.vsix`. Both extensions use the same publisher and version. Run `Developer: Reload Window` after installation.
+Packages are written to `dist/vscode-git.vsix` and `dist/vscode-git-icon-theme.vsix`. Both extensions use the same publisher and version. Run `Developer: Reload Window` after installation.
 
 In a Remote-SSH window, the main extension runs in the remote workspace host and the bridge runs in the local UI host. In a local window, both are installed locally.
 

@@ -11,7 +11,7 @@ const { updateHistoryIndexRaw } = require('../out/extension/git/history-index-up
 const { log } = require('../out/extension/git/history');
 
 test('incremental index reads only missing details and survives ref moves, rewrites, restart and replacement', async () => {
-  const base = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-incremental-'));
+  const base = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-incremental-'));
   const root = path.join(base, 'repo');
   const storage = path.join(base, 'cache');
   const git = client.git;
@@ -88,7 +88,7 @@ test('incremental index reads only missing details and survives ref moves, rewri
 });
 
 test('shallow deepening retains Git ordering and refreshes cached parents', async () => {
-  const base = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-shallow-index-'));
+  const base = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-shallow-index-'));
   const root = path.join(base, 'source');
   const clone = path.join(base, 'clone');
   const git = client.git;

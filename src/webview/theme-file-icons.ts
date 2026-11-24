@@ -14,7 +14,7 @@ export interface FileIconMessage {
 }
 
 /* File/folder icons share the active VS Code theme, including local UI-host assets. */
-export const VsGitFileIcons = {
+export const VsCodeGitFileIcons = {
   create({
     send,
     sheet,
@@ -26,7 +26,7 @@ export const VsGitFileIcons = {
     sheet: CSSStyleSheet;
     document?: Document;
     window?: Window;
-    scope?: { vsgitFontSheet?: CSSStyleSheet; vsgitFontPrefix?: string };
+    scope?: { vsCodeGitFontSheet?: CSSStyleSheet; vsCodeGitFontPrefix?: string };
   }) {
     let generation = 0,
       request = 0,
@@ -38,7 +38,7 @@ export const VsGitFileIcons = {
       fonts = new Map();
     const index = sheet.insertRule('@media all {}', sheet.cssRules.length),
       rules = sheet.cssRules[index] as CSSGroupingRule;
-    const fontSheet = scope.vsgitFontSheet || sheet,
+    const fontSheet = scope.vsCodeGitFontSheet || sheet,
       fontIndex = fontSheet.insertRule('@media all {}', fontSheet.cssRules.length),
       fontRules = fontSheet.cssRules[fontIndex] as CSSGroupingRule;
     const nodes = () => document.querySelectorAll<HTMLElement>('.theme-file-icon');
@@ -99,7 +99,11 @@ export const VsGitFileIcons = {
       for (const [id, font] of Object.entries(data.fonts || {}))
         if (!fonts.has(id)) {
           const family =
-            'vsgit-file-font-' + (scope.vsgitFontPrefix || '') + generation + '-' + fonts.size;
+            'vscode-git-file-font-' +
+            (scope.vsCodeGitFontPrefix || '') +
+            generation +
+            '-' +
+            fonts.size;
           fonts.set(id, family);
           const sources = font.sources.filter((src) =>
             /^data:font\/[\w-]+;base64,[A-Za-z0-9+/=]+$/.test(src.data),

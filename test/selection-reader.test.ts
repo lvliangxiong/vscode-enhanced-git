@@ -12,7 +12,7 @@ const {
 const { details } = require('../out/extension/git/changes');
 
 test('batch details preserve roots, renames, binary and unusual paths across batch boundaries', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-batch-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-batch-'));
   const git = client.git;
   try {
     await git(root, ['init', '-b', 'main']);

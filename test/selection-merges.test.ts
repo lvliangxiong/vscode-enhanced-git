@@ -12,7 +12,7 @@ const {
 } = require('../out/extension/git/index');
 
 async function fixture(run) {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-selection-merge-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-selection-merge-'));
   const write = (name, text) => fs.writeFile(path.join(root, name), text);
   const commit = async (message) => {
     await git(root, ['add', '.']);

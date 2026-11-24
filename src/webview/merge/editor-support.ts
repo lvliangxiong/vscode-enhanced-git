@@ -15,7 +15,7 @@ export function configureWorker() {
         window.addEventListener('unload', () => URL.revokeObjectURL(url), { once: true });
         return url;
       });
-      return new Worker(await workerSource, { name: 'vsgit-merge-editor' });
+      return new Worker(await workerSource, { name: 'vscode-git-merge-editor' });
     },
   };
   (self as unknown as { MonacoEnvironment: monaco.Environment }).MonacoEnvironment = environment;

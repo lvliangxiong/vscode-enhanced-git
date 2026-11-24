@@ -10,7 +10,7 @@ import {
 } from '../src/extension/commands/commit-file-diffs';
 
 test('native Git hover action carries its repository and appended hash into a fixed File Diffs snapshot', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-hover-diffs-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-hover-diffs-'));
   const subscriptions: { dispose(): void }[] = [];
   try {
     await git(root, ['init', '-b', 'main']);
@@ -57,7 +57,7 @@ test('native Git hover action carries its repository and appended hash into a fi
       commands: {
         registerCommand(_name: string, fn: typeof command) {
           handlers.set(_name, fn);
-          if (_name === 'vsgit.showCommitFileDiffs') command = fn;
+          if (_name === 'vscode-git.showCommitFileDiffs') command = fn;
           return { dispose() {} };
         },
       },
@@ -77,12 +77,12 @@ test('native Git hover action carries its repository and appended hash into a fi
     const uri = { scheme: 'vscode-remote', fsPath: root };
     const action = provider.provideHoverCommands({ rootUri: uri })[0];
     const locateAction = provider.provideHoverCommands({ rootUri: uri })[1];
-    assert.equal(locateAction.command, 'vsgit.locateCommit');
+    assert.equal(locateAction.command, 'vscode-git.locateCommit');
     await handlers.get(locateAction.command)(...locateAction.arguments, hash);
     assert.equal(located[0][1], hash);
     assert.equal(located.length, 1);
 
-    assert.equal(action.command, 'vsgit.showCommitFileDiffs');
+    assert.equal(action.command, 'vscode-git.showCommitFileDiffs');
     assert.match(action.title, /Show File Diffs/);
     assert.equal(provider.provideAvatar(), undefined);
     assert.equal(provider.provideMessageLinks(), undefined);

@@ -123,7 +123,7 @@ export function createTextMateAdapter(models: monaco.editor.ITextModel[]) {
           .map((item) => item.scopeName),
     });
     // A private language leaves the built-in provider intact for reliable fallback.
-    const id = 'vsgit-textmate-' + snapshot.language;
+    const id = 'vscode-git-textmate-' + snapshot.language;
     if (!languageRegistrations.has(id)) {
       monaco.languages.register({ id });
       languageRegistrations.set(id, [

@@ -25,8 +25,8 @@ VS Code Git 的本地 UI 配套扩展，扩展 ID 为 `lvliangxiong.vscode-git-i
 ```sh
 npm ci
 npm run package
-code --install-extension dist/vsgit-icon-theme.vsix --force
-code --install-extension dist/vsgit.vsix --force --do-not-include-pack-dependencies
+code --install-extension dist/vscode-git-icon-theme.vsix --force
+code --install-extension dist/vscode-git.vsix --force --do-not-include-pack-dependencies
 ```
 
 打包脚本将桥接插件的 publisher 和版本同步为主插件的值。在本地 VS Code 客户端安装桥接插件，在仓库所在宿主安装主插件，然后执行 `Developer: Reload Window`。

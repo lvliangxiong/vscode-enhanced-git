@@ -8,7 +8,7 @@ import os from 'node:os';
 import path from 'node:path';
 const { git, details } = require('../out/extension/git/index');
 test('detail statistics handle roots, renames, binary files and merged changes', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-stats-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-stats-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Test']);

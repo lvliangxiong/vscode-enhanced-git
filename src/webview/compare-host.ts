@@ -44,7 +44,7 @@ export function mountComparisonHost({
   });
   const syncVisibility = () =>
     frames.forEach((frame) =>
-      frame.receive({ type: 'vsgitVisibility', visible: hostVisible && !document.hidden }),
+      frame.receive({ type: 'vsCodeGitVisibility', visible: hostVisible && !document.hidden }),
     );
   const receive = (data: PaneMessage) => {
     if (disposed) return;
@@ -70,7 +70,7 @@ export function mountComparisonHost({
     );
   const message = (event: MessageEvent) => receive(event.data);
   const theme = new MutationObserver(() =>
-    frames.forEach((frame) => frame.receive({ type: 'vsgitTheme' })),
+    frames.forEach((frame) => frame.receive({ type: 'vsCodeGitTheme' })),
   );
   window.addEventListener('message', message);
   document.addEventListener('visibilitychange', syncVisibility);

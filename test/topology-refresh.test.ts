@@ -13,7 +13,7 @@ const { createHistoryIndexStore } = require('../out/extension/git/history-index-
 const { createPathIndexStore } = require('../out/extension/git/path-index-store');
 
 async function fixture(t) {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-topology-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-topology-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   await client.git(root, ['init', '-b', 'main']);
   await client.git(root, ['config', 'user.name', 'Test']);

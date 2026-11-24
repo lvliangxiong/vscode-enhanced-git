@@ -10,7 +10,7 @@ const {
 const { createRepositoryRecents } = require('../out/extension/repositories/recents');
 const { repositoryKey } = require('../out/extension/repositories/events');
 test('workspace repositories follow folder order, include Git-discovered nested roots and deduplicate aliases', async () => {
-  const base = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-discovery-'));
+  const base = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-discovery-'));
   try {
     await fs.mkdir(path.join(base, 'first'));
     await fs.symlink(path.join(base, 'first'), path.join(base, 'alias'));
@@ -40,7 +40,7 @@ test('workspace repositories follow folder order, include Git-discovered nested 
 });
 test('Recent groups persist per repository, concurrent writes and clear do not affect another root', async () => {
   const storage = new Map([
-    ['vsgit.filterRecents', { branch: [['unattributed-global']] }],
+    ['vscode-git.filterRecents', { branch: [['unattributed-global']] }],
     ['filterRecents:/repo-a', { branch: [['refs/heads/main']], paths: [['src']] }],
   ]);
   const state = {

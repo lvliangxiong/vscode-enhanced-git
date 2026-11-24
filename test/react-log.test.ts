@@ -16,7 +16,7 @@ function documentHtml(
   const html = logDocument(
     { Uri: { joinPath: (...parts: string[]) => parts.join('/') } },
     { extensionUri: project, workspaceState: { get: (_key, fallback) => fallback } },
-    { webview: { asWebviewUri: (value) => value, cspSource: 'https://vsgit.test' } },
+    { webview: { asWebviewUri: (value) => value, cspSource: 'https://vscode-git.test' } },
     { nonce: 'react-smoke', embedded, comparison },
     '/fixture',
   );
@@ -35,7 +35,7 @@ function runtime(html: string) {
   console.on('jsdomError', (error) => errors.push(error));
   console.on('error', (...values) => errors.push(new Error(values.join(' '))));
   const dom = new JSDOM(html, {
-    url: 'https://vsgit.test',
+    url: 'https://vscode-git.test',
     runScripts: 'dangerously',
     pretendToBeVisual: true,
     virtualConsole: console,
@@ -126,7 +126,7 @@ function runtime(html: string) {
     errors,
     tick,
     async dispose() {
-      dom.window.dispatchEvent(new dom.window.Event('vsgitDispose'));
+      dom.window.dispatchEvent(new dom.window.Event('vsCodeGitDispose'));
       dom.window.dispatchEvent(new dom.window.Event('pagehide'));
       await tick();
       dom.window.close();
@@ -386,7 +386,7 @@ test('packaged React log retains branch favorites, commit selection, detail gest
     }
     assert.equal(shortcutCount, 2);
     document.body.className = 'vscode-light';
-    dom.window.dispatchEvent(new dom.window.Event('vsgitTheme'));
+    dom.window.dispatchEvent(new dom.window.Event('vsCodeGitTheme'));
     receive({ type: 'fileIconsChanged' });
     await app.tick();
     const themeRequest = messages.filter((message) => message.type === 'fileIcons').at(-1);

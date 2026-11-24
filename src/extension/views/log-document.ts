@@ -40,7 +40,7 @@ export function logDocument(vscode, context, view, options, root) {
     `</head>`,
     `<body>`,
     `<div id="app"></div>`,
-    `<script id="saved-layout" type="application/json" nonce="${nonce}">${JSON.stringify(context.workspaceState.get(`vsgit.layout:${root}`, {})).replace(/</g, '\\u003c')}</script>${bootstrap}`,
+    `<script id="saved-layout" type="application/json" nonce="${nonce}">${JSON.stringify(context.workspaceState.get(`vscode-git.layout:${root}`, {})).replace(/</g, '\\u003c')}</script>${bootstrap}`,
     `<script nonce="${nonce}" src="${js}"></script>`,
     `</body>`,
     `</html>`,

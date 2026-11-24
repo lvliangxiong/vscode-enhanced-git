@@ -42,7 +42,7 @@ execFileSync(
     '--baseImagesUrl',
     'https://raw.githubusercontent.com/lvliangxiong/vsgit/main/icon-theme-bridge',
     '--out',
-    path.join(root, 'dist/vsgit-icon-theme.vsix'),
+    path.join(root, 'dist/vscode-git-icon-theme.vsix'),
   ],
   { cwd: bridge, stdio: 'inherit' },
 );

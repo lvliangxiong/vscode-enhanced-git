@@ -73,11 +73,11 @@ Cherry-pick 按日志从下到上的顺序应用所选提交，支持冲突后�
 
 ## 设置、加载与刷新
 
-| 设置                         | 默认值   | 含义                                                          |
-| ---------------------------- | -------- | ------------------------------------------------------------- |
-| `vsgit.history.initialCount` | `500`    | 打开日志或更改筛选时加载的提交数；`0` 表示加载全部匹配提交。  |
-| `vsgit.history.pageSize`     | `500`    | 后续每批加载数量，范围为 `100`–`2000`；加载全部时不使用该值。 |
-| `vsgit.mergeDiffStyle`       | `native` | 三栏历史合并比较的显示样式，可设为 `native` 或 `jetbrains`。  |
+| 设置                              | 默认值   | 含义                                                          |
+| --------------------------------- | -------- | ------------------------------------------------------------- |
+| `vscode-git.history.initialCount` | `500`    | 打开日志或更改筛选时加载的提交数；`0` 表示加载全部匹配提交。  |
+| `vscode-git.history.pageSize`     | `500`    | 后续每批加载数量，范围为 `100`–`2000`；加载全部时不使用该值。 |
+| `vscode-git.mergeDiffStyle`       | `native` | 三栏历史合并比较的显示样式，可设为 `native` 或 `jetbrains`。  |
 
 这些设置支持按工作区文件夹配置。修改加载数量后刷新或重新打开日志；修改 Merge Diff 样式会应用到已打开的比较。
 
@@ -102,11 +102,11 @@ npm ci
 npm run check
 npm test
 npm run package
-code --install-extension dist/vsgit-icon-theme.vsix --force
-code --install-extension dist/vsgit.vsix --force --do-not-include-pack-dependencies
+code --install-extension dist/vscode-git-icon-theme.vsix --force
+code --install-extension dist/vscode-git.vsix --force --do-not-include-pack-dependencies
 ```
 
-安装包为 `dist/vsgit.vsix` 和 `dist/vsgit-icon-theme.vsix`。主插件与桥接插件使用相同 publisher 和版本。安装后执行 `Developer: Reload Window`。
+安装包为 `dist/vscode-git.vsix` 和 `dist/vscode-git-icon-theme.vsix`。主插件与桥接插件使用相同 publisher 和版本。安装后执行 `Developer: Reload Window`。
 
 Remote-SSH 窗口中，主插件安装在远端 workspace 宿主，桥接插件安装在本地 UI 宿主；本地窗口中两者都安装在本地。
 

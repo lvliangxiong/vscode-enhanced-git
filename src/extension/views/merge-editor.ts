@@ -3,7 +3,7 @@ import type { FileChange } from '../../shared/model';
 import { git } from '../git/client';
 import { mergeViewType } from './merge-actions';
 
-export const mergeScheme = 'vsgit-merge';
+export const mergeScheme = 'vscode-git-merge';
 export interface MergeResource {
   root: string;
   change: FileChange;

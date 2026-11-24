@@ -51,12 +51,12 @@ function fixture() {
     commands,
     calls,
     snapshots,
-    reset: () => commands.get('vsgit.changes.reset')(),
-    refresh: () => commands.get('vsgit.changes.refresh')(),
+    reset: () => commands.get('vscode-git.changes.reset')(),
+    refresh: () => commands.get('vscode-git.changes.refresh')(),
   };
 }
 test('refresh rereads branch tips and working tree without focusing or replacing the view', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-refresh-comparison-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-refresh-comparison-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Fixture']);
@@ -80,14 +80,14 @@ test('refresh rereads branch tips and working tree without focusing or replacing
     assert.notEqual(f.view.comparison.pair[1].hash, old.pair[1].hash);
     assert.equal(f.messages.at(-1).previousId, old.id);
     assert.notEqual(f.view.comparison.id, old.id);
-    assert.deepEqual(f.focus, ['vsgit.changes.focus']);
+    assert.deepEqual(f.focus, ['vscode-git.changes.focus']);
     const hash = f.view.comparison.pair[1].hash;
     await f.view.show(root, () => commitLocalFiles(root, hash));
     await fs.writeFile(path.join(root, 'base.txt'), 'working tree edit');
     await f.refresh();
     assert.equal(f.view.comparison.files[0].path, 'base.txt');
     assert.equal(f.view.comparison.files[0].after.workingTree, true);
-    assert.equal(f.contexts.get('vsgit.changes.refreshing'), false);
+    assert.equal(f.contexts.get('vscode-git.changes.refreshing'), false);
   } finally {
     await fs.rm(root, { recursive: true, force: true });
   }
@@ -109,8 +109,8 @@ test('reset clears the comparison and ignores an in-flight refresh or new compar
   assert.equal(cleared.pair, undefined);
   assert.equal(f.view.view.description, undefined);
   assert.equal(f.view.loadComparison, undefined);
-  assert.equal(f.contexts.get('vsgit.changes.hasComparison'), false);
-  assert.equal(f.contexts.get('vsgit.changes.refreshing'), false);
+  assert.equal(f.contexts.get('vscode-git.changes.hasComparison'), false);
+  assert.equal(f.contexts.get('vscode-git.changes.refreshing'), false);
   finish(result);
   await pendingRefresh;
   await f.refresh();
@@ -128,7 +128,7 @@ test('reset clears the comparison and ignores an in-flight refresh or new compar
   finish(result);
   await pendingShow;
   assert.equal(f.view.comparison, undefined);
-  assert.deepEqual(f.focus, ['vsgit.changes.focus']);
+  assert.deepEqual(f.focus, ['vscode-git.changes.focus']);
 });
 
 test('a stale refresh cannot clear the busy state of a newer refresh after reset', async () => {
@@ -152,12 +152,12 @@ test('a stale refresh cannot clear the busy state of a newer refresh after reset
   await new Promise(setImmediate);
   failOld(Error('stale failure'));
   await old;
-  assert.equal(f.contexts.get('vsgit.changes.refreshing'), true);
+  assert.equal(f.contexts.get('vscode-git.changes.refreshing'), true);
   assert.deepEqual(f.errors, []);
   finishNew(result);
   await current;
   assert.equal(f.view.comparison.root, '/new');
-  assert.equal(f.contexts.get('vsgit.changes.refreshing'), false);
+  assert.equal(f.contexts.get('vscode-git.changes.refreshing'), false);
 });
 
 test('expansion changes only its context and does not wait for remote context updates', async () => {
@@ -177,7 +177,7 @@ test('expansion changes only its context and does not wait for remote context up
     new Promise((resolve) => {
       finishContext = resolve;
     });
-  const pending = f.commands.get('vsgit.changes.toggleExpansion')();
+  const pending = f.commands.get('vscode-git.changes.toggleExpansion')();
   assert.deepEqual(f.messages.at(-1), {
     type: 'comparisonAction',
     action: 'expansion',
@@ -215,11 +215,11 @@ test('refresh deduplicates clicks, ignores replaced comparisons, and preserves r
   await f.refresh();
   assert.equal(f.view.comparison, second);
   assert.deepEqual(f.errors, ['VS Code Git: branch missing']);
-  assert.equal(f.contexts.get('vsgit.changes.refreshing'), false);
+  assert.equal(f.contexts.get('vscode-git.changes.refreshing'), false);
 });
 
 test('selection sidebar retains fixed commits and opens actual per-file revisions across gaps and renames', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-sidebar-selection-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-sidebar-selection-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Fixture']);
@@ -302,7 +302,7 @@ test('selection sidebar retains fixed commits and opens actual per-file revision
     await f.reset();
     assert.equal(f.messages.at(-1).type, 'branchChanges');
     assert.equal(f.messages.at(-1).commits, undefined);
-    assert.equal(f.contexts.get('vsgit.changes.hasComparison'), false);
+    assert.equal(f.contexts.get('vscode-git.changes.hasComparison'), false);
   } finally {
     await fs.rm(root, { recursive: true, force: true });
   }

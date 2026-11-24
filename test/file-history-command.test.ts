@@ -7,7 +7,7 @@ import { git } from '../src/extension/git/client';
 import { fileHistoryTarget, openFileHistory } from '../src/extension/commands/file-history';
 
 test('file history command resolves a file against its own repository HEAD and supports active editor, explicit URI and picker cancellation', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-history-command-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-history-command-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Test']);

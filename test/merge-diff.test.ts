@@ -126,7 +126,7 @@ function host() {
     command: (id) => commands.get(id)(),
     changeStyle(value: string) {
       style = value;
-      configListener({ affectsConfiguration: (key) => key === 'vsgit.mergeDiffStyle' });
+      configListener({ affectsConfiguration: (key) => key === 'vscode-git.mergeDiffStyle' });
     },
     dispose: () => disposed(),
     styleDisposed: () => styleDisposed,
@@ -137,7 +137,7 @@ function host() {
 async function repository(
   run: (root: string, commit: (message: string) => Promise<string>) => Promise<void>,
 ) {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-merge-diff-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-merge-diff-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Test']);
@@ -204,7 +204,7 @@ test('committed conflict opens parent 1 / result / parent 2, with parent-specifi
     await h.receive({ type: 'mergeCommitAction', hash: 'unknown', action: 'stats' });
     assert.equal(h.messages.length, beforeUnknown);
 
-    await h.command('vsgit.merge.openFile');
+    await h.command('vscode-git.merge.openFile');
     assert.deepEqual(h.openedFiles, [[{ fsPath: file }, { preview: false }]]);
     h.changeStyle('jetbrains');
     assert.deepEqual(h.messages.at(-1), { type: 'mergeDiffStyle', style: 'jetbrains' });
@@ -232,7 +232,7 @@ test('committed conflict opens parent 1 / result / parent 2, with parent-specifi
         (ranges) => ranges[0].kind === 'modified' && ranges[0].start === 0 && ranges[0].end === 1,
       ),
     );
-    await h.command('vsgit.merge.compareParent2');
+    await h.command('vscode-git.merge.compareParent2');
     assert.equal(h.diffs[0][0], 'vscode.diff');
     assert.equal(h.snapshots.get(String(h.diffs[0][1])), 'topic\n');
     assert.equal(h.snapshots.get(String(h.diffs[0][2])), 'resolved\n');

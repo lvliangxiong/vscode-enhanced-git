@@ -8,7 +8,7 @@ import { refs, headLabel } from '../src/extension/git/refs';
 import { branchComparison, branchFiles } from '../src/extension/git/comparison';
 
 test('HEAD comparisons retain detached commits and label branch, lightweight tag, annotated tag and plain commit', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-head-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-head-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Test']);

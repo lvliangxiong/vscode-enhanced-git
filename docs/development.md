@@ -51,11 +51,11 @@ React/jsdom tests cover selection, keyboard interaction, menus, hovers, file tre
 
 ```sh
 npm run package
-code --install-extension dist/vsgit-icon-theme.vsix --force
-code --install-extension dist/vsgit.vsix --force --do-not-include-pack-dependencies
+code --install-extension dist/vscode-git-icon-theme.vsix --force
+code --install-extension dist/vscode-git.vsix --force --do-not-include-pack-dependencies
 ```
 
-Outputs are `dist/vsgit.vsix` and `dist/vsgit-icon-theme.vsix`. `scripts/package-icon-bridge.ts` synchronizes the bridge's publisher and version with the main extension. Run `Developer: Reload Window` after installation.
+Outputs are `dist/vscode-git.vsix` and `dist/vscode-git-icon-theme.vsix`. `scripts/package-icon-bridge.ts` synchronizes the bridge's publisher and version with the main extension. Run `Developer: Reload Window` after installation.
 
 | Extension                          | ID                                   | Host        |
 | ---------------------------------- | ------------------------------------ | ----------- |

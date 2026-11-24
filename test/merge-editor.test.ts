@@ -161,7 +161,7 @@ test('native title actions follow the active merge tab, readiness and disposal',
       },
     ),
   );
-  const command = (action: string) => h.commands.get('vsgit.merge.' + action)();
+  const command = (action: string) => h.commands.get('vscode-git.merge.' + action)();
   panels[0].focus(true);
   await command('next');
   assert.deepEqual(messages, [[], []], 'loading views cannot navigate');
@@ -190,7 +190,7 @@ test('native title actions follow the active merge tab, readiness and disposal',
   assert.equal(comparisons.length, 1, 'closed views cannot receive commands');
   await command('openFile');
   assert.deepEqual(openedFiles, [0, 1]);
-  assert.deepEqual(h.contexts.at(-1), ['vsgit.merge.canNavigate', false]);
+  assert.deepEqual(h.contexts.at(-1), ['vscode-git.merge.canNavigate', false]);
   panels[0].focus(true);
   attachments[0].dispose();
   const failing = controller.attach(

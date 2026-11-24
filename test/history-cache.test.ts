@@ -10,7 +10,7 @@ const { loadHistoryPage } = require('../out/extension/git/history-page');
 const { projectGraph } = require('../out/extension/git/topology');
 
 test('history snapshots invalidate for external refs, HEAD, config, shallow history and explicit refresh', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-filter-cache-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-filter-cache-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Alice']);
@@ -154,7 +154,7 @@ test('history result cache deduplicates pending work, retries failures and bound
 });
 
 test('background text index matches Git full messages, case folding, limits and falls back for complex filters', async () => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-text-index-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-text-index-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'Test']);

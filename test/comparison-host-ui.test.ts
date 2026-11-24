@@ -100,7 +100,7 @@ test('React comparison host routes isolated state and clamps/resets the shared s
     assert.ok(panes.every((pane) => pane.messages.at(-1).visible === true));
     document.body.className = 'vscode-light';
     await tick();
-    assert.ok(panes.every((pane) => pane.messages.at(-1).type === 'vsgitTheme'));
+    assert.ok(panes.every((pane) => pane.messages.at(-1).type === 'vsCodeGitTheme'));
     host.dispose();
     assert.ok(panes.every((pane) => pane.disposed));
     const messageCount = sent.length;

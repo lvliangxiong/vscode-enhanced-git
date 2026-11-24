@@ -25,8 +25,8 @@ Run the following commands from the repository root:
 ```sh
 npm ci
 npm run package
-code --install-extension dist/vsgit-icon-theme.vsix --force
-code --install-extension dist/vsgit.vsix --force --do-not-include-pack-dependencies
+code --install-extension dist/vscode-git-icon-theme.vsix --force
+code --install-extension dist/vscode-git.vsix --force --do-not-include-pack-dependencies
 ```
 
 The packaging script uses the main extension's publisher and version for the bridge. Install the bridge on the local VS Code client and the main extension where the repository is open, then run `Developer: Reload Window`.

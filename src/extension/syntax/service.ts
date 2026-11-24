@@ -17,7 +17,7 @@ function createService(vscode: typeof VSCode, context: VSCode.ExtensionContext) 
     for (const listener of listeners) listener();
   };
   const subscriptions = [
-    vscode.commands.registerCommand('vsgit.syntax.changed', changed),
+    vscode.commands.registerCommand('vscode-git.syntax.changed', changed),
     vscode.window.onDidChangeActiveColorTheme(changed),
     vscode.extensions.onDidChange(changed),
     vscode.workspace.onDidChangeConfiguration((event) => {
@@ -47,7 +47,7 @@ function createService(vscode: typeof VSCode, context: VSCode.ExtensionContext) 
       };
       if (!vscode.env.remoteName) return resolver.snapshot(request);
       const local = await vscode.commands.executeCommand<SyntaxSnapshot>(
-        'vsgit.syntax.snapshot',
+        'vscode-git.syntax.snapshot',
         request,
       );
       const remote = await resolver.snapshot(request);
@@ -66,7 +66,7 @@ function createService(vscode: typeof VSCode, context: VSCode.ExtensionContext) 
       return (
         (await resolver.grammar(scope)) ||
         (vscode.env.remoteName
-          ? vscode.commands.executeCommand('vsgit.syntax.grammar', scope)
+          ? vscode.commands.executeCommand('vscode-git.syntax.grammar', scope)
           : null)
       );
     },

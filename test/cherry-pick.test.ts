@@ -11,7 +11,7 @@ const {
   recoverCherryPick,
 } = require('../out/extension/git/cherry-pick');
 async function fixture(t) {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-cherry-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-cherry-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   await git(root, ['init', '-b', 'main']);
   await git(root, ['config', 'user.name', 'Test']);

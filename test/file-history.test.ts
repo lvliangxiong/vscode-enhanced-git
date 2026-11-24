@@ -13,7 +13,7 @@ import {
 async function fixture(
   run: (root: string, commit: (message: string) => Promise<string>) => Promise<void>,
 ) {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vsgit-file-history-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vscode-git-file-history-'));
   try {
     await git(root, ['init', '-b', 'main']);
     await git(root, ['config', 'user.name', 'History Author']);

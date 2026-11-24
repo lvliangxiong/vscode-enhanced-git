@@ -53,7 +53,7 @@ class ChangesView implements VSCode.WebviewViewProvider {
     };
     for (const [name, action] of Object.entries(actions))
       context.subscriptions.push(
-        vscode.commands.registerCommand(`vsgit.changes.${name}`, async () => {
+        vscode.commands.registerCommand(`vscode-git.changes.${name}`, async () => {
           try {
             await action();
           } catch (error) {
@@ -82,7 +82,11 @@ class ChangesView implements VSCode.WebviewViewProvider {
         .filter(([key, value]) => this.contexts.get(key) !== value)
         .map(([key, value]) => {
           this.contexts.set(key, value);
-          return this.vscode.commands.executeCommand('setContext', `vsgit.changes.${key}`, value);
+          return this.vscode.commands.executeCommand(
+            'setContext',
+            `vscode-git.changes.${key}`,
+            value,
+          );
         }),
     );
   }
@@ -104,7 +108,7 @@ class ChangesView implements VSCode.WebviewViewProvider {
     this.expanded = false;
     await this.updateContexts();
     await this.publish();
-    await this.vscode.commands.executeCommand('vsgit.changes.focus');
+    await this.vscode.commands.executeCommand('vscode-git.changes.focus');
   }
   async refresh() {
     if (!this.comparison || !this.loadComparison || this.refreshing) return;
@@ -174,7 +178,7 @@ class ChangesView implements VSCode.WebviewViewProvider {
           )
             return;
           if (message.type === 'openGitLog')
-            await this.vscode.commands.executeCommand('vsgit.open');
+            await this.vscode.commands.executeCommand('vscode-git.open');
           if (message.type === 'ready') {
             this.ready = true;
             await this.publish();
@@ -247,7 +251,7 @@ class ChangesView implements VSCode.WebviewViewProvider {
     if (this.comparison !== data) return;
     const make = (text: string, label: 'before' | 'after', revision: Revision | null) => {
       const uri = this.vscode.Uri.from({
-        scheme: 'vsgit',
+        scheme: 'vscode-git',
         path: '/' + (data.kind === 'selection' ? revision?.path || change.path : change.path),
         query: crypto.randomUUID() + label,
       });

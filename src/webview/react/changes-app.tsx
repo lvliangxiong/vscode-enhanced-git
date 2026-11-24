@@ -252,12 +252,12 @@ export function mountChanges(env: ChangesEnvironment) {
     disposed = true;
     env.window.removeEventListener('message', receive);
     env.window.removeEventListener('unload', dispose);
-    env.window.removeEventListener('vsgitDispose', dispose);
+    env.window.removeEventListener('vsCodeGitDispose', dispose);
     flushSync(() => root.unmount());
   };
   env.window.addEventListener('message', receive);
   env.window.addEventListener('unload', dispose);
-  env.window.addEventListener('vsgitDispose', dispose);
+  env.window.addEventListener('vsCodeGitDispose', dispose);
   flushSync(() => root.render(<ChangesApp env={env} controller={controller} />));
   env.api.postMessage({ type: 'ready' });
   return { controller, dispose };
