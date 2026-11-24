@@ -2,7 +2,7 @@
   "name": "vscode-git",
   "displayName": "VS Code Git",
   "description": "A JetBrains-inspired three-pane Git history for VS Code.",
-  "version": "0.1.287",
+  "version": "0.1.288",
   "publisher": "lvliangxiong",
   "engines": {
     "vscode": "^1.85.0"
@@ -487,14 +487,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lvliangxiong/vsgit.git"
+    "url": "https://github.com/lvliangxiong/vscode-git.git"
   },
-  "homepage": "https://github.com/lvliangxiong/vsgit#readme",
+  "homepage": "https://github.com/lvliangxiong/vscode-git#readme",
   "extensionPack": [
     "lvliangxiong.vscode-git-icon-theme"
   ],
   "bugs": {
-    "url": "https://github.com/lvliangxiong/vsgit/issues"
+    "url": "https://github.com/lvliangxiong/vscode-git/issues"
   },
   "icon": "media/icon.png"
 }

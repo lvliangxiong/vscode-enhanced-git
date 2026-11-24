@@ -91,7 +91,7 @@ The main extension declares `lvliangxiong.vscode-git-icon-theme` in `extensionPa
 
 For local VSIX installation, install the bridge package first, then the main package. The main-package command below skips Marketplace resolution of pack members. In Remote-SSH windows, install the bridge on the local client and the main extension on the remote workspace host.
 
-Source and support: [GitHub repository](https://github.com/lvliangxiong/vsgit) · [Issues](https://github.com/lvliangxiong/vsgit/issues).
+Source and support: [GitHub repository](https://github.com/lvliangxiong/vscode-git) · [Issues](https://github.com/lvliangxiong/vscode-git/issues).
 
 ## Building and installing
 

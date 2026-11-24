@@ -16,7 +16,7 @@ VS Code Git 的本地 UI 配套扩展，扩展 ID 为 `lvliangxiong.vscode-git-i
 
 主插件在 `extensionPack` 中声明此桥接插件。两个包均发布到 Marketplace 后，从市场安装主插件可以一并安装桥接插件。首次发布市场时先发布桥接插件。本地 VSIX 安装显式使用两个安装包；下面的主包安装命令跳过从市场解析扩展包成员。
 
-[源码仓库](https://github.com/lvliangxiong/vsgit/tree/main/icon-theme-bridge) · [反馈问题](https://github.com/lvliangxiong/vsgit/issues)
+[源码仓库](https://github.com/lvliangxiong/vscode-git/tree/main/icon-theme-bridge) · [反馈问题](https://github.com/lvliangxiong/vscode-git/issues)
 
 ## 构建与安装
 
@@ -31,7 +31,7 @@ code --install-extension dist/vscode-git.vsix --force --do-not-include-pack-depe
 
 打包脚本将桥接插件的 publisher 和版本同步为主插件的值。在本地 VS Code 客户端安装桥接插件，在仓库所在宿主安装主插件，然后执行 `Developer: Reload Window`。
 
-使用方式和验证说明见[主 README](https://github.com/lvliangxiong/vsgit/blob/main/README.zh-CN.md) 和[开发指南](https://github.com/lvliangxiong/vsgit/blob/main/docs/development.zh-CN.md)。
+使用方式和验证说明见[主 README](https://github.com/lvliangxiong/vscode-git/blob/main/README.zh-CN.md) 和[开发指南](https://github.com/lvliangxiong/vscode-git/blob/main/docs/development.zh-CN.md)。
 
 ## 许可证
 

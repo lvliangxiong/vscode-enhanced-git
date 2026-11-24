@@ -16,7 +16,7 @@ The bridge uses the `ui` extension host. Git commands run in the main extension'
 
 The main extension lists this bridge in its `extensionPack`. Marketplace installation of the main extension can install both after both packages are published. For the initial Marketplace release, publish this bridge first. Local VSIX installation uses the two packages explicitly; the main-package command below skips Marketplace resolution of pack members.
 
-[Source repository](https://github.com/lvliangxiong/vsgit/tree/main/icon-theme-bridge) · [Report an issue](https://github.com/lvliangxiong/vsgit/issues)
+[Source repository](https://github.com/lvliangxiong/vscode-git/tree/main/icon-theme-bridge) · [Report an issue](https://github.com/lvliangxiong/vscode-git/issues)
 
 ## Build and install
 
@@ -31,7 +31,7 @@ code --install-extension dist/vscode-git.vsix --force --do-not-include-pack-depe
 
 The packaging script uses the main extension's publisher and version for the bridge. Install the bridge on the local VS Code client and the main extension where the repository is open, then run `Developer: Reload Window`.
 
-See the [main README](https://github.com/lvliangxiong/vsgit/blob/main/README.md) and [development guide](https://github.com/lvliangxiong/vsgit/blob/main/docs/development.md) for usage and verification.
+See the [main README](https://github.com/lvliangxiong/vscode-git/blob/main/README.md) and [development guide](https://github.com/lvliangxiong/vscode-git/blob/main/docs/development.md) for usage and verification.
 
 ## License
 

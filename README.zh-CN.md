@@ -91,7 +91,7 @@ Cherry-pick 按日志从下到上的顺序应用所选提交，支持冲突后�
 
 使用本地 VSIX 时先安装桥接包，再安装主包；主包安装命令跳过从市场解析扩展包成员。Remote-SSH 窗口中需将桥接包安装在本地客户端，主包安装在远端工作区宿主。
 
-源码、使用说明及反馈入口分别为 [GitHub 仓库](https://github.com/lvliangxiong/vsgit)、本 README 和 [Issues](https://github.com/lvliangxiong/vsgit/issues)。
+源码、使用说明及反馈入口分别为 [GitHub 仓库](https://github.com/lvliangxiong/vscode-git)、本 README 和 [Issues](https://github.com/lvliangxiong/vscode-git/issues)。
 
 ## 构建与安装
 

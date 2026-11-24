@@ -20,7 +20,7 @@ The Marketplace publisher must exist and belong to an account you control. This 
    | Field            | Value                 |
    | ---------------- | --------------------- |
    | Repository owner | `lvliangxiong`        |
-   | Repository       | `vsgit`               |
+   | Repository       | `vscode-git`          |
    | Workflow         | `publish-release.yml` |
    | Environment      | `marketplace`         |
 

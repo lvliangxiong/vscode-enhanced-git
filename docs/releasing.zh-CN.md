@@ -20,7 +20,7 @@ Marketplace publisher 必须已经创建，并由你控制的账号管理。本�
    | 字段             | 值                    |
    | ---------------- | --------------------- |
    | Repository owner | `lvliangxiong`        |
-   | Repository       | `vsgit`               |
+   | Repository       | `vscode-git`          |
    | Workflow         | `publish-release.yml` |
    | Environment      | `marketplace`         |
 
