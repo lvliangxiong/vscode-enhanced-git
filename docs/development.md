@@ -93,4 +93,4 @@ Both VSIX packages include their Chinese README, and the main package includes b
 
 `.gitignore` excludes build outputs, VSIX files, test logs, editor configuration, environment files, and personal helper-tool configuration. Documentation uses generic example paths; machine-specific configuration belongs in ignored locations.
 
-The VS Git Performance output channel records query, indexing, and file comparison timings. Diagnostic output can contain runtime repository paths or Git errors; review environment information before sharing logs.
+The VS Code Git Performance output channel records query, indexing, and file comparison timings. Diagnostic output can contain runtime repository paths or Git errors; review environment information before sharing logs.

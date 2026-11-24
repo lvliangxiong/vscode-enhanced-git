@@ -40,7 +40,7 @@ Marketplace publisher 必须已经创建，并由你控制的账号管理。本�
 
 ```sh
 git push origin main
-git tag -a v0.1.285 -m "VS Git 0.1.285"
+git tag -a v0.1.285 -m "VS Code Git 0.1.285"
 git push origin v0.1.285
 ```
 

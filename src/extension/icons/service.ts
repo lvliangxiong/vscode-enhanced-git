@@ -54,7 +54,7 @@ function createIconThemeService(vscode, context) {
           generation: message.generation,
           unavailable: true,
         });
-        console.warn('VS Git file icon theme:', error.message);
+        console.warn('VS Code Git file icon theme:', error.message);
       }
       return true;
     },

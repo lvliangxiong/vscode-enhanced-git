@@ -205,8 +205,8 @@ test('native title actions follow the active merge tab, readiness and disposal',
   await command('compareParent1');
   await command('openFile');
   assert.deepEqual(h.errors, [
-    'VS Git: comparison failed',
-    'VS Git: file no longer exists in the working tree',
+    'VS Code Git: comparison failed',
+    'VS Code Git: file no longer exists in the working tree',
   ]);
   failing.dispose();
 });

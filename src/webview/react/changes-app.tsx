@@ -157,12 +157,12 @@ function ChangesApp({
     );
     drawer.title = state.data
       ? [
-          'Provided by the VS Git extension',
+          'Provided by the VS Code Git extension',
           selection ? selectedLabel : `File Diffs: ${pair![0].name} ↔ ${pair![1].name}`,
           state.data.repository,
           ...(selection ? selection.commits : pair!).map((part) => part.hash),
         ].join('\n')
-      : 'Provided by the VS Git extension';
+      : 'Provided by the VS Code Git extension';
   }, [env, state.data, workingTree, kind, selection, selectedLabel, pair]);
   return (
     <>

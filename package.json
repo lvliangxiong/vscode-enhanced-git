@@ -2,7 +2,7 @@
   "name": "vscode-git",
   "displayName": "VS Code Git",
   "description": "A JetBrains-inspired three-pane Git history for VS Code.",
-  "version": "0.1.285",
+  "version": "0.1.286",
   "publisher": "lvliangxiong",
   "engines": {
     "vscode": "^1.85.0"
@@ -23,26 +23,26 @@
       {
         "command": "vsgit.changes.reset",
         "title": "Reset Comparison",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(clear-all)",
         "enablement": "vsgit.changes.hasComparison"
       },
       {
         "command": "vsgit.changes.refresh",
         "title": "Refresh",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(refresh)",
         "enablement": "vsgit.changes.hasComparison && !vsgit.changes.refreshing"
       },
       {
         "command": "vsgit.open",
-        "title": "VS Git: Open Git Log",
+        "title": "VS Code Git: Open Git Log",
         "icon": "$(git-branch)"
       },
       {
         "command": "vsgit.changes.toggleLayout",
         "title": "View as Tree",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(list-tree)",
         "toggled": {
           "condition": "vsgit.changes.tree",
@@ -53,7 +53,7 @@
       {
         "command": "vsgit.changes.toggleExpansion",
         "title": "Expand All",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(expand-all)",
         "enablement": "vsgit.changes.tree && vsgit.changes.hasFolders",
         "toggled": {
@@ -65,102 +65,102 @@
       {
         "command": "vsgit.merge.previous",
         "title": "Previous Difference",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(arrow-up)",
         "enablement": "vsgit.merge.canNavigate"
       },
       {
         "command": "vsgit.merge.next",
         "title": "Next Difference",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(arrow-down)",
         "enablement": "vsgit.merge.canNavigate"
       },
       {
         "command": "vsgit.merge.compareParent1",
         "title": "Compare with Parent 1",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(git-compare)"
       },
       {
         "command": "vsgit.merge.compareParent2",
         "title": "Compare with Parent 2",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(git-compare)"
       },
       {
         "command": "vsgit.merge.openFile",
         "title": "Open File",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(go-to-file)"
       },
       {
         "command": "vsgit.fileHistory.openFile",
         "title": "Open File",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(go-to-file)"
       },
       {
         "command": "vsgit.fileHistory.refresh",
         "title": "Refresh",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(refresh)",
         "enablement": "vsgit.fileHistory.canRefresh"
       },
       {
         "command": "vsgit.fileHistory.compareLocal",
         "title": "Compare with Working Tree",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(compare-changes)",
         "enablement": "vsgit.fileHistory.canCompareLocal"
       },
       {
         "command": "vsgit.fileHistory.affected",
         "title": "Show All Affected Files",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(files)",
         "enablement": "vsgit.fileHistory.canAffected"
       },
       {
         "command": "vsgit.fileHistory.viewOptions",
         "title": "View Options",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(eye)"
       },
       {
         "command": "vsgit.fileHistory.locate",
         "title": "Select in Git Log",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(target)",
         "enablement": "vsgit.fileHistory.canLocate"
       },
       {
         "command": "vsgit.showFileHistory",
         "title": "Show File History",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(history)"
       },
       {
         "command": "vsgit.showCommitFileDiffs",
         "title": "Show Commit File Diffs",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(diff-multiple)"
       },
       {
         "command": "vsgit.locateCommit",
         "title": "Locate in Git Log",
-        "category": "VS Git",
+        "category": "VS Code Git",
         "icon": "$(target)"
       },
       {
         "command": "vsgit.toggleComparisonPanel",
         "title": "Toggle Panel",
-        "category": "VS Git"
+        "category": "VS Code Git"
       },
       {
         "command": "vsgit.switchRepositoriesBranch",
         "title": "Switch Branch in All Repositories",
-        "category": "VS Git"
+        "category": "VS Code Git"
       }
     ],
     "keybindings": [
@@ -367,14 +367,14 @@
           "name": "File Diffs",
           "type": "webview",
           "icon": "media/icons/sidebar.svg",
-          "contextualTitle": "VS Git Changes"
+          "contextualTitle": "VS Code Git Changes"
         },
         {
           "id": "vsgit.fileHistory",
           "name": "File History",
           "type": "webview",
           "icon": "media/icons/sidebar.svg",
-          "contextualTitle": "VS Git File History"
+          "contextualTitle": "VS Code Git File History"
         }
       ],
       "vsgit-panel": [
@@ -383,13 +383,13 @@
           "name": "Git Log",
           "type": "webview",
           "icon": "media/icons/sidebar.svg",
-          "contextualTitle": "VS Git",
+          "contextualTitle": "VS Code Git",
           "visibility": "visible"
         }
       ]
     },
     "configuration": {
-      "title": "VS Git",
+      "title": "VS Code Git",
       "properties": {
         "vsgit.mergeDiffStyle": {
           "type": "string",

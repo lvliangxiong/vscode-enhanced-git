@@ -59,7 +59,7 @@ export function registerCommitFileDiffs(
           const root = (await git(uri.fsPath, ['rev-parse', '--show-toplevel'])).trim();
           await show(root, () => commitFileDiffs(root, hash));
         } catch (error) {
-          void vscode.window.showErrorMessage(`VS Git: ${error.message}`);
+          void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
         }
       },
     ),
@@ -76,7 +76,7 @@ export function registerCommitFileDiffs(
             const root = (await git(uri.fsPath, ['rev-parse', '--show-toplevel'])).trim();
             await locate(root, hash);
           } catch (error) {
-            void vscode.window.showErrorMessage(`VS Git: ${error.message}`);
+            void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
           }
         },
       ),

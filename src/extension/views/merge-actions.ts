@@ -45,7 +45,7 @@ function createController(vscode: typeof VSCode, context: VSCode.ExtensionContex
         try {
           await run(action);
         } catch (error) {
-          void vscode.window.showErrorMessage(`VS Git: ${error.message}`);
+          void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
         }
       }),
     );

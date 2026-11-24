@@ -41,4 +41,4 @@ Copyright (c) 2026 VS Git contributors.
 
 随包分发的 jsonc-parser 和 vscode-textmate 保留各自的 MIT 许可证，分别位于 `out/jsonc-parser-LICENSE.md` 和 `out/vscode-textmate-LICENSE.txt`。用户安装的第三方主题和语言语法在运行时读取，不随本插件的 VSIX 重新分发。
 
-市场图标沿用 VS Git 的 V 形提交图标识，并添加连接的链路徽标以标明配套扩展身份。SVG 和 PNG 是 VS Git 原创图形，采用 GPL-3.0-only；源图位于主仓库的 `media/marketplace-bridge-icon.svg`。
+市场图标沿用 VS Code Git 的 V 形提交图标识，并添加连接的链路徽标以标明配套扩展身份。SVG 和 PNG 是 VS Code Git 原创图形，采用 GPL-3.0-only；源图位于主仓库的 `media/marketplace-bridge-icon.svg`。

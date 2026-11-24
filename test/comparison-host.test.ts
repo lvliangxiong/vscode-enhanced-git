@@ -352,7 +352,7 @@ test('comparison host embeds executable resources and isolates both logs and nat
         .some((m) => m.type === 'error' && /No remotes/.test(m.message)),
     );
     assert.equal(original.messages.at(-1).type, 'branchToolsFinished', 'failure restores toolbar');
-    assert.match(notifications.at(-1), /^VS Git: .*No remotes/s);
+    assert.match(notifications.at(-1), /^VS Code Git: .*No remotes/s);
     assert.doesNotMatch(original.webview.html, /id="error"/);
     const headBeforeNavigation = (await git(root, ['rev-parse', 'HEAD'])).trim();
     const otherHead = (await git(root, ['rev-parse', 'other'])).trim();
@@ -847,7 +847,7 @@ test('comparison host embeds executable resources and isolates both logs and nat
     });
     assert.equal(second.messages.at(-1).type, 'commitRefError');
     assert.equal(second.messages.at(-1).dialogId, 'tag-test');
-    assert.equal(notifications.at(-1), 'VS Git: ' + second.messages.at(-1).message);
+    assert.equal(notifications.at(-1), 'VS Code Git: ' + second.messages.at(-1).message);
     await second.receive({
       type: 'commitAction',
       action: 'tag',

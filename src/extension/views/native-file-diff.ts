@@ -25,7 +25,7 @@ export function registerHistoryDiffFiles(vscode: typeof VSCode, context: VSCode.
           void vscode.window.showInformationMessage(
             `The file no longer exists in the working tree: ${file.fsPath}`,
           );
-        else void vscode.window.showErrorMessage(`VS Git: ${error.message}`);
+        else void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
       }
     }),
     { dispose: () => files.clear() },

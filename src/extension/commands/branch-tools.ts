@@ -13,7 +13,7 @@ export async function runBranchTool(
   if (action === 'fetch') {
     if (!(await git(root, ['remote'])).trim()) throw Error('No remotes configured');
     await vscode.window.withProgress(
-      { location: vscode.ProgressLocation.Notification, title: 'VS Git: Fetch' },
+      { location: vscode.ProgressLocation.Notification, title: 'VS Code Git: Fetch' },
       () => git(root, ['fetch', '--all']),
     );
     return { action: 'fetch', message: 'Fetch completed' };

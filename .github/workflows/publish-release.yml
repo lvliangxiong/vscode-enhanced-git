@@ -163,6 +163,6 @@ jobs:
             fi
           else
             gh release create "$RELEASE_TAG" dist/vsgit-icon-theme.vsix dist/vsgit.vsix \
-              --verify-tag --title "VS Git $RELEASE_TAG" --generate-notes
+              --verify-tag --title "VS Code Git $RELEASE_TAG" --generate-notes
           fi
           gh release view "$RELEASE_TAG" --json url --jq '.url' >> "$GITHUB_STEP_SUMMARY"

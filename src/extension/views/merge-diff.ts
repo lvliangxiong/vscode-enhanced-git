@@ -203,7 +203,7 @@ async function renderMergeDiff(
       if (message.type === 'compareParent' && (message.parent === 0 || message.parent === 1))
         await compare(message.parent === 0 ? 0 : 2, 1);
     } catch (error) {
-      void vscode.window.showErrorMessage(`VS Git: ${error.message}`);
+      void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
     }
   });
   panel.onDidDispose(() => {

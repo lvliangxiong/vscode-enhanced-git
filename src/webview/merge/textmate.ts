@@ -184,7 +184,7 @@ export function createTextMateAdapter(models: monaco.editor.ITextModel[]) {
     void refresh().catch((error) => {
       if (!disposed && expected === generation) {
         fallback();
-        console.warn('VS Git syntax fallback:', error.message);
+        console.warn('VS Code Git syntax fallback:', error.message);
       }
     });
   };

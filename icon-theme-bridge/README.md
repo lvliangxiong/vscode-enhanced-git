@@ -41,4 +41,4 @@ Original bridge code is licensed under GNU GPL version 3 only (SPDX: GPL-3.0-onl
 
 Bundled jsonc-parser and vscode-textmate retain their MIT licenses, included as `out/jsonc-parser-LICENSE.md` and `out/vscode-textmate-LICENSE.txt`. Installed third-party themes and language grammars are read at runtime and are not redistributed in this extension's VSIX.
 
-The Marketplace icon shares VS Git's V-shaped commit graph mark and adds a connected link badge to identify the companion extension. The SVG and PNG are original VS Git artwork covered by GPL-3.0-only; source artwork is in `media/marketplace-bridge-icon.svg` in the main repository.
+The Marketplace icon shares VS Code Git's V-shaped commit graph mark and adds a connected link badge to identify the companion extension. The SVG and PNG are original VS Code Git artwork covered by GPL-3.0-only; source artwork is in `media/marketplace-bridge-icon.svg` in the main repository.

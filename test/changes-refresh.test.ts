@@ -214,7 +214,7 @@ test('refresh deduplicates clicks, ignores replaced comparisons, and preserves r
   };
   await f.refresh();
   assert.equal(f.view.comparison, second);
-  assert.deepEqual(f.errors, ['VS Git: branch missing']);
+  assert.deepEqual(f.errors, ['VS Code Git: branch missing']);
   assert.equal(f.contexts.get('vsgit.changes.refreshing'), false);
 });
 

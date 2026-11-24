@@ -21,7 +21,7 @@ VS Code Git 是面向 VS Code 的三栏 Git 日志插件，支持本地和 Remot
 
 ## 打开与浏览
 
-在 VS Code 中打开 Git 仓库，按 `Option+G`（macOS）或 `Alt+G`，也可执行 `VS Git: Open Git Log`。多仓库工作区通过底部标签切换仓库。
+在 VS Code 中打开 Git 仓库，按 `Option+G`（macOS）或 `Alt+G`，也可执行 `VS Code Git: Open Git Log`。多仓库工作区通过底部标签切换仓库。
 
 | 区域   | 操作                                                                                                         |
 | ------ | ------------------------------------------------------------------------------------------------------------ |
@@ -65,7 +65,7 @@ VS Code Git 是面向 VS Code 的三栏 Git 日志插件，支持本地和 Remot
 
 ## 多仓库分支切换
 
-执行 `VS Git: Switch Branch in All Repositories`，输入分支名并选择匹配项。候选来自发现的仓库中的本地和远端跟踪分支，不要求每个仓库都存在该分支。
+执行 `VS Code Git: Switch Branch in All Repositories`，输入分支名并选择匹配项。候选来自发现的仓库中的本地和远端跟踪分支，不要求每个仓库都存在该分支。
 
 已有本地分支直接切换；仅存在唯一匹配的远端跟踪分支时创建对应本地分支并设置跟踪关系。目标本地分支被其他 worktree 占用时，以 detached HEAD 切换到该分支指向的提交。分支不存在、远端候选不唯一或本地修改阻止切换时，通过原生通知报告对应仓库的结果，不强制覆盖修改。
 

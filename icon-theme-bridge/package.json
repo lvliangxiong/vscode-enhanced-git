@@ -1,9 +1,9 @@
 {
   "name": "vscode-git-icon-theme",
   "displayName": "VS Code Git File Icon Theme Bridge",
-  "description": "Shares the local VS Code file icon theme with VS Git, including Remote SSH windows.",
+  "description": "Shares the local VS Code file icon theme with VS Code Git, including Remote SSH windows.",
   "publisher": "lvliangxiong",
-  "version": "0.1.285",
+  "version": "0.1.286",
   "engines": {
     "vscode": "^1.85.0"
   },

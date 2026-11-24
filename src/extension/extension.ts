@@ -63,7 +63,7 @@ function activate(context: vscode.ExtensionContext) {
   const comparisonPanelToggle = registerComparisonPanelToggle(vscode, context);
   const notifyError = (error: Error) => {
     // Notifications resolve when dismissed; never keep controls busy while waiting.
-    void vscode.window.showErrorMessage(`VS Git: ${error.message}`);
+    void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
   };
   const historyIndexes = createHistoryIndexStore(context.globalStorageUri?.fsPath, (message) =>
     timingOutput.appendLine(message),
@@ -72,7 +72,7 @@ function activate(context: vscode.ExtensionContext) {
   registerHistoricalMergeEditor(vscode, context, snapshots);
   const gitWriteLocks = new Set<string>();
   const iconThemes = createIconThemeService(vscode, context);
-  const timingOutput = vscode.window.createOutputChannel('VS Git Performance');
+  const timingOutput = vscode.window.createOutputChannel('VS Code Git Performance');
   const pathIndexes = createPathIndexStore(context.globalStorageUri?.fsPath, (message) =>
     timingOutput.appendLine(message),
   );
@@ -684,7 +684,7 @@ function activate(context: vscode.ExtensionContext) {
               if (!accepted) return;
               try {
                 await vscode.window.withProgress(
-                  { location: vscode.ProgressLocation.Notification, title: `VS Git: ${label}` },
+                  { location: vscode.ProgressLocation.Notification, title: `VS Code Git: ${label}` },
                   () => branchBatchAction(targetRoot, msg.refs, msg.action),
                 );
               } finally {
@@ -772,7 +772,7 @@ function activate(context: vscode.ExtensionContext) {
                 await vscode.window.withProgress(
                   {
                     location: vscode.ProgressLocation.Notification,
-                    title: `VS Git: ${msg.action} ${branch.name}`,
+                    title: `VS Code Git: ${msg.action} ${branch.name}`,
                   },
                   () => branchAction(targetRoot, msg.ref, msg.action, options),
                 );

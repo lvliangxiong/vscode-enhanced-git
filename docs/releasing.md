@@ -40,7 +40,7 @@ For example, after both manifests and the lockfile contain `0.1.285`:
 
 ```sh
 git push origin main
-git tag -a v0.1.285 -m "VS Git 0.1.285"
+git tag -a v0.1.285 -m "VS Code Git 0.1.285"
 git push origin v0.1.285
 ```
 

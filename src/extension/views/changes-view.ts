@@ -57,7 +57,7 @@ class ChangesView implements VSCode.WebviewViewProvider {
           try {
             await action();
           } catch (error) {
-            await vscode.window.showErrorMessage(`VS Git: ${error.message}`);
+            await vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
           }
         }),
       );
@@ -190,7 +190,7 @@ class ChangesView implements VSCode.WebviewViewProvider {
           }
           if (message.type === 'branchChangesFile') await this.openFile(message);
         } catch (error) {
-          await vscode.window.showErrorMessage(`VS Git: ${error.message}`);
+          await vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
         }
       },
       null,

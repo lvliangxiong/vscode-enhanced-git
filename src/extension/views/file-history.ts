@@ -41,7 +41,7 @@ export class FileHistoryView implements VSCode.WebviewViewProvider {
       context.subscriptions.push(
         vscode.commands.registerCommand(`vsgit.fileHistory.${action}`, () =>
           this.runAction(action).catch((error) => {
-            void vscode.window.showErrorMessage(`VS Git: ${error.message}`);
+            void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
           }),
         ),
       );
@@ -349,7 +349,7 @@ function historySession(
       }
     } catch (error) {
       if (disposed || receivedGeneration !== generation) return;
-      void vscode.window.showErrorMessage(`VS Git: ${error.message}`);
+      void vscode.window.showErrorMessage(`VS Code Git: ${error.message}`);
       await panel.webview.postMessage({
         type: 'historyError',
         key: message.key,

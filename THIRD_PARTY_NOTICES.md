@@ -2,7 +2,7 @@
 
 English | [简体中文](THIRD_PARTY_NOTICES.zh-CN.md)
 
-Original VS Git code is licensed under GPL-3.0-only; see LICENSE.
+Original VS Code Git code is licensed under GPL-3.0-only; see LICENSE.
 The third-party components listed below retain their respective licenses and notices.
 
 The sparse filtered graph algorithm in `src/extension/git/topology.ts` is adapted from

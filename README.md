@@ -21,7 +21,7 @@ The main extension is `lvliangxiong.vscode-git`. Its local UI companion is `lvli
 
 ## Opening and navigating the log
 
-Open a Git repository in VS Code and press `Option+G` on macOS or `Alt+G` on other platforms, or run `VS Git: Open Git Log`. Use the bottom tabs to switch repositories in a multi-repository workspace.
+Open a Git repository in VS Code and press `Option+G` on macOS or `Alt+G` on other platforms, or run `VS Code Git: Open Git Log`. Use the bottom tabs to switch repositories in a multi-repository workspace.
 
 | Area        | Interaction                                                                                                                                                                         |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -65,7 +65,7 @@ Comparison semantics:
 
 ## Switching branches across repositories
 
-Run `VS Git: Switch Branch in All Repositories`, enter a branch name, and select a match. Candidates come from local and remote-tracking branches in the discovered repositories; a branch does not have to exist in every repository.
+Run `VS Code Git: Switch Branch in All Repositories`, enter a branch name, and select a match. Candidates come from local and remote-tracking branches in the discovered repositories; a branch does not have to exist in every repository.
 
 An existing local branch is checked out directly. A unique remote-tracking match creates a corresponding local tracking branch. If another worktree has the target local branch checked out, the repository switches to that branch's commit in detached HEAD mode. Missing branches, ambiguous remote matches, and local changes blocking checkout are reported per repository through native notifications. Changes are not forcibly overwritten.
 
