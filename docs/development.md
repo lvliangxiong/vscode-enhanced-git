@@ -57,16 +57,16 @@ code --install-extension dist/vsgit.vsix --force --do-not-include-pack-dependenc
 
 Outputs are `dist/vsgit.vsix` and `dist/vsgit-icon-theme.vsix`. `scripts/package-icon-bridge.ts` synchronizes the bridge's publisher and version with the main extension. Run `Developer: Reload Window` after installation.
 
-| Extension                     | ID                              | Host        |
-| ----------------------------- | ------------------------------- | ----------- |
-| VS Git                        | `lvliangxiong.vsgit`            | `workspace` |
-| VS Git File Icon Theme Bridge | `lvliangxiong.vsgit-icon-theme` | `ui`        |
+| Extension                          | ID                                   | Host        |
+| ---------------------------------- | ------------------------------------ | ----------- |
+| VS Code Git                        | `lvliangxiong.vscode-git`            | `workspace` |
+| VS Code Git File Icon Theme Bridge | `lvliangxiong.vscode-git-icon-theme` | `ui`        |
 
-Use `code --list-extensions --show-versions` to inspect local installations and `code --locate-extension lvliangxiong.vsgit` to locate the main extension. Check the publisher and version of a remote installation in the Extensions view of the corresponding Remote-SSH window.
+Use `code --list-extensions --show-versions` to inspect local installations and `code --locate-extension lvliangxiong.vscode-git` to locate the main extension. Check the publisher and version of a remote installation in the Extensions view of the corresponding Remote-SSH window.
 
 In Remote-SSH, the main extension runs in the remote workspace host. The local UI bridge supplies file icons, editor themes, and grammar resources. Their `extensionKind` values are `workspace` and `ui`, respectively.
 
-The main extension's `extensionPack` references `lvliangxiong.vsgit-icon-theme`; publish the bridge first for the initial Marketplace release. For manual VSIX installation, install the local bridge first and use `--do-not-include-pack-dependencies` for the main package to avoid Marketplace resolution. Install the main package in the remote workspace host when using Remote-SSH.
+The main extension's `extensionPack` references `lvliangxiong.vscode-git-icon-theme`; publish the bridge first for the initial Marketplace release. For manual VSIX installation, install the local bridge first and use `--do-not-include-pack-dependencies` for the main package to avoid Marketplace resolution. Install the main package in the remote workspace host when using Remote-SSH.
 
 Both manifests declare the source repository, homepage, Issues URL, and `media/icon.png`. The 256×256 Marketplace icons share a V-shaped commit graph mark. The main icon is `media/icon.png`, rendered from `media/marketplace-icon.svg`. The bridge icon is `media/bridge-icon.png`, rendered from `media/marketplace-bridge-icon.svg` with a connected link badge, and copied to `icon-theme-bridge/media/icon.png` during packaging. SVG sources and PNG assets are version-controlled. Main README relative links are rewritten against GitHub's `main` branch; the bridge README uses its repository subdirectory as the base URL.
 

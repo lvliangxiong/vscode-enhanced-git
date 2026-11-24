@@ -1,10 +1,10 @@
-# VS Git
+# VS Code Git
 
 [English](README.md) | 简体中文
 
-VS Git 是面向 VS Code 的三栏 Git 日志插件，支持本地和 Remote-SSH 工作区。界面使用 VS Code 主题、文件图标主题和原生 Diff 编辑器；分支与引用标签的展示规则、历史浏览交互参考 Rebased / JetBrains，文件变更名称使用 Rebased 状态配色。
+VS Code Git 是面向 VS Code 的三栏 Git 日志插件，支持本地和 Remote-SSH 工作区。界面使用 VS Code 主题、文件图标主题和原生 Diff 编辑器；分支与引用标签的展示规则、历史浏览交互参考 Rebased / JetBrains，文件变更名称使用 Rebased 状态配色。
 
-主插件 ID 为 `lvliangxiong.vsgit`，本地 UI 桥接插件 ID 为 `lvliangxiong.vsgit-icon-theme`。
+主插件 ID 为 `lvliangxiong.vscode-git`，本地 UI 桥接插件 ID 为 `lvliangxiong.vscode-git-icon-theme`。
 
 ## 核心功能
 
@@ -87,7 +87,7 @@ Cherry-pick 按日志从下到上的顺序应用所选提交，支持冲突后�
 
 ## 安装关联
 
-主插件通过 `extensionPack` 声明桥接插件 `lvliangxiong.vsgit-icon-theme`。两个扩展均在 Marketplace 发布后，从市场安装主插件会一并安装桥接插件。首次市场发布时应先发布桥接插件，再发布主插件。
+主插件通过 `extensionPack` 声明桥接插件 `lvliangxiong.vscode-git-icon-theme`。两个扩展均在 Marketplace 发布后，从市场安装主插件会一并安装桥接插件。首次市场发布时应先发布桥接插件，再发布主插件。
 
 使用本地 VSIX 时先安装桥接包，再安装主包；主包安装命令跳过从市场解析扩展包成员。Remote-SSH 窗口中需将桥接包安装在本地客户端，主包安装在远端工作区宿主。
 

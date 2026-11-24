@@ -1,8 +1,8 @@
-# VS Git File Icon Theme Bridge
+# VS Code Git File Icon Theme Bridge
 
 English | [简体中文](README.zh-CN.md)
 
-The local UI companion for VS Git. Its extension ID is `lvliangxiong.vsgit-icon-theme`; the main extension is `lvliangxiong.vsgit`.
+The local UI companion for VS Code Git. Its extension ID is `lvliangxiong.vscode-git-icon-theme`; the main extension is `lvliangxiong.vscode-git`.
 
 ## Responsibilities
 

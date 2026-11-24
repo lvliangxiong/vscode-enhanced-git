@@ -1,10 +1,10 @@
-# VS Git
+# VS Code Git
 
 English | [简体中文](README.zh-CN.md)
 
-VS Git is a three-pane Git history extension for local and Remote-SSH workspaces in VS Code. It uses VS Code themes, file icon themes, and the native Diff editor. Branch and reference presentation and history navigation take inspiration from Rebased / JetBrains; changed file names use Rebased status colors.
+VS Code Git is a three-pane Git history extension for local and Remote-SSH workspaces in VS Code. It uses VS Code themes, file icon themes, and the native Diff editor. Branch and reference presentation and history navigation take inspiration from Rebased / JetBrains; changed file names use Rebased status colors.
 
-The main extension is `lvliangxiong.vsgit`. Its local UI companion is `lvliangxiong.vsgit-icon-theme`.
+The main extension is `lvliangxiong.vscode-git`. Its local UI companion is `lvliangxiong.vscode-git-icon-theme`.
 
 ## Core features
 
@@ -87,7 +87,7 @@ The extension subscribes to repository state events from VS Code's Git extension
 
 ## Companion installation
 
-The main extension declares `lvliangxiong.vsgit-icon-theme` in `extensionPack`. Once both extensions are published to the Marketplace, installing the main extension from the Marketplace also installs the companion. Publish the bridge before the main extension for the initial Marketplace release.
+The main extension declares `lvliangxiong.vscode-git-icon-theme` in `extensionPack`. Once both extensions are published to the Marketplace, installing the main extension from the Marketplace also installs the companion. Publish the bridge before the main extension for the initial Marketplace release.
 
 For local VSIX installation, install the bridge package first, then the main package. The main-package command below skips Marketplace resolution of pack members. In Remote-SSH windows, install the bridge on the local client and the main extension on the remote workspace host.
 

@@ -1,8 +1,8 @@
-# VS Git File Icon Theme Bridge
+# VS Code Git File Icon Theme Bridge
 
 [English](README.md) | 简体中文
 
-VS Git 的本地 UI 配套扩展，扩展 ID 为 `lvliangxiong.vsgit-icon-theme`，主插件 ID 为 `lvliangxiong.vsgit`。
+VS Code Git 的本地 UI 配套扩展，扩展 ID 为 `lvliangxiong.vscode-git-icon-theme`，主插件 ID 为 `lvliangxiong.vscode-git`。
 
 ## 职责
 

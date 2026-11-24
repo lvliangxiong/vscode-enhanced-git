@@ -24,7 +24,7 @@
 
 ## 宿主与视图
 
-主插件 `lvliangxiong.vsgit` 运行在 workspace 扩展宿主，Git 操作与仓库位于同一台机器。桥接插件 `lvliangxiong.vsgit-icon-theme` 运行在本地 UI 宿主，通过 VS Code 命令提供请求的文件图标、编辑器主题和已安装 TextMate 语法资源。
+主插件 `lvliangxiong.vscode-git` 运行在 workspace 扩展宿主，Git 操作与仓库位于同一台机器。桥接插件 `lvliangxiong.vscode-git-icon-theme` 运行在本地 UI 宿主，通过 VS Code 命令提供请求的文件图标、编辑器主题和已安装 TextMate 语法资源。
 
 浏览器入口包括独立日志 `main.ts`、多仓库容器 `repository-host.ts`、双向比较容器 `compare-host.ts` 、File Diffs `branch-changes.ts`、文件历史 `file-history.ts` 和三栏比较 `merge-diff.ts`。底部多仓库视图与双向比较使用 Shadow DOM 隔离各日志实例的 DOM、样式、消息及焦点。
 

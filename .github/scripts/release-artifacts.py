@@ -9,8 +9,8 @@ import subprocess
 import zipfile
 
 PACKAGES = {
-    "vsgit.vsix": ("package.json", "vsgit", "workspace"),
-    "vsgit-icon-theme.vsix": ("icon-theme-bridge/package.json", "vsgit-icon-theme", "ui"),
+    "vsgit.vsix": ("package.json", "vscode-git", "workspace"),
+    "vsgit-icon-theme.vsix": ("icon-theme-bridge/package.json", "vscode-git-icon-theme", "ui"),
 }
 
 

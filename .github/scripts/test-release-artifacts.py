@@ -44,8 +44,8 @@ class ReleaseArtifactsTests(unittest.TestCase):
         record = self.describe()
         self.assertEqual(record["tag"], self.tag)
         self.assertEqual(record["commit"], self.commit)
-        self.assertEqual(record["packages"]["vsgit.vsix"]["id"], "fixture.vsgit")
-        self.assertEqual(record["packages"]["vsgit-icon-theme.vsix"]["id"], "fixture.vsgit-icon-theme")
+        self.assertEqual(record["packages"]["vsgit.vsix"]["id"], "fixture.vscode-git")
+        self.assertEqual(record["packages"]["vsgit-icon-theme.vsix"]["id"], "fixture.vscode-git-icon-theme")
         self.assertEqual(record, self.describe())
 
     def test_changed_package_contents_change_checksum(self):
