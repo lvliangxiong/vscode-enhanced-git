@@ -1,0 +1,7 @@
+**/*
+!package.json
+!README.md
+!out/**
+!LICENSE
+!media/icon.png
+!README.zh-CN.md

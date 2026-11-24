@@ -1,0 +1,132 @@
+/* Native hover-like commit details, using the active VS Code theme. */
+:is(#message, .history-commit-details) .commit-details {
+  padding: 4px 4px 10px;
+  line-height: 1.5;
+}
+:is(#message, .history-commit-details) .commit-details + .commit-details {
+  padding-top: 14px;
+}
+:is(#message, .history-commit-details) .commit-person,
+:is(#message, .history-commit-details) .commit-time {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+:is(#message, .history-commit-details) .commit-author {
+  font-weight: 600;
+}
+:is(#message, .history-commit-details) a,
+:is(#message, .history-commit-details) .commit-footer {
+  color: var(--vscode-textLink-foreground);
+}
+:is(#message, .history-commit-details) a {
+  text-decoration: none;
+  cursor: pointer;
+}
+:is(#message, .history-commit-details) a:hover {
+  color: var(--vscode-textLink-activeForeground);
+  text-decoration: underline;
+}
+:is(#message, .history-commit-details) .commit-time {
+  color: var(--vscode-descriptionForeground);
+  font-size: 0.92em;
+  margin-bottom: 10px;
+}
+:is(#message, .history-commit-details) .commit-title {
+  margin: 12px 0 8px;
+  line-height: 1.5;
+}
+:is(#message, .history-commit-details) .commit-body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin-bottom: 12px;
+}
+:is(#message, .history-commit-details) .commit-stats,
+:is(#message, .history-commit-details) .commit-footer {
+  border-top: 1px solid var(--vscode-panel-border);
+  padding-top: 8px;
+  margin-top: 8px;
+}
+:is(#message, .history-commit-details) .commit-insertions {
+  color: var(--vscode-enhanced-gitDecoration-addedResourceForeground);
+}
+:is(#message, .history-commit-details) .commit-deletions {
+  color: var(--vscode-enhanced-gitDecoration-deletedResourceForeground);
+}
+:is(#message, .history-commit-details) .commit-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+:is(#message, .history-commit-details) .commit-footer code {
+  font-family: var(--vscode-editor-font-family, monospace);
+}
+:is(#message, .history-commit-details) .commit-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  border-radius: 4px;
+}
+:is(#message, .history-commit-details) .commit-copy:hover {
+  background: var(--vscode-toolbar-hoverBackground);
+}
+:is(#message, .history-commit-details) .commit-person-icon,
+:is(#message, .history-commit-details) .commit-clock-icon {
+  flex: none;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  position: relative;
+  align-self: center;
+}
+:is(#message, .history-commit-details) .commit-person-icon::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 50%;
+  left: 3.5px;
+  top: 2px;
+}
+:is(#message, .history-commit-details) .commit-person-icon::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 5px 5px 3px 3px;
+  left: 1.5px;
+  bottom: 1px;
+}
+:is(#message, .history-commit-details) .commit-clock-icon::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 5px;
+  border-left: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  left: 5px;
+  top: 2px;
+}
+
+:is(#message, .history-commit-details) .commit-title {
+  font-size: inherit;
+  font-weight: 700;
+}
+.copy-action-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  mask: url('icons/copy.svg') center / 16px 16px no-repeat;
+}

@@ -1,0 +1,30 @@
+<!-- Original Enhanced Git companion artwork. Copyright (c) 2026 Enhanced Git contributors. GPL-3.0-only. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none">
+  <defs>
+    <linearGradient id="surface" x1="28" y1="12" x2="226" y2="244" gradientUnits="userSpaceOnUse"><stop stop-color="#192A43"/><stop offset="1" stop-color="#0B1224"/></linearGradient>
+    <radialGradient id="light" cx="0" cy="0" r="1" gradientTransform="translate(214 220) rotate(-138) scale(235)" gradientUnits="userSpaceOnUse"><stop stop-color="#A59EFF" stop-opacity=".18"/><stop offset="1" stop-color="#A59EFF" stop-opacity="0"/></radialGradient>
+    <linearGradient id="mint" x1="74" y1="66" x2="132" y2="190" gradientUnits="userSpaceOnUse"><stop stop-color="#7BF8D7"/><stop offset="1" stop-color="#26B9C8"/></linearGradient>
+    <linearGradient id="violet" x1="186" y1="64" x2="128" y2="174" gradientUnits="userSpaceOnUse"><stop stop-color="#B9ACFF"/><stop offset="1" stop-color="#7780F6"/></linearGradient>
+    <linearGradient id="edge" x1="28" y1="4" x2="200" y2="250" gradientUnits="userSpaceOnUse"><stop stop-color="#BDEFFF" stop-opacity=".24"/><stop offset=".65" stop-color="#BDEFFF" stop-opacity=".03"/><stop offset="1" stop-color="#A59EFF" stop-opacity=".18"/></linearGradient>
+    <linearGradient id="module" x1="151" y1="143" x2="216" y2="220" gradientUnits="userSpaceOnUse"><stop stop-color="#B3A8FF"/><stop offset="1" stop-color="#8185F3"/></linearGradient>
+  </defs>
+  <rect x="2" y="2" width="252" height="252" rx="56" fill="url(#surface)"/>
+  <rect x="2" y="2" width="252" height="252" rx="56" fill="url(#light)"/>
+  <rect x="3" y="3" width="250" height="250" rx="55" stroke="url(#edge)" stroke-width="2"/>
+  <path d="M106 151V165C106 177 113 184 126 184H145" stroke="#9094FA" stroke-width="12" stroke-linecap="round"/>
+  <g transform="translate(5 6) scale(.79)">
+    <path d="M182 70V103C182 124 169 137 151 150L128 167" stroke="url(#violet)" stroke-width="20" stroke-linecap="round"/>
+    <path d="M74 70V103C74 124 87 137 105 150L117 159C124 164 128 171 128 182V191" stroke="url(#mint)" stroke-width="20" stroke-linecap="round"/>
+    <rect x="57" y="53" width="34" height="34" rx="9" transform="rotate(45 74 70)" fill="#7BF8D7"/>
+    <rect x="165" y="53" width="34" height="34" rx="9" transform="rotate(45 182 70)" fill="#B9ACFF"/>
+    <circle cx="128" cy="191" r="17" fill="#52D7CF"/>
+    <circle cx="128" cy="191" r="6" fill="#11253A"/>
+  </g>
+  <rect x="137" y="143" width="86" height="77" rx="25" fill="#070E1E" stroke="#111A30" stroke-width="8"/>
+  <rect x="137" y="140" width="86" height="77" rx="25" fill="url(#module)"/>
+  <g transform="translate(180 179) rotate(-35)" stroke="#141E38" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-1 -12H-13C-22 -12 -27 -7 -27 0S-22 12 -13 12H-7"/>
+    <path d="M1 12H13C22 12 27 7 27 0S22 -12 13 -12H7"/>
+    <path d="M-10 0H10"/>
+  </g>
+</svg>

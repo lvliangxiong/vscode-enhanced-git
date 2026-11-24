@@ -1,0 +1,69 @@
+#branch-menu {
+  width: max-content;
+  min-width: 180px;
+  max-width: calc(100vw - 8px);
+  max-height: calc(100vh - 8px);
+  overflow-y: auto;
+  border-radius: 5px;
+  padding: 4px;
+}
+#branch-menu button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  height: 22px;
+  white-space: nowrap;
+  border-radius: 3px;
+}
+.branch-menu-icon {
+  width: 16px;
+  flex: 0 0 16px;
+}
+.branch-menu-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.branch-menu-shortcut {
+  margin-left: 20px;
+  color: var(--vscode-descriptionForeground);
+}
+#branch-menu button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.compare-log #layout > aside,
+.compare-log #split-left,
+.compare-log #filter-branch,
+.compare-log #clear-branch {
+  display: none;
+}
+.compare-log .filter-chip:has(#filter-branch) {
+  display: none;
+}
+.compare-log #history {
+  grid-column: 3;
+  grid-row: 1;
+}
+.compare-log #split-right {
+  grid-column: 4;
+  grid-row: 1;
+}
+.compare-log #detail {
+  grid-column: 5;
+  grid-row: 1;
+}
+.comparison-explanation {
+  padding: 5px 8px;
+  background: var(--vscode-inputValidation-warningBackground, #80602040);
+  border-bottom: 1px solid var(--vscode-inputValidation-warningBorder, transparent);
+  line-height: 20px;
+  flex-shrink: 0;
+}
+.compare-log #commits:has(> .empty) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

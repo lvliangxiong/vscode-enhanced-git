@@ -1,0 +1,12 @@
+**/*
+!package.json
+!README.md
+!out/**
+!media/icons/sidebar.svg
+!THIRD_PARTY_NOTICES.md
+!LICENSE
+!LICENSE-APACHE-2.0.txt
+!docs/**
+!media/icon.png
+!README.zh-CN.md
+!THIRD_PARTY_NOTICES.zh-CN.md

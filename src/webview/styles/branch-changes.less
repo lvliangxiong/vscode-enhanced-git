@@ -1,0 +1,157 @@
+.changes-sidebar {
+  --file-row-background: var(--vscode-sideBar-background);
+  --log-font-size: var(--vscode-font-size, 13px);
+  background: var(--vscode-sideBar-background);
+  color: var(--vscode-sideBar-foreground, var(--vscode-foreground));
+}
+.branch-changes {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+.branch-changes-files > .empty {
+  padding: 8px;
+  line-height: 1.5;
+}
+.branch-changes-files {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+}
+.changes-sidebar .branch-changes-files:has(> .file-folder, > .file-row) {
+  padding: 0 8px;
+}
+.branch-changes-files > .file-row {
+  width: 100%;
+}
+.branch-changes-files details[open] > summary > .rebased-right {
+  transform: rotate(90deg);
+}
+
+// Match the file tree's 22px rows and outer inset, without a second large header.
+.selected-commit-section {
+  position: relative;
+  display: flex;
+  flex: none;
+  min-height: 26px;
+  max-height: min(180px, 35%);
+  padding: 2px 8px;
+  border-bottom: 1px solid var(--vscode-sideBarSectionHeader-border, var(--vscode-panel-border));
+}
+.selected-commit-summary {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+
+  > summary {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 22px;
+    padding: 0 28px 0 4px;
+    list-style: none;
+    color: var(--vscode-sideBar-foreground, var(--vscode-foreground));
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+    &:hover {
+      background: var(--vscode-list-hoverBackground);
+    }
+    &:focus-visible {
+      outline: 1px solid var(--vscode-focusBorder);
+      outline-offset: -1px;
+    }
+  }
+  &[open] > summary > .rebased-right {
+    transform: rotate(90deg);
+  }
+  ol {
+    list-style: none;
+    padding: 0 4px 2px 24px;
+    margin: 0;
+  }
+  li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    height: 22px;
+    line-height: 22px;
+    &:hover {
+      background: var(--vscode-list-hoverBackground);
+    }
+  }
+}
+.selected-commit-label,
+.selected-commit-subject {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.selected-commit-count {
+  flex: none;
+  margin-left: 2px;
+  color: var(--vscode-descriptionForeground);
+}
+.selected-commit-hash {
+  flex: none;
+  padding: 0;
+  background: transparent;
+  color: var(--vscode-descriptionForeground);
+  font-family: var(--vscode-editor-font-family, monospace);
+  font-size: 0.92em;
+}
+.selected-commit-info {
+  position: absolute;
+  top: 2px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  color: var(--vscode-descriptionForeground);
+  cursor: help;
+  border-radius: 3px;
+  > svg {
+    width: 16px;
+    height: 16px;
+  }
+  &:hover,
+  &:focus {
+    background: var(--vscode-toolbar-hoverBackground);
+    color: var(--vscode-foreground);
+  }
+  &:focus-visible {
+    outline: 1px solid var(--vscode-focusBorder);
+    outline-offset: -1px;
+  }
+  &:hover > .selected-commit-help,
+  &:focus > .selected-commit-help {
+    visibility: visible;
+  }
+}
+.selected-commit-help {
+  visibility: hidden;
+  position: absolute;
+  z-index: 10;
+  top: 24px;
+  right: 0;
+  width: min(320px, calc(100vw - 32px));
+  padding: 6px 8px;
+  border: 1px solid var(--vscode-editorHoverWidget-border, var(--vscode-panel-border));
+  border-radius: 3px;
+  background: var(--vscode-editorHoverWidget-background, var(--vscode-editor-background));
+  color: var(--vscode-editorHoverWidget-foreground, var(--vscode-foreground));
+  box-shadow: 0 2px 8px var(--vscode-widget-shadow);
+  line-height: 1.5;
+  white-space: normal;
+  pointer-events: none;
+}
+
+@import 'sidebar-welcome';

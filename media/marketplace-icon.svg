@@ -1,0 +1,21 @@
+<!-- Original Enhanced Git artwork. Copyright (c) 2026 Enhanced Git contributors. GPL-3.0-only. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none">
+  <defs>
+    <linearGradient id="surface" x1="28" y1="12" x2="226" y2="244" gradientUnits="userSpaceOnUse"><stop stop-color="#192A43"/><stop offset="1" stop-color="#0B1224"/></linearGradient>
+    <radialGradient id="light" cx="0" cy="0" r="1" gradientTransform="translate(44 22) rotate(48) scale(244)" gradientUnits="userSpaceOnUse"><stop stop-color="#49E1DA" stop-opacity=".15"/><stop offset="1" stop-color="#49E1DA" stop-opacity="0"/></radialGradient>
+    <linearGradient id="mint" x1="74" y1="66" x2="132" y2="190" gradientUnits="userSpaceOnUse"><stop stop-color="#7BF8D7"/><stop offset="1" stop-color="#26B9C8"/></linearGradient>
+    <linearGradient id="violet" x1="186" y1="64" x2="128" y2="174" gradientUnits="userSpaceOnUse"><stop stop-color="#B9ACFF"/><stop offset="1" stop-color="#7780F6"/></linearGradient>
+    <linearGradient id="edge" x1="28" y1="4" x2="200" y2="250" gradientUnits="userSpaceOnUse"><stop stop-color="#BDEFFF" stop-opacity=".24"/><stop offset=".65" stop-color="#BDEFFF" stop-opacity=".03"/><stop offset="1" stop-color="#A59EFF" stop-opacity=".18"/></linearGradient>
+  </defs>
+  <rect x="2" y="2" width="252" height="252" rx="56" fill="url(#surface)"/>
+  <rect x="2" y="2" width="252" height="252" rx="56" fill="url(#light)"/>
+  <rect x="3" y="3" width="250" height="250" rx="55" stroke="url(#edge)" stroke-width="2"/>
+  <path d="M182 70V103C182 124 169 137 151 150L128 167" stroke="#050B18" stroke-opacity=".3" stroke-width="25" stroke-linecap="round" transform="translate(0 5)"/>
+  <path d="M182 70V103C182 124 169 137 151 150L128 167" stroke="url(#violet)" stroke-width="20" stroke-linecap="round"/>
+  <path d="M74 70V103C74 124 87 137 105 150L117 159C124 164 128 171 128 182V191" stroke="#050B18" stroke-opacity=".3" stroke-width="25" stroke-linecap="round" transform="translate(0 5)"/>
+  <path d="M74 70V103C74 124 87 137 105 150L117 159C124 164 128 171 128 182V191" stroke="url(#mint)" stroke-width="20" stroke-linecap="round"/>
+  <rect x="57" y="53" width="34" height="34" rx="9" transform="rotate(45 74 70)" fill="#7BF8D7"/>
+  <rect x="165" y="53" width="34" height="34" rx="9" transform="rotate(45 182 70)" fill="#B9ACFF"/>
+  <circle cx="128" cy="191" r="17" fill="#52D7CF"/>
+  <circle cx="128" cy="191" r="6" fill="#11253A"/>
+</svg>

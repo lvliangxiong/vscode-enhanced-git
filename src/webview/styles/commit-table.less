@@ -1,0 +1,120 @@
+/* Shared Git Log / File History commit table presentation. */
+.commit-table {
+  --log-commit-height: 24px;
+  font-size: calc(var(--vscode-font-size, 13px) - 1px);
+  line-height: 18px;
+  .commit {
+    display: grid;
+    align-items: center;
+    column-gap: 8px;
+    height: var(--log-commit-height);
+    padding: 0 4px;
+    width: 100%;
+    font-size: inherit;
+    cursor: default;
+  }
+  .commit:hover {
+    background: var(--vscode-list-hoverBackground);
+  }
+  .commit.selected {
+    background: var(--vscode-list-inactiveSelectionBackground);
+    color: var(--vscode-list-inactiveSelectionForeground);
+  }
+  &:focus-within .commit.selected {
+    background: var(--vscode-list-activeSelectionBackground);
+    color: var(--vscode-list-activeSelectionForeground);
+  }
+  .log-column {
+    position: relative;
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .column-text,
+  .subject-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .subject-content {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+  .subject-text {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+  .commit-spacer {
+    width: 1px;
+    pointer-events: none;
+  }
+}
+.graph-cell {
+  position: relative;
+  display: block;
+  flex: 0 0 var(--graph-width);
+  width: var(--graph-width);
+  height: var(--log-commit-height);
+  overflow-x: clip;
+  overflow-y: visible;
+  clip-path: inset(-50% 0);
+}
+.graph-cell > canvas {
+  position: absolute;
+  left: var(--graph-canvas-left, 0px);
+  top: -50%;
+  width: var(--graph-canvas-width, 20px);
+  height: 200%;
+  pointer-events: none;
+}
+.graph-cell > svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: visible;
+  clip-path: inset(-50% 0);
+  pointer-events: none;
+}
+.graph-cell .graph-node,
+.graph-cell .graph-arrow-shape {
+  opacity: 0;
+  pointer-events: none;
+}
+
+// The Canvas renderer owns the contents of this React boundary.
+.graph-mount {
+  display: contents;
+}
+
+.graph-cell .graph-jump {
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.commit-hover {
+  position: fixed;
+  z-index: 100;
+  width: max-content;
+  padding: 3px 5px;
+  border: 1px solid var(--vscode-editorHoverWidget-border, var(--vscode-panel-border));
+  border-radius: 3px;
+  background: var(--vscode-editorHoverWidget-background, var(--vscode-editor-background));
+  color: var(--vscode-editorHoverWidget-foreground, var(--vscode-foreground));
+  box-shadow: 0 2px 8px var(--vscode-widget-shadow);
+  overflow: auto;
+}
+
+.hover-message {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.commit-subject-tooltip {
+  pointer-events: none;
+}
